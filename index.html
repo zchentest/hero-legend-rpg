@@ -661,19 +661,33 @@
 
         // 音乐配置 - 按地图ID配置BGM
         const MUSIC_CONFIG = {
-            // 音乐文件CDN地址（jsDelivr从GitHub仓库加载）
-            // 本地优先：先尝试本地路径，加载失败后自动使用CDN
-            cdnBase: 'https://cdn.jsdelivr.net/gh/zchentest/hero-legend-rpg@main/music/',
-            localBase: 'music/',
-            useCDN: false,  // 自动检测，本地失败后切换为CDN
+            // 音乐文件地址配置 - 多源自动切换
+            // 优先级：本地 → GitHub raw → jsDelivr CDN
+            sources: [
+                { base: 'music/', name: '本地' },
+                { base: 'https://raw.githubusercontent.com/zchentest/hero-legend-rpg/main/music/', name: 'GitHub' },
+                { base: 'https://cdn.jsdelivr.net/gh/zchentest/hero-legend-rpg@main/music/', name: 'jsDelivr' }
+            ],
+            currentSource: 0,  // 当前使用的源索引
+            files: {
+                map: 'map_bgm.mp3',
+                battle: 'battle_normal.mp3',
+                boss: 'battle_boss.mp3',
+                victory: 'victory.mp3'
+            },
 
-            get mapBGM() { return this.getUrl('map_bgm.mp3'); },
-            get battleBGM() { return this.getUrl('battle_normal.mp3'); },
-            get bossBGM() { return this.getUrl('battle_boss.mp3'); },
-            get victoryBGM() { return this.getUrl('victory.mp3'); },
+            getUrl(type) {
+                return this.sources[this.currentSource].base + this.files[type];
+            },
 
-            getUrl(filename) {
-                return this.useCDN ? this.cdnBase + filename : this.localBase + filename;
+            // 切换到下一个源
+            nextSource() {
+                if (this.currentSource < this.sources.length - 1) {
+                    this.currentSource++;
+                    console.log('音乐源切换到:', this.sources[this.currentSource].name);
+                    return true;
+                }
+                return false;
             }
         };
 
@@ -692,7 +706,7 @@
                 this.userInteracted = true;
                 // 播放等待中的BGM
                 if (this.pendingBGM) {
-                    this.play(this.pendingBGM.url, this.pendingBGM.type, true);
+                    this.play(this.pendingBGM.type, true);
                     this.pendingBGM = null;
                 }
             },
@@ -700,59 +714,50 @@
             // 播放地图BGM
             playMapBGM(mapId) {
                 if (!this.enabled) return;
-                const url = MUSIC_CONFIG.mapBGM.url;
                 if (!this.userInteracted) {
-                    this.pendingBGM = { url, type: 'map' };
+                    this.pendingBGM = { type: 'map' };
                     return;
                 }
-                this.play(url, 'map', true);
+                this.play('map', true);
             },
 
             // 播放普通战斗BGM
             playBattleBGM() {
                 if (!this.enabled) return;
-                this.play(MUSIC_CONFIG.battleBGM.url, 'battle', true);
+                this.play('battle', true);
             },
 
             // 播放BOSS战斗BGM
             playBossBGM(bossIndex) {
                 if (!this.enabled) return;
-                this.play(MUSIC_CONFIG.bossBGM.url, 'boss', true);
+                this.play('boss', true);
             },
 
             // 播放胜利音乐
             playVictoryBGM() {
                 if (!this.enabled) return;
-                this.play(MUSIC_CONFIG.victoryBGM.url, 'victory', false);
+                this.play('victory', false);
             },
 
-            // 通用播放方法
-            play(url, type, loop = true) {
+            // 通用播放方法 - 支持多源自动切换
+            play(type, loop = true) {
                 // 如果正在播放同类型音乐，不重复播放
                 if (this.currentAudio && this.currentType === type && !this.currentAudio.ended) {
                     return;
                 }
-                // 停止当前音乐
                 this.stop();
-                // 创建新音频
+                const url = MUSIC_CONFIG.getUrl(type);
                 this.currentAudio = new Audio(url);
                 this.currentAudio.volume = this.volume;
                 this.currentAudio.loop = loop;
                 this.currentType = type;
-                // 播放，失败时自动切换CDN
+                this.currentPlayType = type;
+                this.currentPlayLoop = loop;
+                // 播放，失败时自动切换源
                 this.currentAudio.play().catch(e => {
-                    console.log('音乐播放失败:', url, e);
-                    // 如果本地加载失败，尝试CDN
-                    if (!MUSIC_CONFIG.useCDN) {
-                        MUSIC_CONFIG.useCDN = true;
-                        const cdnUrl = MUSIC_CONFIG.cdnBase + url.split('/').pop();
-                        console.log('尝试CDN加载:', cdnUrl);
-                        this.currentAudio = new Audio(cdnUrl);
-                        this.currentAudio.volume = this.volume;
-                        this.currentAudio.loop = loop;
-                        this.currentAudio.play().catch(e2 => {
-                            console.log('CDN也失败，静默跳过:', e2);
-                        });
+                    console.log('音乐播放失败 [' + MUSIC_CONFIG.sources[MUSIC_CONFIG.currentSource].name + ']:', url);
+                    if (MUSIC_CONFIG.nextSource()) {
+                        this.play(this.currentPlayType, this.currentPlayLoop);
                     }
                 });
             },
