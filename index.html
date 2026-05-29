@@ -1940,8 +1940,14 @@
                 if (floatAtk > playerDef) {
                     damage = floatAtk - playerDef;
                 } else {
-                    // BOSS破不了防时造成1-30伤害，普通怪1-4
-                    const maxMinDamage = this.isBoss ? 30 : 4;
+                    // 根据地图层数计算最低伤害上限
+                    // 第1层：1-5，第2层：1-10，...最多1-30
+                    const mapId = game.currentMap.id;
+                    let maxMinDamage = Math.min(30, 5 + mapId * 5);
+                    // BOSS伤害更高：1-15 到 1-50
+                    if (this.isBoss) {
+                        maxMinDamage = Math.min(50, 15 + mapId * 5);
+                    }
                     damage = Math.floor(Math.random() * maxMinDamage) + 1;
                 }
                 game.player.hp -= damage;
