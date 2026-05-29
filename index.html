@@ -661,14 +661,20 @@
 
         // 音乐配置 - 按地图ID配置BGM
         const MUSIC_CONFIG = {
-            // 地图背景音乐 - 所有地图共用一首
-            mapBGM: { url: 'music/map_bgm.mp3' },
-            // 普通战斗音乐
-            battleBGM: { url: 'music/battle_normal.mp3' },
-            // BOSS战斗音乐 - 所有BOSS共用一首
-            bossBGM: { url: 'music/battle_boss.mp3' },
-            // 最终胜利音乐
-            victoryBGM: { url: 'music/victory.mp3' }
+            // 音乐文件CDN地址（jsDelivr从GitHub仓库加载）
+            // 本地优先：先尝试本地路径，加载失败后自动使用CDN
+            cdnBase: 'https://cdn.jsdelivr.net/gh/zchentest/hero-legend-rpg@main/music/',
+            localBase: 'music/',
+            useCDN: false,  // 自动检测，本地失败后切换为CDN
+
+            get mapBGM() { return this.getUrl('map_bgm.mp3'); },
+            get battleBGM() { return this.getUrl('battle_normal.mp3'); },
+            get bossBGM() { return this.getUrl('battle_boss.mp3'); },
+            get victoryBGM() { return this.getUrl('victory.mp3'); },
+
+            getUrl(filename) {
+                return this.useCDN ? this.cdnBase + filename : this.localBase + filename;
+            }
         };
 
         // 音乐播放器
@@ -733,9 +739,21 @@
                 this.currentAudio.volume = this.volume;
                 this.currentAudio.loop = loop;
                 this.currentType = type;
-                // 播放
+                // 播放，失败时自动切换CDN
                 this.currentAudio.play().catch(e => {
-                    console.log('音乐播放失败:', e);
+                    console.log('音乐播放失败:', url, e);
+                    // 如果本地加载失败，尝试CDN
+                    if (!MUSIC_CONFIG.useCDN) {
+                        MUSIC_CONFIG.useCDN = true;
+                        const cdnUrl = MUSIC_CONFIG.cdnBase + url.split('/').pop();
+                        console.log('尝试CDN加载:', cdnUrl);
+                        this.currentAudio = new Audio(cdnUrl);
+                        this.currentAudio.volume = this.volume;
+                        this.currentAudio.loop = loop;
+                        this.currentAudio.play().catch(e2 => {
+                            console.log('CDN也失败，静默跳过:', e2);
+                        });
+                    }
                 });
             },
 
