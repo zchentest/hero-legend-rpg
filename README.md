@@ -10,6 +10,12 @@
 
 **画面风格**：夕阳下的骑士守护着正在咏唱终极火焰咒的法师——这是"剑与魔法"最经典的战斗瞬间。
 
+## 🌐 在线试玩
+
+**👉 [立即开始游戏](https://4rqbhfdvw-herorpg-y0qkg01ht.maozi.io/)**
+
+欢迎体验，祝您游戏愉快！
+
 ## ✨ 核心特性
 
 - 🗺️ **9层地图**：从新手村到创世神域，每层独特主题
@@ -22,9 +28,6 @@
 
 ## 🚀 快速开始
 
-### 在线游玩
-直接打开 `勇者传说RPG.html` 文件即可开始游戏，无需服务器。
-
 ### 本地运行
 ```bash
 # 克隆仓库
@@ -32,7 +35,7 @@ git clone https://github.com/your-username/hero-legend-rpg.git
 
 # 打开游戏
 cd hero-legend-rpg
-# 用浏览器打开 勇者传说RPG.html
+# 用浏览器打开 index.html
 ```
 
 ## 🎯 游戏玩法
@@ -89,13 +92,13 @@ cd hero-legend-rpg
 
 ```
 hero-legend-rpg/
-├── 勇者传说RPG.html              # 游戏主文件
-├── README.md                      # 项目说明
-└── hero-legend-rpg-skill/         # Skill（供其他开发者参考）
-    ├── SKILL.md                   # Skill说明
+├── index.html                      # 游戏主文件
+├── README.md                       # 项目说明
+└── hero-legend-rpg-skill/          # Skill（供其他开发者参考）
+    ├── SKILL.md                    # Skill说明
     └── references/
-        ├── game-design.md         # 游戏设计文档
-        └── data-config.md         # 数据配置模板
+        ├── game-design.md          # 游戏设计文档
+        └── data-config.md          # 数据配置模板
 ```
 
 ## 🤝 贡献指南
@@ -110,7 +113,8 @@ hero-legend-rpg/
 
 **开发者**：SOLO AI Assistant  
 **版本**：v1.0.0  
-**最后更新**：2025年
+**最后更新**：2025年  
+**部署平台**：[帽子云](https://maozi.io)
 
 ---
 
