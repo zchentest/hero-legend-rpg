@@ -659,6 +659,128 @@
             { level: 80, name: '创世', emoji: '🌟', desc: '5倍伤害', cooldown: 15, multiplier: 5 }
         ];
 
+        // 音乐配置 - 按地图ID配置BGM
+        const MUSIC_CONFIG = {
+            // 地图背景音乐 - 所有地图共用一首
+            mapBGM: { url: 'music/map_bgm.mp3' },
+            // 普通战斗音乐
+            battleBGM: { url: 'music/battle_normal.mp3' },
+            // BOSS战斗音乐 - 所有BOSS共用一首
+            bossBGM: { url: 'music/battle_boss.mp3' },
+            // 最终胜利音乐
+            victoryBGM: { url: 'music/victory.mp3' }
+        };
+
+        // 音乐播放器
+        const musicPlayer = {
+            currentAudio: null,
+            currentType: null,
+            volume: 0.5,
+            enabled: true,
+            userInteracted: false,  // 用户是否已交互
+            pendingBGM: null,       // 等待播放的BGM
+
+            // 用户首次交互后启用音乐
+            onUserInteract() {
+                if (this.userInteracted) return;
+                this.userInteracted = true;
+                // 播放等待中的BGM
+                if (this.pendingBGM) {
+                    this.play(this.pendingBGM.url, this.pendingBGM.type, true);
+                    this.pendingBGM = null;
+                }
+            },
+
+            // 播放地图BGM
+            playMapBGM(mapId) {
+                if (!this.enabled) return;
+                const url = MUSIC_CONFIG.mapBGM.url;
+                if (!this.userInteracted) {
+                    this.pendingBGM = { url, type: 'map' };
+                    return;
+                }
+                this.play(url, 'map', true);
+            },
+
+            // 播放普通战斗BGM
+            playBattleBGM() {
+                if (!this.enabled) return;
+                this.play(MUSIC_CONFIG.battleBGM.url, 'battle', true);
+            },
+
+            // 播放BOSS战斗BGM
+            playBossBGM(bossIndex) {
+                if (!this.enabled) return;
+                this.play(MUSIC_CONFIG.bossBGM.url, 'boss', true);
+            },
+
+            // 播放胜利音乐
+            playVictoryBGM() {
+                if (!this.enabled) return;
+                this.play(MUSIC_CONFIG.victoryBGM.url, 'victory', false);
+            },
+
+            // 通用播放方法
+            play(url, type, loop = true) {
+                // 如果正在播放同类型音乐，不重复播放
+                if (this.currentAudio && this.currentType === type && !this.currentAudio.ended) {
+                    return;
+                }
+                // 停止当前音乐
+                this.stop();
+                // 创建新音频
+                this.currentAudio = new Audio(url);
+                this.currentAudio.volume = this.volume;
+                this.currentAudio.loop = loop;
+                this.currentType = type;
+                // 播放
+                this.currentAudio.play().catch(e => {
+                    console.log('音乐播放失败:', e);
+                });
+            },
+
+            // 停止音乐
+            stop() {
+                if (this.currentAudio) {
+                    this.currentAudio.pause();
+                    this.currentAudio.currentTime = 0;
+                    this.currentAudio = null;
+                    this.currentType = null;
+                }
+            },
+
+            // 暂停
+            pause() {
+                if (this.currentAudio) {
+                    this.currentAudio.pause();
+                }
+            },
+
+            // 恢复播放
+            resume() {
+                if (this.currentAudio && this.currentAudio.paused) {
+                    this.currentAudio.play().catch(e => console.log('恢复播放失败:', e));
+                }
+            },
+
+            // 设置音量
+            setVolume(vol) {
+                this.volume = Math.max(0, Math.min(1, vol));
+                if (this.currentAudio) {
+                    this.currentAudio.volume = this.volume;
+                }
+            },
+
+            // 切换音乐开关
+            toggle() {
+                this.enabled = !this.enabled;
+                if (!this.enabled) {
+                    this.stop();
+                }
+                return this.enabled;
+            }
+        };
+
         // 可选角色形象
         const CHARACTERS = [
             { emoji: '🧙‍♂️', name: '法师' },
@@ -702,6 +824,9 @@
                 const mapData = MAPS[mapId];
                 this.currentMap = { id: mapId, rows: mapData.rows, cols: mapData.cols, cells: [], monsters: [], bgClass: mapData.bgClass, boss: null };
                 document.getElementById('mapContainer').className = `map-container ${mapData.bgClass}`;
+                
+                // 播放地图BGM
+                musicPlayer.playMapBGM(mapId);
 
                 // 初始化空地图
                 for (let y = 0; y < mapData.rows; y++) {
@@ -1000,6 +1125,9 @@
             async handleCellClick(x, y) {
                 if (this.isMoving) return;
 
+                // 触发音乐播放（浏览器需要用户交互才能播放音频）
+                musicPlayer.onUserInteract();
+
                 const cell = this.currentMap.cells[y][x];
                 
                 if (cell.type === 'monster') {
@@ -1283,7 +1411,7 @@
                 const templates = isWeapon ? WEAPONS : ARMORS;
                 const template = templates[Math.floor(Math.random() * templates.length)];
                 
-                let level = Math.max(1, Math.min(60, monsterLevel + Math.floor(Math.random() * 7) - 3));
+                let level = Math.max(1, Math.min(80, monsterLevel + Math.floor(Math.random() * 7) - 3));
                 // BOSS掉落最低品质为优秀(2)，普通怪随机
                 let quality = isBoss ? Math.max(2, this.getRandomQuality()) : this.getRandomQuality();
                 quality = Math.min(4, quality + traitBonus);
@@ -1662,6 +1790,8 @@
             closeVictoryCg() {
                 document.getElementById('victoryCg').classList.remove('active');
                 document.getElementById('battleScreen').classList.remove('active');
+                // 恢复地图BGM
+                musicPlayer.playMapBGM(this.currentMap.id);
                 this.renderMap();
                 this.updateUI();
             }
@@ -1679,6 +1809,15 @@
                 this.autoMode = false;
                 // 使用游戏保存的战斗速度
                 this.speed = game.battleSpeed;
+
+                // 播放战斗BGM
+                if (this.isBoss) {
+                    // 根据地图ID确定BOSS索引
+                    const bossIndex = game.currentMap.id;
+                    musicPlayer.playBossBGM(bossIndex);
+                } else {
+                    musicPlayer.playBattleBGM();
+                }
 
                 document.getElementById('battleScreen').classList.add('active');
                 // 根据保存的速度设置按钮状态
@@ -1795,7 +1934,16 @@
 
             enemyAttack() {
                 if (!this.enemy || this.enemy.hp <= 0) return;
-                const damage = this.calculateDamage(this.enemy.atk, game.getTotalDef());
+                const playerDef = game.getTotalDef();
+                const floatAtk = Math.floor(this.enemy.atk * (0.75 + Math.random() * 0.5));
+                let damage;
+                if (floatAtk > playerDef) {
+                    damage = floatAtk - playerDef;
+                } else {
+                    // BOSS破不了防时造成1-30伤害，普通怪1-4
+                    const maxMinDamage = this.isBoss ? 30 : 4;
+                    damage = Math.floor(Math.random() * maxMinDamage) + 1;
+                }
                 game.player.hp -= damage;
                 this.addLog(`${this.enemy.name}反击！造成 ${damage} 伤害！`, 'enemy');
                 this.updatePlayerHp();
@@ -1834,6 +1982,8 @@
                     this.stopAuto();
                     setTimeout(() => {
                         document.getElementById('battleScreen').classList.remove('active');
+                        // 恢复地图BGM
+                        musicPlayer.playMapBGM(game.currentMap.id);
                     }, 500 / this.speed);
                 } else {
                     this.addLog('逃跑失败！', 'system');
@@ -1924,6 +2074,8 @@
 
             setTimeout(() => {
                 document.getElementById('battleScreen').classList.remove('active');
+                // 恢复地图BGM
+                musicPlayer.playMapBGM(this.currentMap.id);
                 this.renderMap();
                 this.updateUI();
             }, 1500);
@@ -1989,6 +2141,11 @@
 
             battle.stopAuto();
 
+            // 最终BOSS播放胜利音乐
+            if (this.currentMap.id === 8) {
+                musicPlayer.playVictoryBGM();
+            }
+
             // 显示结算CG
             setTimeout(() => {
                 this.showVictoryCg(boss, drop);
@@ -2001,6 +2158,8 @@
             battle.stopAuto();
             setTimeout(() => {
                 document.getElementById('battleScreen').classList.remove('active');
+                // 恢复地图BGM
+                musicPlayer.playMapBGM(this.currentMap.id);
                 this.returnToVillage();
                 this.updateUI();
             }, 1500);
