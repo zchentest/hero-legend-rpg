@@ -265,6 +265,55 @@
         /* 受击动画：抖动+变红 */
         @keyframes hitShake { 0%, 100% { transform: translateX(0); filter: brightness(1); } 25% { transform: translateX(-10px); filter: brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(5); } 50% { transform: translateX(10px); filter: brightness(0.5) sepia(1) hue-rotate(-50deg) saturate(5); } 75% { transform: translateX(-5px); filter: brightness(0.7) sepia(1) hue-rotate(-50deg) saturate(5); } }
         .fighter-avatar.hit { animation: hitShake 0.3s ease-out; }
+
+        /* ===== 技能专属动画 ===== */
+        /* 玩家技能：重击/高倍伤害 - 冲刺+放大+金光 */
+        @keyframes skillSlash { 0% { transform: translateX(0) scale(1); filter: brightness(1); } 20% { transform: translateX(20px) scale(1.15); filter: brightness(1.5); } 40% { transform: translateX(60px) scale(1.3); filter: brightness(2) drop-shadow(0 0 20px #ffd700); } 60% { transform: translateX(40px) scale(1.1); filter: brightness(1.5); } 100% { transform: translateX(0) scale(1); filter: brightness(1); } }
+        .fighter-avatar.skill-slash { animation: skillSlash 0.6s ease-out; }
+        /* 玩家技能：防御 - 蓝色护盾 */
+        @keyframes skillShield { 0% { filter: brightness(1); } 30% { filter: brightness(1.3) drop-shadow(0 0 15px #3498db); transform: scale(1.05); } 60% { filter: brightness(1.5) drop-shadow(0 0 25px #2980b9); transform: scale(1.1); } 100% { filter: brightness(1); transform: scale(1); } }
+        .fighter-avatar.skill-shield { animation: skillShield 0.8s ease-out; }
+        /* 玩家技能：连击 - 快速左右冲刺 */
+        @keyframes skillCombo { 0% { transform: translateX(0); } 15% { transform: translateX(40px) scale(1.1); } 30% { transform: translateX(0); } 45% { transform: translateX(35px) scale(1.05); } 60% { transform: translateX(0); } 75% { transform: translateX(30px) scale(1.0); } 100% { transform: translateX(0); } }
+        .fighter-avatar.skill-combo { animation: skillCombo 0.7s ease-out; }
+        /* 玩家技能：狂暴/增益 - 红色燃烧 */
+        @keyframes skillRage { 0% { transform: scale(1); filter: brightness(1); } 25% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 20px #e74c3c); } 50% { transform: scale(1.15); filter: brightness(2) drop-shadow(0 0 30px #ff0000); } 75% { transform: scale(1.1); filter: brightness(1.3) drop-shadow(0 0 15px #e74c3c); } 100% { transform: scale(1); filter: brightness(1); } }
+        .fighter-avatar.skill-rage { animation: skillRage 0.8s ease-out; }
+        /* 玩家技能：圣光/恢复 - 绿色治愈 */
+        @keyframes skillHeal { 0% { transform: scale(1); filter: brightness(1); } 30% { transform: scale(1.1); filter: brightness(1.3) drop-shadow(0 0 20px #2ecc71); } 60% { transform: scale(1.15); filter: brightness(1.5) drop-shadow(0 0 30px #27ae60); } 100% { transform: scale(1); filter: brightness(1); } }
+        .fighter-avatar.skill-heal { animation: skillHeal 1s ease-out; }
+        /* 玩家技能：终极/高倍 - 金色爆发 */
+        @keyframes skillUltimate { 0% { transform: scale(1); filter: brightness(1); } 20% { transform: scale(0.9); filter: brightness(1.5); } 40% { transform: scale(1.4); filter: brightness(2.5) drop-shadow(0 0 40px #ffd700); } 60% { transform: scale(1.3) translateX(30px); filter: brightness(2) drop-shadow(0 0 30px #f39c12); } 80% { transform: scale(1.1) translateX(10px); filter: brightness(1.3); } 100% { transform: scale(1) translateX(0); filter: brightness(1); } }
+        .fighter-avatar.skill-ultimate { animation: skillUltimate 1s ease-out; }
+
+        /* BOSS技能动画 */
+        /* BOSS重击/高倍伤害 - 红色冲刺 */
+        @keyframes bossSkillSlash { 0% { transform: translateX(0) scale(1); filter: brightness(1); } 20% { transform: translateX(-20px) scale(1.15); filter: brightness(1.5); } 40% { transform: translateX(-60px) scale(1.3); filter: brightness(2) drop-shadow(0 0 20px #ff0000); } 60% { transform: translateX(-40px) scale(1.1); filter: brightness(1.5); } 100% { transform: translateX(0) scale(1); filter: brightness(1); } }
+        .fighter-avatar.boss-skill-slash { animation: bossSkillSlash 0.6s ease-out; }
+        /* BOSS防御增益 - 紫色护盾 */
+        @keyframes bossSkillShield { 0% { filter: brightness(1); } 30% { filter: brightness(1.3) drop-shadow(0 0 15px #9b59b6); transform: scale(1.05); } 60% { filter: brightness(1.5) drop-shadow(0 0 25px #8e44ad); transform: scale(1.1); } 100% { filter: brightness(1); transform: scale(1); } }
+        .fighter-avatar.boss-skill-shield { animation: bossSkillShield 0.8s ease-out; }
+        /* BOSS连击 - 快速冲刺 */
+        @keyframes bossSkillCombo { 0% { transform: translateX(0); } 15% { transform: translateX(-40px) scale(1.1); } 30% { transform: translateX(0); } 45% { transform: translateX(-35px) scale(1.05); } 60% { transform: translateX(0); } 75% { transform: translateX(-30px) scale(1.0); } 100% { transform: translateX(0); } }
+        .fighter-avatar.boss-skill-combo { animation: bossSkillCombo 0.7s ease-out; }
+        /* BOSS狂暴 - 暗红燃烧 */
+        @keyframes bossSkillRage { 0% { transform: scale(1); filter: brightness(1); } 25% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 20px #c0392b); } 50% { transform: scale(1.15); filter: brightness(2) drop-shadow(0 0 30px #e74c3c); } 75% { transform: scale(1.1); filter: brightness(1.3) drop-shadow(0 0 15px #c0392b); } 100% { transform: scale(1); filter: brightness(1); } }
+        .fighter-avatar.boss-skill-rage { animation: bossSkillRage 0.8s ease-out; }
+        /* BOSS恢复 - 绿色治愈 */
+        @keyframes bossSkillHeal { 0% { transform: scale(1); filter: brightness(1); } 30% { transform: scale(1.1); filter: brightness(1.3) drop-shadow(0 0 20px #2ecc71); } 60% { transform: scale(1.15); filter: brightness(1.5) drop-shadow(0 0 30px #27ae60); } 100% { transform: scale(1); filter: brightness(1); } }
+        .fighter-avatar.boss-skill-heal { animation: bossSkillHeal 1s ease-out; }
+        /* BOSS终极 - 暗紫爆发 */
+        @keyframes bossSkillUltimate { 0% { transform: scale(1); filter: brightness(1); } 20% { transform: scale(0.9); filter: brightness(1.5); } 40% { transform: scale(1.4); filter: brightness(2.5) drop-shadow(0 0 40px #8e44ad); } 60% { transform: scale(1.3) translateX(-30px); filter: brightness(2) drop-shadow(0 0 30px #9b59b6); } 80% { transform: scale(1.1) translateX(-10px); filter: brightness(1.3); } 100% { transform: scale(1) translateX(0); filter: brightness(1); } }
+        .fighter-avatar.boss-skill-ultimate { animation: bossSkillUltimate 1s ease-out; }
+
+        /* 技能受击特效 - 更强烈 */
+        @keyframes skillHit { 0%, 100% { transform: translateX(0) scale(1); filter: brightness(1); } 15% { transform: translateX(-15px) scale(0.95); filter: brightness(0.5) sepia(1) hue-rotate(-50deg) saturate(5); } 30% { transform: translateX(15px) scale(0.9); filter: brightness(0.3); } 45% { transform: translateX(-10px) scale(0.95); filter: brightness(0.5); } 60% { transform: translateX(10px) scale(0.9); filter: brightness(0.3); } 75% { transform: translateX(-5px) scale(0.95); filter: brightness(0.5); } }
+        .fighter-avatar.skill-hit { animation: skillHit 0.5s ease-out; }
+
+        /* 技能名称弹出 */
+        .skill-popup { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5em; font-weight: bold; color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.8), 2px 2px 4px rgba(0,0,0,0.8); z-index: 10; pointer-events: none; animation: skillPopupAnim 1.2s ease-out forwards; white-space: nowrap; }
+        @keyframes skillPopupAnim { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 20% { opacity: 1; transform: translate(-50%, -70%) scale(1.2); } 40% { transform: translate(-50%, -80%) scale(1); } 80% { opacity: 1; transform: translate(-50%, -100%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -120%) scale(0.8); } }
+        .boss-skill-popup { color: #ff4444; text-shadow: 0 0 10px rgba(255,0,0,0.8), 2px 2px 4px rgba(0,0,0,0.8); }
         .fighter-name { font-size: 1em; margin-bottom: 2px; }
         .fighter-level { color: #ffd700; font-size: 0.85em; margin-bottom: 3px; }
         .fighter-trait { display: inline-block; padding: 3px 10px; border-radius: 15px; font-size: 0.8em; margin-bottom: 10px; }
@@ -802,15 +851,15 @@
         };
 
         const BOSSES = [
-            { name: '哥布林王', emoji: '👺', level: 8, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
-            { name: '森林之王', emoji: '🌳', level: 18, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
-            { name: '骷髅领主', emoji: '💀', level: 28, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
-            { name: '炎魔', emoji: '🔥', level: 38, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
-            { name: '冰霜巨龙', emoji: '🐲', level: 52, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
-            { name: '龙神', emoji: '🐉', level: 60, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
-            { name: '雷神', emoji: '🌩️', level: 68, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
-            { name: '虚空之主', emoji: '👾', level: 75, hpMult: 2.52, atkMult: 1.8, defMult: 1.8 },
-            { name: '创世神', emoji: '👑', level: 80, hpMult: 4.2, atkMult: 2.0, defMult: 2.0 }  // hpMult 3.0 = 2.0 * 1.5 血量增加50%
+            { name: '哥布林王', emoji: '👺', level: 8, hpMult: 1.8, atkMult: 1.8, defMult: 1.8, skill: { name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 } },
+            { name: '森林之王', emoji: '🌳', level: 18, hpMult: 1.8, atkMult: 1.8, defMult: 1.8, skill: { name: '藤蔓缠绕', emoji: '🌿', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 } },
+            { name: '骷髅领主', emoji: '💀', level: 28, hpMult: 1.8, atkMult: 1.8, defMult: 1.8, skill: { name: '骨刃连斩', emoji: '⚡', desc: '攻击2次', cooldown: 4, hits: 2 } },
+            { name: '炎魔', emoji: '🔥', level: 38, hpMult: 1.8, atkMult: 1.8, defMult: 1.8, skill: { name: '烈焰狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 } },
+            { name: '冰霜巨龙', emoji: '🐲', level: 52, hpMult: 1.8, atkMult: 1.8, defMult: 1.8, skill: { name: '冰霜吐息', emoji: '✨', desc: '恢复30%血量', cooldown: 8, healPercent: 0.3 } },
+            { name: '龙神', emoji: '🐉', level: 60, hpMult: 1.8, atkMult: 1.8, defMult: 1.8, skill: { name: '龙息终焉', emoji: '💥', desc: '3倍伤害', cooldown: 10, multiplier: 3 } },
+            { name: '雷神', emoji: '🌩️', level: 68, hpMult: 1.8, atkMult: 1.8, defMult: 1.8, skill: { name: '天罚雷霆', emoji: '⚡', desc: '4倍伤害', cooldown: 12, multiplier: 4 } },
+            { name: '虚空之主', emoji: '👾', level: 75, hpMult: 2.52, atkMult: 1.8, defMult: 1.8, skill: { name: '虚空吞噬', emoji: '🌀', desc: '5倍伤害', cooldown: 15, multiplier: 5 } },
+            { name: '创世神', emoji: '👑', level: 80, hpMult: 4.2, atkMult: 2.0, defMult: 2.0, skill: { name: '创世之光', emoji: '🌟', desc: '6倍伤害+恢复20%', cooldown: 15, multiplier: 6, healPercent: 0.2 } }
         ];
 
         const MAPS = [
@@ -2562,6 +2611,11 @@
 
                 document.getElementById('battleLog').innerHTML = '<div class="battle-log-entry log-system">战斗开始！</div>';
 
+                // BOSS技能冷却初始化
+                this.enemySkillCooldown = 0;
+                this.enemyAtkBoostTurns = 0;
+                this.enemyDefBoostTurns = 0;
+
                 // 怪物先攻击（BOSS主动碰撞时）
                 if (enemyFirst) {
                     this.addLog(`${this.enemy.name} 主动发起攻击！怪物先手！`, 'system');
@@ -2590,16 +2644,46 @@
                 // 玩家已死亡则不再攻击
                 if (game.player.hp <= 0) return;
 
-                // 玩家攻击动画
+                // 根据技能类型选择动画
                 const playerAvatar = document.getElementById('battlePlayerAvatar');
-                playerAvatar.classList.add('player-attack');
-                setTimeout(() => playerAvatar.classList.remove('player-attack'), 400);
-                // 敌人受击动画
                 const enemyAvatar = document.getElementById('battleEnemyAvatar');
+                let animClass = 'player-attack';
+                let hitClass = 'hit';
+                let animDuration = 400;
+
+                if (useSkill) {
+                    if (useSkill.healPercent) {
+                        animClass = 'skill-heal'; animDuration = 1000;
+                    } else if (useSkill.defenseBoost) {
+                        animClass = 'skill-shield'; animDuration = 800;
+                    } else if (useSkill.hits && useSkill.hits > 1) {
+                        animClass = 'skill-combo'; animDuration = 700; hitClass = 'skill-hit';
+                    } else if (useSkill.atkBoost) {
+                        animClass = 'skill-rage'; animDuration = 800;
+                    } else if (useSkill.multiplier && useSkill.multiplier >= 3) {
+                        animClass = 'skill-ultimate'; animDuration = 1000; hitClass = 'skill-hit';
+                    } else if (useSkill.multiplier) {
+                        animClass = 'skill-slash'; animDuration = 600; hitClass = 'skill-hit';
+                    }
+                }
+
+                playerAvatar.classList.add(animClass);
+                setTimeout(() => playerAvatar.classList.remove(animClass), animDuration);
                 setTimeout(() => {
-                    enemyAvatar.classList.add('hit');
-                    setTimeout(() => enemyAvatar.classList.remove('hit'), 300);
+                    enemyAvatar.classList.add(hitClass);
+                    setTimeout(() => enemyAvatar.classList.remove(hitClass), hitClass === 'skill-hit' ? 500 : 300);
                 }, 200);
+
+                // 技能名称弹出
+                if (useSkill) {
+                    const playerFighter = document.querySelector('.battle-fighter.player');
+                    const popup = document.createElement('div');
+                    popup.className = 'skill-popup';
+                    popup.textContent = `${useSkill.emoji} ${useSkill.name}`;
+                    playerFighter.style.position = 'relative';
+                    playerFighter.appendChild(popup);
+                    setTimeout(() => popup.remove(), 1200);
+                }
 
                 let playerAtk = game.getTotalAtk();
                 let damage = this.calculateDamage(playerAtk, this.enemy.def);
@@ -2607,7 +2691,7 @@
                 if (useSkill) {
                     if (useSkill.multiplier) damage = Math.floor(damage * useSkill.multiplier);
                     game.player.skillCooldowns[useSkill.bossIndex] = useSkill.cooldown;
-                    this.addLog(`使用技能 ${useSkill.name}！`, 'system');
+                    this.addLog(`使用技能 ${useSkill.emoji}${useSkill.name}！`, 'system');
                 }
 
                 // 多层血条伤害计算
@@ -2666,36 +2750,151 @@
 
                 // 敌人攻击动画
                 const enemyAvatar = document.getElementById('battleEnemyAvatar');
-                enemyAvatar.classList.add('enemy-attack');
-                setTimeout(() => enemyAvatar.classList.remove('enemy-attack'), 400);
-                // 玩家受击动画
                 const playerAvatar = document.getElementById('battlePlayerAvatar');
+
+                // BOSS技能逻辑
+                let useBossSkill = false;
+                let bossSkill = null;
+                if (this.isBoss && this.enemy.skill) {
+                    if (this.enemySkillCooldown > 0) {
+                        this.enemySkillCooldown--;
+                    } else {
+                        if (Math.random() < 0.5) {
+                            useBossSkill = true;
+                            bossSkill = this.enemy.skill;
+                            this.enemySkillCooldown = bossSkill.cooldown;
+                        }
+                    }
+                }
+
+                // 根据是否使用技能选择动画
+                let animClass = 'enemy-attack';
+                let hitClass = 'hit';
+                let animDuration = 400;
+
+                if (useBossSkill && bossSkill) {
+                    if (bossSkill.healPercent) {
+                        animClass = 'boss-skill-heal'; animDuration = 1000;
+                    } else if (bossSkill.defenseBoost) {
+                        animClass = 'boss-skill-shield'; animDuration = 800;
+                    } else if (bossSkill.hits && bossSkill.hits > 1) {
+                        animClass = 'boss-skill-combo'; animDuration = 700; hitClass = 'skill-hit';
+                    } else if (bossSkill.atkBoost) {
+                        animClass = 'boss-skill-rage'; animDuration = 800;
+                    } else if (bossSkill.multiplier && bossSkill.multiplier >= 3) {
+                        animClass = 'boss-skill-ultimate'; animDuration = 1000; hitClass = 'skill-hit';
+                    } else if (bossSkill.multiplier) {
+                        animClass = 'boss-skill-slash'; animDuration = 600; hitClass = 'skill-hit';
+                    }
+                }
+
+                enemyAvatar.classList.add(animClass);
+                setTimeout(() => enemyAvatar.classList.remove(animClass), animDuration);
                 setTimeout(() => {
-                    playerAvatar.classList.add('hit');
-                    setTimeout(() => playerAvatar.classList.remove('hit'), 300);
+                    playerAvatar.classList.add(hitClass);
+                    setTimeout(() => playerAvatar.classList.remove(hitClass), hitClass === 'skill-hit' ? 500 : 300);
                 }, 200);
 
-                const playerDef = game.getTotalDef();
-                const floatAtk = Math.floor(this.enemy.atk * (0.75 + Math.random() * 0.5));
-                let damage;
-                if (floatAtk > playerDef) {
-                    damage = floatAtk - playerDef;
-                } else {
-                    // 根据地图层数计算最低伤害上限
-                    // 第1层：1-5，第2层：1-10，...最多1-30
-                    const mapId = game.currentMap.id;
-                    let maxMinDamage = Math.min(30, 5 + mapId * 5);
-                    // BOSS伤害更高：1-15 到 1-50
-                    if (this.isBoss) {
-                        maxMinDamage = Math.min(50, 15 + mapId * 5);
-                    }
-                    damage = Math.floor(Math.random() * maxMinDamage) + 1;
+                // BOSS技能名称弹出
+                if (useBossSkill && bossSkill) {
+                    const enemyFighter = document.querySelector('.battle-fighter.enemy');
+                    const popup = document.createElement('div');
+                    popup.className = 'skill-popup boss-skill-popup';
+                    popup.textContent = `${bossSkill.emoji} ${bossSkill.name}`;
+                    enemyFighter.style.position = 'relative';
+                    enemyFighter.appendChild(popup);
+                    setTimeout(() => popup.remove(), 1200);
                 }
-                game.player.hp -= damage;
-                this.addLog(`${this.enemy.name}反击！造成 ${damage} 伤害！`, 'enemy');
+
+                const playerDef = game.getTotalDef();
+                let totalDamage = 0;
+
+                if (useBossSkill && bossSkill) {
+                    // BOSS使用技能
+                    this.addLog(`${this.enemy.name} 使用了 ${bossSkill.emoji}${bossSkill.name}！`, 'enemy');
+
+                    if (bossSkill.multiplier) {
+                        // 伤害类技能
+                        const hitCount = bossSkill.hits || 1;
+                        for (let i = 0; i < hitCount; i++) {
+                            let atk = this.enemy.atk;
+                            // 应用攻击增益
+                            if (this.enemyAtkBoostTurns > 0) {
+                                atk = Math.floor(atk * (1 + (bossSkill.atkBoost || 0.3)));
+                            }
+                            const floatAtk = Math.floor(atk * (0.75 + Math.random() * 0.5));
+                            let damage;
+                            if (floatAtk > playerDef) {
+                                damage = Math.floor((floatAtk - playerDef) * bossSkill.multiplier);
+                            } else {
+                                damage = Math.floor((Math.floor(Math.random() * 30) + 1) * bossSkill.multiplier);
+                            }
+                            totalDamage += damage;
+                            game.player.hp -= damage;
+                            this.addLog(`造成 ${damage} 伤害！`, 'enemy');
+                        }
+                    }
+
+                    if (bossSkill.healPercent) {
+                        // 恢复类技能
+                        const healAmount = Math.floor(this.enemy.maxHp * bossSkill.healPercent);
+                        this.enemy.hp = Math.min(this.enemy.hp + healAmount, this.enemy.maxHp);
+                        this.addLog(`${this.enemy.name} 恢复了 ${healAmount} 生命值！`, 'enemy');
+                        this.updateEnemyHp();
+                    }
+
+                    if (bossSkill.defenseBoost) {
+                        // 防御增益
+                        this.enemyDefBoostTurns = 3;
+                        this.addLog(`${this.enemy.name} 防御大幅提升！`, 'enemy');
+                    }
+
+                    if (bossSkill.atkBoost) {
+                        // 攻击增益（持续回合）
+                        this.enemyAtkBoostTurns = bossSkill.duration || 3;
+                        this.addLog(`${this.enemy.name} 攻击力提升！`, 'enemy');
+                    }
+                } else {
+                    // 普通攻击
+                    let atk = this.enemy.atk;
+                    // 应用攻击增益
+                    if (this.enemyAtkBoostTurns > 0) {
+                        atk = Math.floor(atk * 1.3);
+                        this.enemyAtkBoostTurns--;
+                        if (this.enemyAtkBoostTurns === 0) {
+                            this.addLog(`${this.enemy.name} 的攻击增益消失了！`, 'system');
+                        }
+                    }
+                    // 应用防御增益
+                    let effectiveDef = playerDef;
+                    if (this.enemyDefBoostTurns > 0) {
+                        this.enemyDefBoostTurns--;
+                        if (this.enemyDefBoostTurns === 0) {
+                            this.addLog(`${this.enemy.name} 的防御增益消失了！`, 'system');
+                        }
+                    }
+
+                    const floatAtk = Math.floor(atk * (0.75 + Math.random() * 0.5));
+                    let damage;
+                    if (floatAtk > effectiveDef) {
+                        damage = floatAtk - effectiveDef;
+                    } else {
+                        // 根据地图层数计算最低伤害上限
+                        const mapId = game.currentMap.id;
+                        let maxMinDamage = Math.min(30, 5 + mapId * 5);
+                        if (this.isBoss) {
+                            maxMinDamage = Math.min(50, 15 + mapId * 5);
+                        }
+                        damage = Math.floor(Math.random() * maxMinDamage) + 1;
+                    }
+                    totalDamage = damage;
+                    game.player.hp -= damage;
+                    this.addLog(`${this.enemy.name}反击！造成 ${damage} 伤害！`, 'enemy');
+                }
+
                 this.updatePlayerHp();
                 // 显示伤害数字
-                this.showDamage('player', damage);
+                if (totalDamage > 0) this.showDamage('player', totalDamage);
                 // 同时更新左侧角色面板血量
                 game.updateUI();
                 // 一回合结束，递减技能冷却
