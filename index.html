@@ -812,42 +812,42 @@
         // BOSS配置 - 等级接近每层怪物上限，加成1.8x
         // BOSS贴图路径
         const BOSS_ART = [
-            'boss_art/boss_0_goblin_king.jpg',
-            'boss_art/boss_1_forest_king.jpg',
-            'boss_art/boss_2_skeleton_lord.jpg',
-            'boss_art/boss_3_fire_demon.jpg',
-            'boss_art/boss_4_ice_dragon.jpg',
-            'boss_art/boss_5_dragon_god.jpg',
-            'boss_art/boss_6_thunder_god.jpg',
-            'boss_art/boss_7_void_lord.jpg',
-            'boss_art/boss_8_creator_god.jpg'
+            'boss_art_v2/boss_0_goblin_king.jpg',
+            'boss_art_v2/boss_1_forest_king.jpg',
+            'boss_art_v2/boss_2_skeleton_lord.jpg',
+            'boss_art_v2/boss_3_fire_demon.jpg',
+            'boss_art_v2/boss_4_ice_dragon.jpg',
+            'boss_art_v2/boss_5_dragon_god.jpg',
+            'boss_art_v2/boss_6_thunder_god.jpg',
+            'boss_art_v2/boss_7_void_lord.jpg',
+            'boss_art_v2/boss_8_creator_god.jpg'
         ];
 
         // 怪物贴图（按MONSTERS数组索引）
         const MONSTER_ART = [
-            'monster_art/slime.jpg', 'monster_art/mushroom.jpg', 'monster_art/bat.jpg',
-            'monster_art/goblin.jpg', 'monster_art/treant.jpg', 'monster_art/wolf.jpg',
-            'monster_art/boar.jpg', 'monster_art/skeleton.jpg', 'monster_art/batking.jpg',
-            'monster_art/rock.jpg', 'monster_art/zombie.jpg', 'monster_art/orc.jpg',
-            'monster_art/fire.jpg', 'monster_art/lavaslime.jpg', 'monster_art/demon_dog.jpg',
-            'monster_art/dark_knight.jpg', 'monster_art/demon.jpg', 'monster_art/shadow_dragon.jpg',
-            'monster_art/bone_dragon.jpg', 'monster_art/ancient_dragon.jpg',
-            'monster_art/thunder_bird.jpg', 'monster_art/angel.jpg', 'monster_art/fallen.jpg',
-            'monster_art/cloud_giant.jpg', 'monster_art/wind_spirit.jpg'
+            'monster_art_v2/slime.jpg', 'monster_art_v2/mushroom.jpg', 'monster_art_v2/bat.jpg',
+            'monster_art_v2/goblin.jpg', 'monster_art_v2/treant.jpg', 'monster_art_v2/wolf.jpg',
+            'monster_art_v2/boar.jpg', 'monster_art_v2/skeleton.jpg', 'monster_art_v2/batking.jpg',
+            'monster_art_v2/rock.jpg', 'monster_art_v2/zombie.jpg', 'monster_art_v2/orc.jpg',
+            'monster_art_v2/fire.jpg', 'monster_art_v2/lavaslime.jpg', 'monster_art_v2/demon_dog.jpg',
+            'monster_art_v2/dark_knight.jpg', 'monster_art_v2/demon.jpg', 'monster_art_v2/shadow_dragon.jpg',
+            'monster_art_v2/bone_dragon.jpg', 'monster_art_v2/ancient_dragon.jpg',
+            'monster_art_v2/thunder_bird.jpg', 'monster_art_v2/angel.jpg', 'monster_art_v2/fallen.jpg',
+            'monster_art_v2/cloud_giant.jpg', 'monster_art_v2/wind_spirit.jpg'
         ];
 
         // 装备贴图（按类型+名称索引）
         const EQUIP_ART = {
-            sword: 'equip_art/sword.jpg', axe: 'equip_art/axe.jpg', staff: 'equip_art/staff.jpg',
-            dagger: 'equip_art/dagger.jpg', greatsword: 'equip_art/greatsword.jpg',
-            leather: 'equip_art/leather.jpg', plate: 'equip_art/plate.jpg', robe: 'equip_art/robe.jpg',
-            chain: 'equip_art/chain.jpg', dragon: 'equip_art/dragon.jpg',
-            ring: 'equip_art/ring.jpg', necklace: 'equip_art/necklace.jpg', bracelet: 'equip_art/bracelet.jpg',
-            earring: 'equip_art/earring.jpg', belt: 'equip_art/belt.jpg',
+            sword: 'equip_art_v2/sword.jpg', axe: 'equip_art_v2/axe.jpg', staff: 'equip_art_v2/staff.jpg',
+            dagger: 'equip_art_v2/dagger.jpg', greatsword: 'equip_art_v2/greatsword.jpg',
+            leather: 'equip_art_v2/leather.jpg', plate: 'equip_art_v2/plate.jpg', robe: 'equip_art_v2/robe.jpg',
+            chain: 'equip_art_v2/chain.jpg', dragon: 'equip_art_v2/dragon.jpg',
+            ring: 'equip_art_v2/ring.jpg', necklace: 'equip_art_v2/necklace.jpg', bracelet: 'equip_art_v2/bracelet.jpg',
+            earring: 'equip_art_v2/earring.jpg', belt: 'equip_art_v2/belt.jpg',
             // 鞋子贴图
-            leather_boots: 'equip_art/leather_boots.jpg', iron_boots: 'equip_art/iron_boots.jpg',
-            mage_boots: 'equip_art/mage_boots.jpg', wind_boots: 'equip_art/wind_boots.jpg',
-            dragon_boots: 'equip_art/dragon_boots.jpg'
+            leather_boots: 'equip_art_v2/leather_boots.jpg', iron_boots: 'equip_art_v2/iron_boots.jpg',
+            mage_boots: 'equip_art_v2/mage_boots.jpg', wind_boots: 'equip_art_v2/wind_boots.jpg',
+            dragon_boots: 'equip_art_v2/dragon_boots.jpg'
         };
 
         const BOSSES = [
@@ -999,7 +999,7 @@
             playBossBGM(bossIndex) {
                 if (!this.enabled) return;
                 const mapId = game.currentMap.id;
-                if (this.bossBGMs[mapId]) {
+                if (MUSIC_CONFIG.bossBGMs[mapId]) {
                     this._bossBgmIndex = mapId;
                     this.play('boss_bgm', true);
                 } else {
@@ -1607,14 +1607,27 @@
                 
                 if (cell.type === 'monster') {
                     const monster = cell.monster;
-                    const mainPart = monster.parts ? monster.parts.find(p => p.isMain) : { x, y };
+                    // 获取怪物的主位置（BOSS可能有多个parts，普通怪物直接用cell坐标）
+                    let mainPart = { x: x, y: y };
+                    if (monster.parts && monster.parts.length > 0) {
+                        const foundMain = monster.parts.find(p => p.isMain);
+                        if (foundMain) mainPart = foundMain;
+                    }
                     
-                    // 检查是否是BOSS且未解锁
+                    // 检查是否是BOSS且未解锁，提示后仍然进入战斗
                     if (monster.isBoss && !this.player.passports.includes(this.currentMap.id)) {
                         this.log(`🔥 需要先击败BOSS ${monster.name} 才能开启下一层！`);
                     }
 
-                    // 找到相邻的空位
+                    // 检查玩家是否已经在怪物旁边（曼哈顿距离为1）
+                    const dx = Math.abs(mainPart.x - this.player.x);
+                    const dy = Math.abs(mainPart.y - this.player.y);
+                    if (dx + dy === 1) {
+                        battle.start(monster, mainPart.x, mainPart.y);
+                        return;
+                    }
+
+                    // 找到相邻的空位移动到怪物旁边
                     const neighbors = [
                         { x: mainPart.x + 1, y: mainPart.y }, { x: mainPart.x - 1, y: mainPart.y },
                         { x: mainPart.x, y: mainPart.y + 1 }, { x: mainPart.x, y: mainPart.y - 1 }
@@ -1631,6 +1644,7 @@
                         }
                     }
                     
+                    // 如果玩家已经在目标位置，直接战斗
                     if (targetX === this.player.x && targetY === this.player.y) {
                         battle.start(monster, mainPart.x, mainPart.y);
                         return;
@@ -1638,9 +1652,10 @@
                     
                     await this.moveTo(targetX, targetY, false);
                     
-                    const dx = Math.abs(mainPart.x - this.player.x);
-                    const dy = Math.abs(mainPart.y - this.player.y);
-                    if (dx + dy === 1) battle.start(monster, mainPart.x, mainPart.y);
+                    // 移动后检查是否在怪物旁边
+                    const dx2 = Math.abs(mainPart.x - this.player.x);
+                    const dy2 = Math.abs(mainPart.y - this.player.y);
+                    if (dx2 + dy2 === 1) battle.start(monster, mainPart.x, mainPart.y);
                     return;
                 }
 
