@@ -21,7 +21,7 @@ pinned: false
 
 ## 🌐 在线试玩
 
-**👉 [立即开始游戏](https://zhangzui-hero-legend-rpg.hf.space)**
+**👉 [立即开始游戏](https://shimmering-cheesecake-12b68c.netlify.app/)**
 
 欢迎体验，祝您游戏愉快！
 
