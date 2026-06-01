@@ -170,6 +170,7 @@
         }
         .map-cell:hover { background: rgba(255,255,255,0.15); transform: scale(1.05); }
         .map-cell.player { background: rgba(78, 205, 196, 0.3); border-color: #4ecdc4; animation: pulse 1.5s infinite; }
+        .map-cell.path-highlight { background: rgba(255, 215, 0, 0.4); border-color: #ffd700; box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
         .map-cell.monster { background: rgba(255, 255, 255, 0.3); border-color: #ccc; }
         .map-cell.monster-elite { background: rgba(155, 89, 182, 0.4); border-color: #9b59b6; animation: eliteGlow 1.5s infinite; box-shadow: 0 0 10px #9b59b6; }
         .map-cell.monster-rare { background: rgba(243, 156, 18, 0.4); border-color: #f39c12; animation: rareGlow 1.5s infinite; box-shadow: 0 0 15px #f39c12; }
@@ -648,10 +649,10 @@
         // ==================== 配置 ====================
         const QUALITIES = [
             { name: '普通', class: 'quality-common', multiplier: 1.0, color: '#95a5a6' },
-            { name: '精良', class: 'quality-uncommon', multiplier: 1.2, color: '#2ecc71' },
-            { name: '优秀', class: 'quality-rare', multiplier: 1.5, color: '#3498db' },
-            { name: '史诗', class: 'quality-epic', multiplier: 2.0, color: '#9b59b6' },
-            { name: '传说', class: 'quality-legendary', multiplier: 3.0, color: '#f39c12' }
+            { name: '精良', class: 'quality-uncommon', multiplier: 1.5, color: '#2ecc71' },
+            { name: '优秀', class: 'quality-rare', multiplier: 2.2, color: '#3498db' },
+            { name: '史诗', class: 'quality-epic', multiplier: 3.5, color: '#9b59b6' },
+            { name: '传说', class: 'quality-legendary', multiplier: 5.0, color: '#f39c12' }
         ];
 
         const WEAPONS = [
@@ -1343,6 +1344,11 @@
                         cell.dataset.x = x;
                         cell.dataset.y = y;
 
+                        // 检查是否在移动路径上
+                        if (this.currentPath && this.currentPath.some(p => p.x === x && p.y === y)) {
+                            cell.classList.add('path-highlight');
+                        }
+
                         if (x === this.player.x && y === this.player.y) {
                             cell.classList.add('player');
                             // 玩家使用贴图
@@ -1560,6 +1566,8 @@
                 }
 
                 this.isMoving = true;
+                this.currentPath = path; // 保存路径用于显示
+                this.renderMap(); // 重新渲染显示路径
 
                 for (const step of path) {
                     // 检查路径上是否有怪物（如果需要避开）
@@ -1591,6 +1599,8 @@
                 }
 
                 this.isMoving = false;
+                this.currentPath = null; // 清除路径
+                this.renderMap();
             },
 
             sleep(ms) { return new Promise(r => setTimeout(r, ms)); },
