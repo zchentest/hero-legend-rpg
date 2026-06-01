@@ -1166,7 +1166,7 @@
                             currentLayer: 3,
                             atk: Math.floor(bossData.level * 1.4 * bossData.atkMult),
                             def: Math.floor(bossData.level * 0.8 * bossData.defMult),
-                            exp: bossData.level * 10,
+                            exp: bossData.level * 8,
                             parts: [{ x, y, isMain: true }],
                             // BOSS阶段系统
                             phaseBonus: { def: 0.60, atk: 0.60 },
@@ -1541,6 +1541,8 @@
                         this.log('需要击败BOSS才能进入下一层！');
                         return;
                     }
+                    // 先移动到传送门位置，再进入
+                    await this.moveTo(x, y, true);
                     this.usePortal(cell.targetMap);
                     return;
                 }
