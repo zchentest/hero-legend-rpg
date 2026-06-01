@@ -195,8 +195,8 @@
         @keyframes giftGlow { 0%, 100% { box-shadow: inset 0 0 5px rgba(255,215,0,0.2); } 50% { box-shadow: inset 0 0 12px rgba(255,215,0,0.5); } }
         .map-cell.village { background: rgba(46, 204, 113, 0.3); border-color: #2ecc71; }
         .map-cell.path { background: rgba(255, 215, 0, 0.3); }
-        .monster-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.55em; background: rgba(0,0,0,0.85); color: #fff; padding: 1px 4px; border-radius: 3px; font-weight: bold; white-space: nowrap; z-index: 5; pointer-events: none; }
-        .boss-label { background: linear-gradient(135deg, #ff0000, #cc0000); color: #fff; font-size: 0.6em; text-shadow: 0 0 5px #fff; border: none; bottom: -18px; }
+        .monster-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.45em; background: rgba(0,0,0,0.85); color: #fff; padding: 1px 4px; border-radius: 3px; font-weight: bold; white-space: nowrap; z-index: 5; pointer-events: none; }
+        .boss-label { background: linear-gradient(135deg, #ff0000, #cc0000); color: #fff; font-size: 0.5em; text-shadow: 0 0 5px #fff; border: none; bottom: -18px; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         @keyframes glow { 0%, 100% { box-shadow: 0 0 5px #9b59b6; } 50% { box-shadow: 0 0 20px #9b59b6; } }
         @keyframes eliteGlow { 0%, 100% { box-shadow: 0 0 5px #9b59b6, inset 0 0 10px rgba(155,89,182,0.3); } 50% { box-shadow: 0 0 20px #9b59b6, inset 0 0 20px rgba(155,89,182,0.5); } }
@@ -438,8 +438,8 @@
         .equip-preview.active { display: block; }
         .preview-title { font-size: 1.5em; color: #ffd700; margin-bottom: 15px; text-align: center; }
         .preview-comparison { margin: 15px 0; }
-        .preview-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(180,140,80,0.2); }
-        .preview-stat { display: flex; align-items: center; gap: 10px; }
+        .preview-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(180,140,80,0.2); color: #fff; }
+        .preview-stat { display: flex; align-items: center; gap: 10px; color: #ffd700; }
         .preview-change { font-weight: bold; }
         .preview-change.positive { color: #2ecc71; }
         .preview-change.negative { color: #e74c3c; }
@@ -751,11 +751,11 @@
                 bonus2: { atkMult: 1.05, defMult: 1.05, desc: '攻防+5%' },
                 bonus4: { atkMult: 1.15, defMult: 1.15, expMult: 1.15, desc: '攻防+15%, 经验+15%' }
             },
-            dragon: { name: '龙鳞', color: '#9c27b0',
+            dragon: { name: '龙鳞', color: '#d580ff',
                 bonus2: { hpMult: 1.1, atkMult: 1.05, desc: '生命+10%, 攻击+5%' },
                 bonus4: { hpMult: 1.2, atkMult: 1.15, defMult: 1.1, desc: '生命+20%, 攻击+15%, 防御+10%' }
             },
-            shadow: { name: '暗影', color: '#424242',
+            shadow: { name: '暗影', color: '#C71585',
                 bonus2: { expMult: 1.15, desc: '经验+15%' },
                 bonus4: { expMult: 1.3, atkMult: 1.1, desc: '经验+30%, 攻击+10%' }
             },
@@ -874,7 +874,7 @@
             { id: 8, name: '创世神域', emoji: '⭐', minLv: 70, maxLv: 75, rows: 12, cols: 22, obstacleRate: 0.12, monsterCount: 46, monsters: ['divine_messenger', 'holy_beast', 'temple_guard'], bgClass: 'map-bg-divine', obstacles: { types: ['⭐', '✨', '🔔', '🕊️'] }, emptyEmoji: '🟨', desc: '创世神的居所，最终试炼之地' }
         ];
 
-        // 技能改为击败BOSS后解锁
+        // 技能改为击败BOSS后解锁 (补充第9层技能)
         const SKILLS = [
             { bossIndex: 0, name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 },
             { bossIndex: 1, name: '防御', emoji: '🛡️', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 },
@@ -883,7 +883,8 @@
             { bossIndex: 4, name: '圣光', emoji: '✨', desc: '恢复30%', cooldown: 8, healPercent: 0.3 },
             { bossIndex: 5, name: '终极', emoji: '💥', desc: '3倍伤害', cooldown: 10, multiplier: 3 },
             { bossIndex: 6, name: '神罚', emoji: '⚡', desc: '4倍伤害', cooldown: 12, multiplier: 4 },
-            { bossIndex: 7, name: '创世', emoji: '🌟', desc: '5倍伤害', cooldown: 15, multiplier: 5 }
+            { bossIndex: 7, name: '创世', emoji: '🌟', desc: '5倍伤害', cooldown: 15, multiplier: 5 },
+            { bossIndex: 8, name: '创世之光', emoji: '🌟', desc: '6倍伤害+恢复20%', cooldown: 15, multiplier: 6, healPercent: 0.2 }
         ];
 
         // 音乐配置 - 按地图ID配置BGM
@@ -1131,6 +1132,10 @@
             currentMap: null, autoBattle: false, playTimeInterval: null, isMoving: false, previewItem: null, battleSpeed: 1,
 
             init() {
+                if (!this.player.charName) {
+                    const defaultChar = CHARACTERS.find(c => c.emoji === BASE_CHAR);
+                    this.player.charName = defaultChar ? defaultChar.name : '勇者';
+                }
                 this.loadSkills();
                 this.generateMap(0);
                 this.updateUI();
@@ -1139,6 +1144,11 @@
                 this.loadGame();
                 // BOSS随机移动定时器（每3秒移动一次）
                 this.bossMoveInterval = setInterval(() => this.moveBoss(), 3000);
+                // 页面卸载时清除定时器
+                window.addEventListener('beforeunload', () => {
+                    if (this.bossMoveInterval) clearInterval(this.bossMoveInterval);
+                    if (this.playTimeInterval) clearInterval(this.playTimeInterval);
+                });
             },
 
             loadSkills() {
@@ -1294,6 +1304,45 @@
                     }
                     attempts++;
                 }
+                
+                // 如果随机放置失败，强制找一个空位放置
+                if (!placed) {
+                    for (let y = 0; y < mapData.rows; y++) {
+                        for (let x = 0; x < mapData.cols; x++) {
+                            if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && 
+                                this.currentMap.cells[y][x].type === 'empty') {
+                                const layerHp = Math.floor(bossData.level * 55 * bossData.hpMult);
+                                const boss = {
+                                    ...bossData,
+                                    isBoss: true,
+                                    bossIndex: mapId,
+                                    hp: layerHp,
+                                    maxHp: layerHp * 3,
+                                    layerHp: layerHp,
+                                    hpLayers: 3,
+                                    currentLayer: 3,
+                                    atk: Math.floor(bossData.level * 1.4 * bossData.atkMult),
+                                    def: Math.floor(bossData.level * 0.8 * bossData.defMult),
+                                    exp: bossData.level * 8,
+                                    parts: [{ x, y, isMain: true }],
+                                    phaseBonus: { def: 0.60, atk: 0.60 },
+                                    defBoosted: false,
+                                    atkBoosted: false
+                                };
+                                this.currentMap.cells[y][x] = {
+                                    type: 'monster', x, y, 
+                                    emoji: bossData.emoji,
+                                    monster: boss, isMainPart: true
+                                };
+                                this.currentMap.boss = boss;
+                                placed = true;
+                                this.log(`🔥 BOSS ${boss.name} 已出现！`);
+                                break;
+                            }
+                        }
+                        if (placed) break;
+                    }
+                }
             },
 
             // BOSS随机移动
@@ -1326,6 +1375,7 @@
                     // 检查是否撞到玩家 → 发起战斗（怪物先攻击）
                     if (newX === this.player.x && newY === this.player.y) {
                         this.startBossAmbush(boss, mainPart);
+                        return;
                     }
                     return;
                 }
@@ -1459,8 +1509,10 @@
 
                         if (x === this.player.x && y === this.player.y) {
                             cell.classList.add('player');
-                            // 玩家使用贴图
-                            cell.innerHTML = `<img src="${BASE_ART}" style="width:44px;height:44px;object-fit:contain;border-radius:4px;" onerror="this.parentElement.textContent='${this.getPlayerAvatar()}'">`;
+                            cell.style.position = 'relative';
+                            const imgHtml = `<img src="${BASE_ART}" style="width:44px;height:44px;object-fit:contain;border-radius:4px;" onerror="this.parentElement.textContent='${this.getPlayerAvatar()}'">`;
+                            const labelHtml = `<span style="position:absolute; bottom:-16px; left:50%; transform:translateX(-50%); font-size:0.55em; background:rgba(0,0,0,0.85); color:#ffd700; padding:1px 4px; border-radius:3px; white-space:nowrap;">${this.player.charName || '勇者'}</span>`;
+                            cell.innerHTML = imgHtml + labelHtml;
                         } else {
                             const cellData = this.currentMap.cells[y][x];
                             switch (cellData.type) {
@@ -1650,7 +1702,7 @@
                         return;
                     }
                     
-                    await this.moveTo(targetX, targetY, false);
+                    await this.moveTo(targetX, targetY, true);
                     
                     // 移动后检查是否在怪物旁边
                     const dx2 = Math.abs(mainPart.x - this.player.x);
@@ -1695,6 +1747,12 @@
                 this.renderMap(); // 重新渲染显示路径
 
                 for (const step of path) {
+                    // 如果战斗已经开始，则中断移动
+                    if (document.getElementById('battleScreen').classList.contains('active')) {
+                        this.isMoving = false;
+                        this.currentPath = null;
+                        return;
+                    }
                     // 检查路径上是否有怪物（如果需要避开）
                     if (avoidMonsters) {
                         const cell = this.currentMap.cells[step.y][step.x];
@@ -1872,8 +1930,8 @@
                 this.updatePassportList();
             },
 
-            // 获取套装加成
-            // 获取套装加成（按套装类型统计）
+            // 获取套装加成（2+2可叠加，同属性叠加，不同属性取最高）
+            // 替换 game 对象中的 getSetBonus 方法
             getSetBonus() {
                 const equipped = [
                     this.player.weapon,
@@ -1884,30 +1942,62 @@
                 
                 if (equipped.length < 2) return null;
                 
-                // 统计各套装数量
+                // 统计各套装的件数
                 const setCounts = {};
                 equipped.forEach(e => {
                     setCounts[e.setType] = (setCounts[e.setType] || 0) + 1;
                 });
                 
-                // 找出数量最多的套装
-                let maxSet = null, maxCount = 0;
+                // 收集激活的套装效果（每套装只取最高档：4件 > 2件）
+                const activeBonuses = [];
+                const activeSets = [];
                 for (const [setType, count] of Object.entries(setCounts)) {
-                    if (count > maxCount) {
-                        maxCount = count;
-                        maxSet = setType;
+                    const setData = SET_TYPES[setType];
+                    if (!setData) continue;
+                    
+                    let bonus = null;
+                    let pieces = 0;
+                    if (count >= 4) {
+                        bonus = setData.bonus4;
+                        pieces = 4;
+                    } else if (count >= 2) {
+                        bonus = setData.bonus2;
+                        pieces = 2;
+                    }
+                    if (bonus) {
+                        activeBonuses.push(bonus);
+                        activeSets.push({ name: setData.name, pieces, bonusDesc: bonus.desc });
                     }
                 }
                 
-                // 返回对应套装加成
-                if (maxCount >= 4 && SET_TYPES[maxSet]) {
-                    return { ...SET_TYPES[maxSet].bonus4, setType: maxSet, count: 4, setData: SET_TYPES[maxSet] };
-                } else if (maxCount >= 2 && SET_TYPES[maxSet]) {
-                    return { ...SET_TYPES[maxSet].bonus2, setType: maxSet, count: maxCount, setData: SET_TYPES[maxSet] };
+                if (activeBonuses.length === 0) return null;
+                
+                // 合并加成：相同属性取最高值
+                let atkMult = 1, defMult = 1, hpMult = 1, expMult = 1;
+                for (const bonus of activeBonuses) {
+                    if (bonus.atkMult) atkMult = Math.max(atkMult, bonus.atkMult);
+                    if (bonus.defMult) defMult = Math.max(defMult, bonus.defMult);
+                    if (bonus.hpMult) hpMult = Math.max(hpMult, bonus.hpMult);
+                    if (bonus.expMult) expMult = Math.max(expMult, bonus.expMult);
                 }
-                return null;
+                
+                // 生成描述
+                const effects = [];
+                if (atkMult > 1) effects.push(`攻击+${Math.round((atkMult - 1) * 100)}%`);
+                if (defMult > 1) effects.push(`防御+${Math.round((defMult - 1) * 100)}%`);
+                if (hpMult > 1) effects.push(`生命+${Math.round((hpMult - 1) * 100)}%`);
+                if (expMult > 1) effects.push(`经验+${Math.round((expMult - 1) * 100)}%`);
+                
+                let desc = '';
+                if (activeSets.length) {
+                    const setNames = activeSets.map(s => `${s.name}(${s.pieces}件)`).join('、');
+                    desc = `${setNames} 激活 | 最终加成: ${effects.join('、')}`;
+                } else {
+                    desc = effects.join('、');
+                }
+                
+                return { atkMult, defMult, hpMult, expMult, desc };
             },
-
             // 获取经验加成（来自套装）
             getExpBonus() {
                 const setBonus = this.getSetBonus();
@@ -1995,9 +2085,9 @@
                 const setBonusDiv = document.getElementById('setBonusInfo');
                 if (setBonusDiv) {
                     if (setBonus) {
-                        setBonusDiv.innerHTML = `<div style="color:#fff;font-weight:bold;">${setBonus.setData.name}套装 (${setBonus.count}件): ${setBonus.desc}</div>`;
+                        setBonusDiv.innerHTML = `<div style="color:#ffd700;font-size:0.9em;">✨ 套装加成: ${setBonus.desc}</div>`;
                     } else {
-                        setBonusDiv.innerHTML = '<div style="color:#888;">装备2件同套装可激活套装加成</div>';
+                        setBonusDiv.innerHTML = '<div style="color:#888;">装备2件同类型套装可激活加成（相同属性取最高值）</div>';
                     }
                 }
             },
@@ -2057,6 +2147,8 @@
                     this.player.hp = this.player.maxHp;
                     // 升级经验：基础100，每级+20
                     this.player.expNeeded = 50 + (this.player.level - 1) * 50;
+                    // 重新计算套装生命加成
+                    this.recalculateStats();
                     upCount++;
                 }
                 if (upCount > 0) {
@@ -2186,11 +2278,21 @@
                             <div style="font-size: 2em; text-align: center; margin-bottom: 10px;">${art ? `<img src="${art}" style="width:48px;height:48px;object-fit:contain;" onerror="this.parentElement.textContent='${item.emoji}'">` : item.emoji}</div>
                             <div style="font-weight: bold; text-align: center; color: ${quality.color}">${item.name}+${item.level}</div>
                             <div style="text-align: center; font-size: 0.8em; color: ${quality.color}; margin: 3px 0;">${quality.name}</div>
+                            ${item.setName ? `<div style="text-align: center; font-size: 0.75em; color: ${item.setColor}; margin: 2px 0;">[${item.setName}]</div>` : ''}
                             <div style="font-size: 0.85em; color: #aaa; text-align: center; margin: 5px 0;">❤️+${item.hp} ⚔️+${item.atk} 🛡️+${item.def}</div>
                             <div style="display: flex; gap: 5px; margin-top: 10px;">
                                 <button class="btn btn-primary" style="flex: 1;" onclick="game.showEquipPreview(${index})">装备</button>
                                 <button class="btn btn-warning" style="flex: 1;" onclick="game.convertItem(${index})">回收</button>
                             </div>`;
+                        // div.innerHTML = `
+                        //     <div style="font-size: 2em; text-align: center; margin-bottom: 10px;">${art ? `<img src="${art}" style="width:48px;height:48px;object-fit:contain;" onerror="this.parentElement.textContent='${item.emoji}'">` : item.emoji}</div>
+                        //     <div style="font-weight: bold; text-align: center; color: ${quality.color}">${item.name}+${item.level}</div>
+                        //     <div style="text-align: center; font-size: 0.8em; color: ${quality.color}; margin: 3px 0;">${quality.name}</div>
+                        //     <div style="font-size: 0.85em; color: #aaa; text-align: center; margin: 5px 0;">❤️+${item.hp} ⚔️+${item.atk} 🛡️+${item.def}</div>
+                        //     <div style="display: flex; gap: 5px; margin-top: 10px;">
+                        //         <button class="btn btn-primary" style="flex: 1;" onclick="game.showEquipPreview(${index})">装备</button>
+                        //         <button class="btn btn-warning" style="flex: 1;" onclick="game.convertItem(${index})">回收</button>
+                        //     </div>`;
                         grid.appendChild(div);
                     });
                 }
@@ -2225,15 +2327,38 @@
                     return `<span>${diff}</span>`;
                 };
                 
+                // 构建套装效果信息
+                let setEffectHtml = '';
+                if (item.setName) {
+                    const setData = SET_TYPES[item.setType];
+                    if (setData) {
+                        setEffectHtml = `
+                            <div class="preview-row" style="border-bottom: none;">
+                                <span class="preview-stat">✨ 套装</span>
+                                <span style="color: ${item.setColor}; font-weight: bold;">[${item.setName}]</span>
+                            </div>
+                            <div class="preview-row" style="padding-left: 20px; border-bottom: none;">
+                                <span>2件效果：</span><span style="color: #ffd700;">${setData.bonus2.desc}</span>
+                            </div>
+                            <div class="preview-row" style="padding-left: 20px;">
+                                <span>4件效果：</span><span style="color: #ffd700;">${setData.bonus4.desc}</span>
+                            </div>
+                        `;
+                    }
+                }
+                
                 comparison.innerHTML = `
+                    ${setEffectHtml}
                     <div class="preview-row"><span class="preview-stat">❤️ 生命</span> ${formatDiff(hpDiff)}</div>
                     <div class="preview-row"><span class="preview-stat">⚔️ 攻击</span> ${formatDiff(atkDiff)}</div>
-                    <div class="preview-row"><span class="preview-stat">🛡️ 防御</span> ${formatDiff(defDiff)}</div>`;
+                    <div class="preview-row"><span class="preview-stat">🛡️ 防御</span> ${formatDiff(defDiff)}</div>
+                `;
                 
                 document.getElementById('previewEquipBtn').onclick = () => this.equipItem(index);
                 preview.classList.add('active');
                 this.previewItem = index;
             },
+            
 
             closeEquipPreview() {
                 document.getElementById('equipPreview').classList.remove('active');
@@ -2375,6 +2500,12 @@
             selectChar(index) {
                 BASE_CHAR = CHARACTERS[index].emoji;
                 BASE_ART = CHARACTERS[index].art;
+                // if (!this.player.charName) {
+                //     const defaultChar = CHARACTERS.find(c => c.emoji === BASE_CHAR);
+                //     this.player.charName = defaultChar ? defaultChar.name : '勇者';
+                // }
+                
+                // 直接更新角色名称
                 this.player.charName = CHARACTERS[index].name;
                 this.updateUI();
                 this.renderMap();
@@ -2785,13 +2916,15 @@
                         }
                     }
                 }
-                
-                this.addLog(`勇者攻击！造成 ${damage} 伤害！`, 'player');
+                this.addLog(`${game.player.charName || '勇者'}攻击！造成 ${damage} 伤害！`, 'player');
+                // this.addLog(`勇者攻击！造成 ${damage} 伤害！`, 'player');
                 this.updateEnemyHp();
                 // 显示伤害数字
                 this.showDamage('enemy', damage);
 
                 if (this.enemy.hp <= 0 && this.enemy.currentLayer <= 0) {
+                    // 胜利前先递减冷却
+                    this.tickCooldowns();
                     if (this.isBoss) game.winBoss();
                     else game.win();
                     return;
@@ -2973,7 +3106,11 @@
                 game.updateUI();
                 // 一回合结束，递减技能冷却
                 this.tickCooldowns();
-                if (game.player.hp <= 0) game.lose();
+                if (game.player.hp <= 0) {
+                    // 玩家死亡前递减冷却
+                    this.tickCooldowns();
+                    game.lose();
+                }
             },
 
             showDamage(target, damage) {
@@ -3292,7 +3429,7 @@
             document.getElementById('defeatCg').classList.add('active');
 
             // 播放死亡BGM
-            musicPlayer.stopBGM();
+            musicPlayer.stop();
             if (isBoss) {
                 musicPlayer.playDefeatBossBGM();
             } else {
