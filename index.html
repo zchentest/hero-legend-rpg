@@ -10,10 +10,10 @@
         body { 
             font-family: 'Microsoft YaHei', sans-serif; 
             background: 
-                radial-gradient(ellipse at 20% 80%, rgba(139, 69, 19, 0.4) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(147, 112, 219, 0.3) 0%, transparent 40%),
-                linear-gradient(180deg, #2d1810 0%, #4a1a1a 30%, #8b4513 60%, #d2691e 85%, #ff8c42 100%);
-            color: #fff; 
+                radial-gradient(ellipse at 20% 80%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 223, 100, 0.1) 0%, transparent 40%),
+                linear-gradient(180deg, #f5f0e0 0%, #faf5e4 30%, #fff8dc 60%, #fffacd 85%, #ffe4b5 100%);
+            color: #3d2b1f; 
             min-height: 100vh; 
             overflow-x: hidden;
             position: relative;
@@ -36,17 +36,9 @@
         .game-title { 
             text-align: center; 
             font-size: 2.5em; 
-            color: #ffd700; 
-            text-shadow: 
-                0 0 10px rgba(255, 140, 66, 0.8),
-                0 0 20px rgba(255, 69, 0, 0.5),
-                2px 2px 4px rgba(0,0,0,0.8); 
+            color: #ff6b6b; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             margin-bottom: 10px; 
-            background: linear-gradient(45deg, #ffd700, #ff8c42, #ff6347); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            background-clip: text;
-            filter: drop-shadow(0 0 8px rgba(255, 140, 66, 0.5));
         }
         .game-info { text-align: center; color: #deb887; margin-bottom: 15px; font-size: 0.9em; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); }
         
@@ -70,37 +62,37 @@
         }
         
         .main-game { display: grid; grid-template-columns: 450px 1fr 330px; gap: 15px; margin-bottom: 15px; }
-        .left-panel { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); }
-        .panel-section { margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .left-panel { background: rgba(60,40,20,0.85); border-radius: 15px; padding: 12px; border: 1px solid rgba(180,140,80,0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .panel-section { margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(180,140,80,0.2); }
         .panel-section:last-child { border-bottom: none; margin-bottom: 0; }
-        .panel-title { font-size: 1em; color: #ff8c42; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; text-shadow: 0 0 10px rgba(255, 140, 66, 0.5); }
-        .character-info { background: linear-gradient(135deg, rgba(45, 24, 16, 0.6), rgba(74, 26, 26, 0.4)); border-radius: 10px; padding: 10px; border: 1px solid rgba(255, 140, 66, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .char-avatar { font-size: 2.5em; text-align: center; margin-bottom: 6px; min-height: 50px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 10px rgba(255, 140, 66, 0.4)); }
-        .char-name { text-align: center; font-size: 1.1em; color: #deb887; margin-bottom: 6px; text-shadow: 0 0 8px rgba(222, 184, 135, 0.4); }
+        .panel-title { font-size: 1em; color: #ff8c42; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .character-info { background: linear-gradient(135deg, rgba(80, 50, 20, 0.7), rgba(60, 35, 15, 0.5)); border-radius: 10px; padding: 10px; border: 1px solid rgba(180,140,80,0.25); }
+        .char-avatar { font-size: 2.5em; text-align: center; margin-bottom: 6px; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+        .char-name { text-align: center; font-size: 1.1em; color: #ffd700; margin-bottom: 6px; }
         .stat-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; padding: 5px 0; }
-        .stat-label { color: #cd853f; font-size: 0.9em; }
-        .stat-value { font-weight: bold; color: #fff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
-        .hp-bar, .exp-bar { width: 100%; height: 20px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin: 5px 0; position: relative; border: 1px solid rgba(255, 140, 66, 0.2); }
-        .hp-fill { height: 100%; background: linear-gradient(90deg, #8b0000, #dc143c, #ff6347); transition: width 0.3s ease; box-shadow: 0 0 10px rgba(220, 20, 60, 0.5); }
-        .exp-fill { height: 100%; background: linear-gradient(90deg, #4b0082, #8a2be2, #da70d6); transition: width 0.3s ease; box-shadow: 0 0 10px rgba(138, 43, 226, 0.4); }
+        .stat-label { color: #deb887; font-size: 0.9em; }
+        .stat-value { font-weight: bold; color: #fff; }
+        .hp-bar, .exp-bar { width: 100%; height: 20px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin: 5px 0; position: relative; border: 1px solid rgba(180,140,80,0.2); }
+        .hp-fill { height: 100%; background: linear-gradient(90deg, #8b0000, #dc143c, #ff6347); transition: width 0.3s ease; }
+        .exp-fill { height: 100%; background: linear-gradient(90deg, #4b0082, #8a2be2, #da70d6); transition: width 0.3s ease; }
         .bar-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.75em; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
-        .equipment-slot { background: linear-gradient(135deg, rgba(45, 24, 16, 0.5), rgba(74, 26, 26, 0.3)); border-radius: 8px; padding: 10px; margin: 8px 0; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255, 140, 66, 0.1); }
-        .equipment-slot:hover { background: rgba(255, 140, 66, 0.15); border-color: #ff8c42; box-shadow: 0 0 15px rgba(255, 140, 66, 0.3); }
+        .equipment-slot { background: linear-gradient(135deg, rgba(80, 50, 20, 0.6), rgba(60, 35, 15, 0.4)); border-radius: 8px; padding: 10px; margin: 8px 0; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(180,140,80,0.15); }
+        .equipment-slot:hover { background: rgba(180,140,80,0.25); border-color: #daa520; box-shadow: 0 0 15px rgba(218,165,32,0.3); }
         .equipment-slot.empty { opacity: 0.5; }
         .equip-icon { font-size: 1.8em; }
-        .equip-info { flex: 1; }
-        .equip-name { font-weight: bold; font-size: 0.9em; }
-        .equip-quality { font-size: 0.75em; margin-top: 2px; }
+        .equip-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .equip-name { font-weight: bold; font-size: 0.85em; line-height: 1.2; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .equip-quality { font-size: 0.7em; margin-top: 1px; }
         .quality-common { color: #cd853f; }
         .quality-uncommon { color: #9acd32; }
         .quality-rare { color: #87ceeb; }
         .quality-epic { color: #da70d6; }
         .quality-legendary { color: #ffd700; text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
-        .equip-stats { font-size: 0.75em; color: #deb887; }
+        .equip-stats { font-size: 0.7em; color: #deb887; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .btn-small { padding: 4px 8px; font-size: 0.7em; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
         .btn-unequip { background: linear-gradient(135deg, #8b0000, #dc143c); color: white; }
-        .map-container { background: linear-gradient(135deg, rgba(45, 24, 16, 0.4), rgba(74, 26, 26, 0.3)); border-radius: 15px; padding: 15px; border: 1px solid rgba(255, 140, 66, 0.2); position: relative; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-        .right-panel { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .map-container { background: linear-gradient(135deg, rgba(60,40,20,0.5), rgba(40,25,10,0.4)); border-radius: 15px; padding: 15px; border: 1px solid rgba(180,140,80,0.25); position: relative; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .right-panel { background: rgba(60,40,20,0.85); border-radius: 15px; padding: 12px; border: 1px solid rgba(180,140,80,0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .map-bg-village { background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 100%); }
         .map-bg-forest { background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%); }
         .map-bg-mine { background: linear-gradient(135deg, #3d2817 0%, #5a3d23 100%); }
@@ -110,7 +102,7 @@
         .map-bg-sky { background: linear-gradient(135deg, #4a90e2 0%, #87ceeb 50%, #e0f6ff 100%); }
         .map-bg-abyss { background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #2d1b4e 100%); }
         .map-bg-divine { background: linear-gradient(135deg, #ffd700 0%, #ff8c42 50%, #fff8dc 100%); }
-        .map-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .map-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(180,140,80,0.2); }
         .map-name { font-size: 1.3em; color: #4ecdc4; display: flex; align-items: center; gap: 8px; }
         .map-level { color: #aaa; font-size: 0.9em; }
         
@@ -178,7 +170,7 @@
         }
         .map-cell:hover { background: rgba(255,255,255,0.15); transform: scale(1.05); }
         .map-cell.player { background: rgba(78, 205, 196, 0.3); border-color: #4ecdc4; animation: pulse 1.5s infinite; }
-        .map-cell.monster { background: rgba(231, 76, 60, 0.2); border-color: #e74c3c; }
+        .map-cell.monster { background: rgba(255, 255, 255, 0.3); border-color: #ccc; }
         .map-cell.monster-elite { background: rgba(155, 89, 182, 0.4); border-color: #9b59b6; animation: eliteGlow 1.5s infinite; box-shadow: 0 0 10px #9b59b6; }
         .map-cell.monster-rare { background: rgba(243, 156, 18, 0.4); border-color: #f39c12; animation: rareGlow 1.5s infinite; box-shadow: 0 0 15px #f39c12; }
         .map-cell.monster-boss { 
@@ -198,9 +190,11 @@
         .map-cell.obstacle { background: rgba(100, 100, 100, 0.3); cursor: not-allowed; }
         .map-cell.portal { background: rgba(155, 89, 182, 0.3); border-color: #9b59b6; animation: glow 2s infinite; }
         .map-cell.portal-locked { background: rgba(100, 100, 100, 0.3); border-color: #666; cursor: not-allowed; }
+        .map-cell.gift-cell { background: rgba(255,215,0,0.2); border-color: rgba(255,215,0,0.4); animation: giftGlow 2s infinite; cursor: pointer; }
+        @keyframes giftGlow { 0%, 100% { box-shadow: inset 0 0 5px rgba(255,215,0,0.2); } 50% { box-shadow: inset 0 0 12px rgba(255,215,0,0.5); } }
         .map-cell.village { background: rgba(46, 204, 113, 0.3); border-color: #2ecc71; }
         .map-cell.path { background: rgba(255, 215, 0, 0.3); }
-        .monster-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.55em; background: rgba(0,0,0,0.85); color: #ccc; padding: 1px 4px; border-radius: 3px; font-weight: bold; white-space: nowrap; z-index: 5; pointer-events: none; }
+        .monster-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.55em; background: rgba(0,0,0,0.85); color: #fff; padding: 1px 4px; border-radius: 3px; font-weight: bold; white-space: nowrap; z-index: 5; pointer-events: none; }
         .boss-label { background: linear-gradient(135deg, #ff0000, #cc0000); color: #fff; font-size: 0.6em; text-shadow: 0 0 5px #fff; border: none; bottom: -18px; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         @keyframes glow { 0%, 100% { box-shadow: 0 0 5px #9b59b6; } 50% { box-shadow: 0 0 20px #9b59b6; } }
@@ -220,26 +214,26 @@
         }
         .map-legend { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; font-size: 0.85em; color: #aaa; }
         .legend-item { display: flex; align-items: center; gap: 5px; }
-        .log-container { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 12px; height: 150px; overflow-y: auto; font-size: 0.85em; }
-        .log-entry { margin: 4px 0; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .log-time { color: #666; font-size: 0.8em; }
+        .log-container { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 12px; height: 150px; overflow-y: auto; font-size: 0.85em; color: #fff; }
+        .log-entry { margin: 4px 0; padding: 3px 0; border-bottom: 1px solid rgba(180,140,80,0.1); }
+        .log-time { color: #999; font-size: 0.8em; }
 
         /* 战斗界面 */
-        .battle-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; padding: 20px; }
+        .battle-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(40,25,10,0.97), rgba(60,35,15,0.98)); z-index: 1000; padding: 20px; border: 2px solid rgba(180,140,80,0.3); color: #fff; }
         .battle-screen.active { display: grid; grid-template-columns: 1fr 340px; grid-template-rows: auto 1fr auto; gap: 15px; }
         .battle-header { grid-column: 1 / -1; text-align: center; margin-bottom: 0; display: flex; justify-content: center; align-items: center; gap: 20px; }
-        .battle-title { font-size: 2em; color: #e74c3c; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .battle-title.boss { font-size: 2.5em; color: #ff0000; animation: bossTitle 1s infinite; }
+        .battle-title { font-size: 2em; color: #ff6b6b; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .battle-title.boss { font-size: 2.5em; color: #ff4444; animation: bossTitle 1s infinite; }
         @keyframes bossTitle { 0%, 100% { text-shadow: 0 0 10px #ff0000, 2px 2px 4px rgba(0,0,0,0.5); } 50% { text-shadow: 0 0 30px #ff0000, 2px 2px 4px rgba(0,0,0,0.5); } }
-        .speed-control { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; }
-        .speed-btn { background: rgba(255,255,255,0.2); border: none; color: #fff; padding: 5px 15px; border-radius: 15px; cursor: pointer; transition: all 0.3s; }
-        .speed-btn:hover { background: rgba(255,255,255,0.3); }
-        .speed-btn.active { background: #3498db; }
+        .speed-control { display: flex; align-items: center; gap: 10px; background: rgba(180,140,80,0.15); padding: 10px 20px; border-radius: 20px; border: 1px solid rgba(180,140,80,0.2); }
+        .speed-btn { background: rgba(180,140,80,0.2); border: none; color: #fff; padding: 5px 15px; border-radius: 15px; cursor: pointer; transition: all 0.3s; }
+        .speed-btn:hover { background: rgba(180,140,80,0.35); }
+        .speed-btn.active { background: #daa520; color: #3d2b1f; }
         .battle-arena { grid-column: 1; grid-row: 2; display: flex; justify-content: space-around; align-items: center; width: 100%; }
-        .battle-fighter { text-align: center; padding: 8px 10px; background: rgba(255,255,255,0.05); border-radius: 15px; min-width: 100px; border: 2px solid rgba(255,255,255,0.1); position: relative; }
-        .battle-fighter.player { border-color: #4ecdc4; background: rgba(78, 205, 196, 0.1); }
-        .battle-fighter.enemy { border-color: #e74c3c; background: rgba(231, 76, 60, 0.1); }
-        .battle-fighter.boss { border-color: #ff0000; background: rgba(255, 0, 0, 0.1); animation: bossBorder 1s infinite; }
+        .battle-fighter { text-align: center; padding: 8px 10px; background: rgba(80,50,20,0.6); border-radius: 15px; min-width: 100px; border: 2px solid rgba(180,140,80,0.2); position: relative; }
+        .battle-fighter.player { border-color: #4ecdc4; background: rgba(78, 205, 196, 0.15); }
+        .battle-fighter.enemy { border-color: #e74c3c; background: rgba(231, 76, 60, 0.15); }
+        .battle-fighter.boss { border-color: #ff0000; background: rgba(255, 0, 0, 0.15); animation: bossBorder 1s infinite; }
         @keyframes bossBorder { 0%, 100% { box-shadow: 0 0 20px rgba(255,0,0,0.5); } 50% { box-shadow: 0 0 50px rgba(255,0,0,0.8); } }
         /* 伤害数字弹出动画 */
         .damage-popup {
@@ -281,12 +275,17 @@
         .fighter-stat { display: flex; justify-content: space-between; margin: 8px 0; font-size: 1.1em; }
         .battle-hp-bar { width: 100%; height: 25px; background: rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; margin: 10px 0; position: relative; }
         .battle-hp-fill { height: 100%; transition: width 0.5s ease; }
-        .battle-hp-fill.player { background: linear-gradient(90deg, #27ae60, #2ecc71); }
-        .battle-hp-fill.enemy { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+        /* 血量颜色：>=50%蓝色，30-50%黄色，<30%红色 */
+        .battle-hp-fill.player { background: linear-gradient(90deg, #2980b9, #3498db); }
+        .battle-hp-fill.player.hp-yellow { background: linear-gradient(90deg, #f39c12, #f1c40f); }
+        .battle-hp-fill.player.hp-red { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+        .battle-hp-fill.enemy { background: linear-gradient(90deg, #2980b9, #3498db); }
+        .battle-hp-fill.enemy.hp-yellow { background: linear-gradient(90deg, #f39c12, #f1c40f); }
+        .battle-hp-fill.enemy.hp-red { background: linear-gradient(90deg, #c0392b, #e74c3c); }
         .battle-hp-fill.boss { background: linear-gradient(90deg, #8b0000, #ff0000); }
-        .battle-hp-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.9em; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        .battle-hp-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.9em; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); white-space: nowrap; }
         .vs-text { font-size: 3em; color: #ffd700; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .battle-log { grid-column: 2; grid-row: 2 / span 2; background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px; width: 100%; height: 100%; overflow-y: auto; font-size: 0.95em; }
+        .battle-log { grid-column: 2; grid-row: 2 / span 2; background: rgba(40,25,10,0.7); border-radius: 10px; padding: 15px; width: 100%; height: 100%; overflow-y: auto; font-size: 0.95em; border: 1px solid rgba(180,140,80,0.2); }
         .battle-log-entry { margin: 5px 0; padding: 5px; border-radius: 5px; }
         .log-player { background: rgba(78, 205, 196, 0.2); }
         .log-enemy { background: rgba(231, 76, 60, 0.2); }
@@ -302,10 +301,37 @@
         .btn-respawn { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; animation: respawnPulse 1.5s infinite; }
         @keyframes respawnPulse { 0%, 100% { box-shadow: 0 0 5px #e74c3c; } 50% { box-shadow: 0 0 20px #e74c3c, 0 0 30px #c0392b; } }
 
+        /* 地图进场CG */
+        .map-enter-cg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; align-items: center; justify-content: center; background: rgba(0,0,0,0.85); }
+        .map-enter-cg.active { display: flex; animation: mapEnterFade 3s ease-out forwards; }
+        .map-enter-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(5px) brightness(0.6); transform: scale(1.1); }
+        .map-enter-content { position: relative; z-index: 1; text-align: center; animation: mapEnterContent 2s ease-out; }
+        @keyframes mapEnterFade { 0% { opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+        @keyframes mapEnterContent { 0% { transform: scale(0.5); opacity: 0; } 30% { transform: scale(1.1); opacity: 1; } 50% { transform: scale(1); } }
+        .map-enter-emoji { font-size: 6em; margin-bottom: 15px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.5)); }
+        .map-enter-name { font-size: 3em; color: #fff; text-shadow: 0 0 30px rgba(255,215,0,0.8), 2px 2px 4px rgba(0,0,0,0.8); margin-bottom: 10px; font-weight: bold; }
+        .map-enter-level { font-size: 1.5em; color: #ffd700; margin-bottom: 15px; }
+        .map-enter-desc { font-size: 1.1em; color: #ccc; max-width: 400px; margin: 0 auto; line-height: 1.5; }
+
         /* BOSS结算CG */
         .victory-cg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(20,20,40,0.98)); z-index: 2000; flex-direction: column; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; }
         .victory-cg.active { display: flex; }
         .victory-cg.final-mode { background: linear-gradient(135deg, rgba(30,20,0,0.98), rgba(50,30,0,0.98)); }
+        /* 战败死亡CG */
+        .defeat-cg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(40,0,0,0.97), rgba(20,0,0,0.99)); z-index: 2000; flex-direction: column; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; }
+        .defeat-cg.active { display: flex; }
+        .defeat-title { font-size: 3em; color: #ff4444; text-shadow: 0 0 30px #ff0000, 0 0 60px rgba(255,0,0,0.5); margin-bottom: 20px; animation: defeatShake 0.5s ease-out; }
+        @keyframes defeatShake { 0% { transform: scale(0) rotate(-10deg); opacity: 0; } 50% { transform: scale(1.1) rotate(5deg); opacity: 1; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
+        .defeat-icon { font-size: 8em; margin-bottom: 20px; animation: defeatFall 1.5s ease-out; }
+        @keyframes defeatFall { 0% { transform: translateY(-100px) rotate(0deg); opacity: 0; } 60% { transform: translateY(10px) rotate(15deg); opacity: 1; } 100% { transform: translateY(0) rotate(0deg); opacity: 1; } }
+        .defeat-info { text-align: center; margin-bottom: 30px; }
+        .defeat-info .defeat-enemy { font-size: 1.5em; color: #ff6b6b; margin-bottom: 10px; }
+        .defeat-info .defeat-detail { font-size: 1em; color: #ccc; line-height: 1.8; }
+        .defeat-penalty { background: rgba(255,255,255,0.08); padding: 15px 30px; border-radius: 10px; margin-bottom: 30px; text-align: center; }
+        .defeat-penalty .penalty-title { color: #ff8888; font-size: 1.1em; margin-bottom: 8px; }
+        .defeat-penalty .penalty-desc { color: #aaa; font-size: 0.95em; }
+        .cg-continue { padding: 15px 50px; font-size: 1.2em; background: linear-gradient(135deg, #8b0000, #dc143c); color: white; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s; animation: cgReward 1s ease-out; }
+        .cg-continue:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(220,20,60,0.5); }
         .cg-title { font-size: 3em; color: #ffd700; text-shadow: 0 0 30px #ffd700; margin-bottom: 20px; animation: cgTitle 2s ease-out; }
         .cg-title.final { font-size: 3.5em; color: #fff; text-shadow: 0 0 50px #ffd700, 0 0 80px #ff6b6b; }
         .cg-title.normal { font-size: 3em; color: #ffd700; text-shadow: 0 0 30px #ffd700; }
@@ -362,7 +388,7 @@
         .equip-preview.active { display: block; }
         .preview-title { font-size: 1.5em; color: #ffd700; margin-bottom: 15px; text-align: center; }
         .preview-comparison { margin: 15px 0; }
-        .preview-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .preview-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(180,140,80,0.2); }
         .preview-stat { display: flex; align-items: center; gap: 10px; }
         .preview-change { font-weight: bold; }
         .preview-change.positive { color: #2ecc71; }
@@ -431,7 +457,7 @@
             <div class="left-panel">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                     <div class="panel-section">
-                        <div class="panel-title">🧙‍♂️ 角色信息</div>
+                        <div class="panel-title">角色信息</div>
                         <div class="character-info">
                             <div class="char-avatar" id="charAvatar" onclick="game.showCharSelect()" style="cursor: pointer;" title="点击更换形象">🧙‍♂️</div>
                             <div class="char-name" id="charName">勇者</div>
@@ -447,7 +473,10 @@
                         <div id="equipmentSlots">
                             <div class="equipment-slot empty" id="weaponSlot"><span class="equip-icon">🗡️</span><div class="equip-info"><div class="equip-name">武器栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div></div>
                             <div class="equipment-slot empty" id="armorSlot"><span class="equip-icon">👕</span><div class="equip-info"><div class="equip-name">防具栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div></div>
+                            <div class="equipment-slot empty" id="accessorySlot"><span class="equip-icon">💍</span><div class="equip-info"><div class="equip-name">饰品栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div></div>
+                            <div class="equipment-slot empty" id="bootsSlot"><span class="equip-icon">👢</span><div class="equip-info"><div class="equip-name">鞋子栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div></div>
                         </div>
+                        <div id="setBonusInfo" style="text-align:center;margin-top:10px;padding:8px;background:rgba(0,0,0,0.3);border-radius:8px;font-size:0.9em;"><div style="color:#888;">装备2件同套装可激活套装加成</div></div>
                     </div>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
@@ -537,6 +566,17 @@
         </div>
     </div>
 
+    <!-- 地图进场CG -->
+    <div class="map-enter-cg" id="mapEnterCg">
+        <div class="map-enter-bg" id="mapEnterBg"></div>
+        <div class="map-enter-content">
+            <div class="map-enter-emoji" id="mapEnterEmoji">🌿</div>
+            <div class="map-enter-name" id="mapEnterName">新手村外围</div>
+            <div class="map-enter-level" id="mapEnterLevel">Lv.1-5</div>
+            <div class="map-enter-desc" id="mapEnterDesc">宁静的村庄外围，适合新手冒险者练级</div>
+        </div>
+    </div>
+
     <!-- BOSS结算CG -->
     <div class="victory-cg" id="victoryCg">
         <div class="cg-title" id="cgTitle">🎉 BOSS击破！</div>
@@ -548,12 +588,28 @@
         <button class="cg-continue" onclick="game.closeVictoryCg()">继续冒险</button>
     </div>
 
+    <!-- 战败死亡CG -->
+    <div class="defeat-cg" id="defeatCg">
+        <div class="defeat-title">💀 战败！</div>
+        <div class="defeat-icon" id="defeatIcon">💀</div>
+        <div class="defeat-info">
+            <div class="defeat-enemy" id="defeatEnemy">被击败了...</div>
+            <div class="defeat-detail" id="defeatDetail"></div>
+        </div>
+        <div class="defeat-penalty">
+            <div class="penalty-title">⚠️ 战败惩罚</div>
+            <div class="penalty-desc" id="defeatPenalty"></div>
+        </div>
+        <button class="cg-continue" onclick="game.closeDefeatCg()">返回村庄</button>
+    </div>
+
     <!-- 背包界面 -->
     <div class="inventory-modal" id="inventoryModal">
         <div class="inventory-header">
             <div class="inventory-title">🎒 背包</div>
             <div style="display: flex; gap: 10px; align-items: center;">
-                <button class="btn btn-warning" onclick="game.recycleAll()">🗑️ 一键回收全部</button>
+                <button class="btn btn-primary" onclick="game.autoEquip()">🤖 自动装备</button>
+                <button class="btn btn-warning" onclick="game.recycleAll()">🗑️ 一键回收</button>
                 <button class="close-btn" onclick="game.closeInventory()">×</button>
             </div>
         </div>
@@ -578,7 +634,7 @@
 
     <!-- 角色选择 -->
     <div class="skill-list" id="charSelectModal">
-        <div class="inventory-header"><div class="inventory-title">🎭 选择角色形象</div><button class="close-btn" onclick="game.hideCharSelect()">×</button></div>
+        <div class="inventory-header"><div class="inventory-title">选择角色形象</div><button class="close-btn" onclick="game.hideCharSelect()">×</button></div>
         <div id="charSelectContent" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px;"></div>
     </div>
 
@@ -613,6 +669,58 @@
             { id: 'chain', name: '链甲', emoji: '🦺', avatar: '🦺', hpMod: 1.1, atkMod: 0.8, defMod: 1.1 },
             { id: 'dragon', name: '龙鳞甲', emoji: '🐲', avatar: '🐲', hpMod: 1.3, atkMod: 1.0, defMod: 1.2 }
         ];
+
+        const ACCESSORIES = [
+            { id: 'ring', name: '戒指', emoji: '💍', avatar: '💍', hpMod: 1.1, atkMod: 1.1, defMod: 1.0 },
+            { id: 'necklace', name: '项链', emoji: '📿', avatar: '📿', hpMod: 1.2, atkMod: 1.0, defMod: 1.1 },
+            { id: 'bracelet', name: '手镯', emoji: '✨', avatar: '✨', hpMod: 1.0, atkMod: 1.2, defMod: 1.1 },
+            { id: 'earring', name: '耳环', emoji: '💎', avatar: '💎', hpMod: 1.1, atkMod: 1.15, defMod: 1.05 },
+            { id: 'belt', name: '腰带', emoji: '🎀', avatar: '🎀', hpMod: 1.15, atkMod: 1.05, defMod: 1.15 }
+        ];
+
+        // 鞋子配置
+        const BOOTS = [
+            { id: 'leather_boots', name: '皮靴', emoji: '👢', avatar: '👢', hpMod: 1.0, atkMod: 1.0, defMod: 1.1 },
+            { id: 'iron_boots', name: '铁靴', emoji: '🥾', avatar: '🥾', hpMod: 1.1, atkMod: 0.9, defMod: 1.2 },
+            { id: 'mage_boots', name: '法靴', emoji: '👟', avatar: '👟', hpMod: 1.15, atkMod: 1.1, defMod: 0.9 },
+            { id: 'wind_boots', name: '风行靴', emoji: '🌪️', avatar: '🌪️', hpMod: 1.0, atkMod: 1.15, defMod: 1.0 },
+            { id: 'dragon_boots', name: '龙鳞靴', emoji: '🐲', avatar: '🐲', hpMod: 1.2, atkMod: 1.1, defMod: 1.15 }
+        ];
+
+        // 套装系统（按元素/主题分类，每套有独特混合加成）
+        const SET_TYPES = {
+            flame: { name: '火焰', color: '#ff6b35', 
+                bonus2: { atkMult: 1.1, desc: '攻击+10%' },
+                bonus4: { atkMult: 1.2, expMult: 1.1, desc: '攻击+20%, 经验+10%' }
+            },
+            frost: { name: '冰霜', color: '#4fc3f7',
+                bonus2: { defMult: 1.1, desc: '防御+10%' },
+                bonus4: { defMult: 1.2, hpMult: 1.1, desc: '防御+20%, 生命+10%' }
+            },
+            thunder: { name: '雷霆', color: '#ffeb3b',
+                bonus2: { atkMult: 1.05, defMult: 1.05, desc: '攻防+5%' },
+                bonus4: { atkMult: 1.15, defMult: 1.15, expMult: 1.15, desc: '攻防+15%, 经验+15%' }
+            },
+            dragon: { name: '龙鳞', color: '#9c27b0',
+                bonus2: { hpMult: 1.1, atkMult: 1.05, desc: '生命+10%, 攻击+5%' },
+                bonus4: { hpMult: 1.2, atkMult: 1.15, defMult: 1.1, desc: '生命+20%, 攻击+15%, 防御+10%' }
+            },
+            shadow: { name: '暗影', color: '#424242',
+                bonus2: { expMult: 1.15, desc: '经验+15%' },
+                bonus4: { expMult: 1.3, atkMult: 1.1, desc: '经验+30%, 攻击+10%' }
+            },
+            holy: { name: '神圣', color: '#ffd700',
+                bonus2: { hpMult: 1.08, defMult: 1.08, desc: '生命+8%, 防御+8%' },
+                bonus4: { hpMult: 1.15, defMult: 1.15, expMult: 1.1, desc: '生命+15%, 防御+15%, 经验+10%' }
+            }
+        };
+
+        // 套装配置（保留兼容）
+        const SET_BONUS = {
+            2: { hpMult: 1.05, atkMult: 1.05, defMult: 1.05, desc: '2件套: 全属性+5%' },
+            3: { hpMult: 1.1, atkMult: 1.1, defMult: 1.1, desc: '3件套: 全属性+10%' },
+            4: { hpMult: 1.15, atkMult: 1.15, defMult: 1.15, desc: '4件套: 全属性+15%' }
+        };
 
         const MONSTERS = [
             { id: 'slime', name: '史莱姆', emoji: '💧', minLv: 1, maxLv: 3, hpBase: 15, atkBase: 0.6, defBase: 0.4, size: 1 },
@@ -665,6 +773,33 @@
             'boss_art/boss_8_creator_god.jpg'
         ];
 
+        // 怪物贴图（按MONSTERS数组索引）
+        const MONSTER_ART = [
+            'monster_art/slime.jpg', 'monster_art/mushroom.jpg', 'monster_art/bat.jpg',
+            'monster_art/goblin.jpg', 'monster_art/treant.jpg', 'monster_art/wolf.jpg',
+            'monster_art/boar.jpg', 'monster_art/skeleton.jpg', 'monster_art/batking.jpg',
+            'monster_art/rock.jpg', 'monster_art/zombie.jpg', 'monster_art/orc.jpg',
+            'monster_art/fire.jpg', 'monster_art/lavaslime.jpg', 'monster_art/demon_dog.jpg',
+            'monster_art/dark_knight.jpg', 'monster_art/demon.jpg', 'monster_art/shadow_dragon.jpg',
+            'monster_art/bone_dragon.jpg', 'monster_art/ancient_dragon.jpg',
+            'monster_art/thunder_bird.jpg', 'monster_art/angel.jpg', 'monster_art/fallen.jpg',
+            'monster_art/cloud_giant.jpg', 'monster_art/wind_spirit.jpg'
+        ];
+
+        // 装备贴图（按类型+名称索引）
+        const EQUIP_ART = {
+            sword: 'equip_art/sword.jpg', axe: 'equip_art/axe.jpg', staff: 'equip_art/staff.jpg',
+            dagger: 'equip_art/dagger.jpg', greatsword: 'equip_art/greatsword.jpg',
+            leather: 'equip_art/leather.jpg', plate: 'equip_art/plate.jpg', robe: 'equip_art/robe.jpg',
+            chain: 'equip_art/chain.jpg', dragon: 'equip_art/dragon.jpg',
+            ring: 'equip_art/ring.jpg', necklace: 'equip_art/necklace.jpg', bracelet: 'equip_art/bracelet.jpg',
+            earring: 'equip_art/earring.jpg', belt: 'equip_art/belt.jpg',
+            // 鞋子贴图
+            leather_boots: 'equip_art/leather_boots.jpg', iron_boots: 'equip_art/iron_boots.jpg',
+            mage_boots: 'equip_art/mage_boots.jpg', wind_boots: 'equip_art/wind_boots.jpg',
+            dragon_boots: 'equip_art/dragon_boots.jpg'
+        };
+
         const BOSSES = [
             { name: '哥布林王', emoji: '👺', level: 8, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
             { name: '森林之王', emoji: '🌳', level: 18, hpMult: 1.8, atkMult: 1.8, defMult: 1.8 },
@@ -678,26 +813,27 @@
         ];
 
         const MAPS = [
-            { id: 0, name: '🌿 新手村外围', emoji: '🌿', minLv: 1, maxLv: 5, rows: 12, cols: 20, obstacleRate: 0.12, monsterCount: 18, monsters: ['slime', 'mushroom', 'bat'], bgClass: 'map-bg-village', obstacles: { types: ['🌳', '🌲', '🌿'] }, emptyEmoji: '🟫' },
-            { id: 1, name: '🌲 迷雾森林', emoji: '🌲', minLv: 4, maxLv: 12, rows: 12, cols: 20, obstacleRate: 0.18, monsterCount: 24, monsters: ['goblin', 'treant', 'wolf', 'boar'], bgClass: 'map-bg-forest', obstacles: { types: ['🌲', '🌳', '🌿', '🍄'] }, emptyEmoji: '🟩' },
-            { id: 2, name: '⛏️ 废弃矿坑', emoji: '⛏️', minLv: 10, maxLv: 20, rows: 12, cols: 20, obstacleRate: 0.22, monsterCount: 28, monsters: ['skeleton', 'batking', 'rock', 'zombie'], bgClass: 'map-bg-mine', obstacles: { types: ['🪨', '🗿', '⚫', '💎'] }, emptyEmoji: '🟫' },
-            { id: 3, name: '🌋 熔岩地带', emoji: '🌋', minLv: 18, maxLv: 35, rows: 12, cols: 20, obstacleRate: 0.15, monsterCount: 32, monsters: ['orc', 'fire', 'lavaslime', 'demon_dog'], bgClass: 'map-bg-lava', obstacles: { types: ['🔥', '🌋', '♨️', '🟥'] }, emptyEmoji: '🟥' },
-            { id: 4, name: '❄️ 冰封雪原', emoji: '❄️', minLv: 30, maxLv: 50, rows: 12, cols: 20, obstacleRate: 0.20, monsterCount: 36, monsters: ['dark_knight', 'shadow_dragon'], bgClass: 'map-bg-snow', obstacles: { types: ['🧊', '❄️', '🗻', '⛰️'] }, emptyEmoji: '⬜' },
-            { id: 5, name: '🐉 龙之巢穴', emoji: '🐉', minLv: 45, maxLv: 60, rows: 12, cols: 20, obstacleRate: 0.16, monsterCount: 40, monsters: ['demon', 'bone_dragon', 'ancient_dragon'], bgClass: 'map-bg-dragon', obstacles: { types: ['🦴', '💀', '⚰️', '🏺'] }, emptyEmoji: '⬛' },
-            { id: 6, name: '☁️ 天空之城', emoji: '☁️', minLv: 55, maxLv: 70, rows: 12, cols: 20, obstacleRate: 0.14, monsterCount: 42, monsters: ['cloud_beast', 'angel', 'thunder_bird', 'storm_element'], bgClass: 'map-bg-sky', obstacles: { types: ['☁️', '⚡', '💨', '🌈'] }, emptyEmoji: '🔵' },
-            { id: 7, name: '🌑 无尽深渊', emoji: '🌑', minLv: 65, maxLv: 75, rows: 12, cols: 20, obstacleRate: 0.18, monsterCount: 44, monsters: ['void_walker', 'evil_eye', 'chaos_tentacle', 'mist_ghost'], bgClass: 'map-bg-abyss', obstacles: { types: ['🌑', '👁️', '⚫', '🕳️'] }, emptyEmoji: '⬛' },
-            { id: 8, name: '⭐ 创世神域', emoji: '⭐', minLv: 70, maxLv: 80, rows: 12, cols: 20, obstacleRate: 0.12, monsterCount: 46, monsters: ['divine_messenger', 'holy_beast', 'temple_guard'], bgClass: 'map-bg-divine', obstacles: { types: ['⭐', '✨', '🔔', '🕊️'] }, emptyEmoji: '🟨' }
+            { id: 0, name: '新手村外围', emoji: '🌿', minLv: 1, maxLv: 5, rows: 12, cols: 22, obstacleRate: 0.12, monsterCount: 18, monsters: ['slime', 'mushroom', 'bat'], bgClass: 'map-bg-village', obstacles: { types: ['🌳', '🌲', '🌿'] }, emptyEmoji: '🟫', desc: '宁静的村庄外围，适合新手冒险者练级' },
+            { id: 1, name: '迷雾森林', emoji: '🌲', minLv: 4, maxLv: 12, rows: 12, cols: 22, obstacleRate: 0.18, monsterCount: 24, monsters: ['goblin', 'treant', 'wolf', 'boar'], bgClass: 'map-bg-forest', obstacles: { types: ['🌲', '🌳', '🌿', '🍄'] }, emptyEmoji: '🟩', desc: '幽暗的森林深处，潜伏着各种野兽' },
+            { id: 2, name: '废弃矿坑', emoji: '⛏️', minLv: 10, maxLv: 20, rows: 12, cols: 22, obstacleRate: 0.22, monsterCount: 28, monsters: ['skeleton', 'batking', 'rock', 'zombie'], bgClass: 'map-bg-mine', obstacles: { types: ['🪨', '🗿', '⚫', '💎'] }, emptyEmoji: '🟫', desc: '废弃的矿坑中游荡着不死生物' },
+            { id: 3, name: '熔岩地带', emoji: '🌋', minLv: 18, maxLv: 35, rows: 12, cols: 22, obstacleRate: 0.15, monsterCount: 32, monsters: ['orc', 'fire', 'lavaslime', 'demon_dog'], bgClass: 'map-bg-lava', obstacles: { types: ['🔥', '🌋', '♨️', '🟥'] }, emptyEmoji: '🟥', desc: '炽热的熔岩之地，火焰生物横行' },
+            { id: 4, name: '冰封雪原', emoji: '❄️', minLv: 30, maxLv: 50, rows: 12, cols: 22, obstacleRate: 0.20, monsterCount: 36, monsters: ['dark_knight', 'shadow_dragon'], bgClass: 'map-bg-snow', obstacles: { types: ['🧊', '❄️', '🗻', '⛰️'] }, emptyEmoji: '⬜', desc: '永恒冰封之地，传说有巨龙栖息' },
+            { id: 5, name: '龙之巢穴', emoji: '🐉', minLv: 45, maxLv: 60, rows: 12, cols: 22, obstacleRate: 0.16, monsterCount: 40, monsters: ['demon', 'bone_dragon', 'ancient_dragon'], bgClass: 'map-bg-dragon', obstacles: { types: ['🦴', '💀', '⚰️', '🏺'] }, emptyEmoji: '⬛', desc: '远古巨龙的领地，危险与机遇并存' },
+            { id: 6, name: '天空之城', emoji: '☁️', minLv: 55, maxLv: 70, rows: 12, cols: 22, obstacleRate: 0.14, monsterCount: 42, monsters: ['cloud_beast', 'angel', 'thunder_bird', 'storm_element'], bgClass: 'map-bg-sky', obstacles: { types: ['☁️', '⚡', '💨', '🌈'] }, emptyEmoji: '🔵', desc: '漂浮在云端的神秘城市' },
+            { id: 7, name: '无尽深渊', emoji: '🌑', minLv: 65, maxLv: 75, rows: 12, cols: 22, obstacleRate: 0.18, monsterCount: 44, monsters: ['void_walker', 'evil_eye', 'chaos_tentacle', 'mist_ghost'], bgClass: 'map-bg-abyss', obstacles: { types: ['🌑', '👁️', '⚫', '🕳️'] }, emptyEmoji: '⬛', desc: '虚空裂缝中涌出的黑暗力量' },
+            { id: 8, name: '创世神域', emoji: '⭐', minLv: 70, maxLv: 80, rows: 12, cols: 22, obstacleRate: 0.12, monsterCount: 46, monsters: ['divine_messenger', 'holy_beast', 'temple_guard'], bgClass: 'map-bg-divine', obstacles: { types: ['⭐', '✨', '🔔', '🕊️'] }, emptyEmoji: '🟨', desc: '创世神的居所，最终试炼之地' }
         ];
 
+        // 技能改为击败BOSS后解锁
         const SKILLS = [
-            { level: 10, name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 },
-            { level: 20, name: '防御', emoji: '🛡️', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 },
-            { level: 30, name: '连击', emoji: '⚡', desc: '攻击2次', cooldown: 4, hits: 2 },
-            { level: 40, name: '狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 },
-            { level: 50, name: '圣光', emoji: '✨', desc: '恢复30%', cooldown: 8, healPercent: 0.3 },
-            { level: 60, name: '终极', emoji: '💥', desc: '3倍伤害', cooldown: 10, multiplier: 3 },
-            { level: 70, name: '神罚', emoji: '⚡', desc: '4倍伤害', cooldown: 12, multiplier: 4 },
-            { level: 80, name: '创世', emoji: '🌟', desc: '5倍伤害', cooldown: 15, multiplier: 5 }
+            { bossIndex: 0, name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 },
+            { bossIndex: 1, name: '防御', emoji: '🛡️', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 },
+            { bossIndex: 2, name: '连击', emoji: '⚡', desc: '攻击2次', cooldown: 4, hits: 2 },
+            { bossIndex: 3, name: '狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 },
+            { bossIndex: 4, name: '圣光', emoji: '✨', desc: '恢复30%', cooldown: 8, healPercent: 0.3 },
+            { bossIndex: 5, name: '终极', emoji: '💥', desc: '3倍伤害', cooldown: 10, multiplier: 3 },
+            { bossIndex: 6, name: '神罚', emoji: '⚡', desc: '4倍伤害', cooldown: 12, multiplier: 4 },
+            { bossIndex: 7, name: '创世', emoji: '🌟', desc: '5倍伤害', cooldown: 15, multiplier: 5 }
         ];
 
         // 音乐配置 - 按地图ID配置BGM
@@ -875,12 +1011,13 @@
         const game = {
             player: {
                 level: 1, hp: 50, maxHp: 50, atk: 5, def: 5,
-                exp: 0, expNeeded: 10,
-                weapon: null, armor: null,
-                inventory: [], skills: [], skillCooldowns: {}, buffs: {},
+                exp: 0, expNeeded: 50,
+                weapon: null, armor: null, accessory: null, boots: null,
+                inventory: [], maxInventory: 30, skills: [], skillCooldowns: {}, buffs: {},
                 x: 0, y: 0, currentMap: 0,
                 kills: 0, bossKills: 0, startTime: Date.now(),
-                passports: [] // 已通关的地图ID
+                passports: [], // 已通关的地图ID
+                unlockedSkills: [] // 已解锁的技能（通过击败BOSS获得）
             },
             currentMap: null, autoBattle: false, playTimeInterval: null, isMoving: false, previewItem: null, battleSpeed: 1,
 
@@ -891,19 +1028,24 @@
                 this.startPlayTime();
                 this.log('欢迎来到勇者传说！击败每层的BOSS即可前往下一层！');
                 this.loadGame();
+                // BOSS随机移动定时器（每3秒移动一次）
+                this.bossMoveInterval = setInterval(() => this.moveBoss(), 3000);
             },
 
             loadSkills() {
-                this.player.skills = SKILLS.filter(s => s.level <= this.player.level);
+                // 技能通过击败BOSS解锁，不再基于等级
             },
 
             generateMap(mapId) {
                 const mapData = MAPS[mapId];
-                this.currentMap = { id: mapId, rows: mapData.rows, cols: mapData.cols, cells: [], monsters: [], bgClass: mapData.bgClass, boss: null };
+                this.currentMap = { id: mapId, rows: mapData.rows, cols: mapData.cols, cells: [], monsters: [], bgClass: mapData.bgClass, boss: null, minLv: mapData.minLv, maxLv: mapData.maxLv };
                 document.getElementById('mapContainer').className = `map-container ${mapData.bgClass}`;
                 
                 // 播放地图BGM
                 musicPlayer.playMapBGM(mapId);
+                
+                // 显示进场CG
+                this.showMapEnterCG(mapData);
 
                 // 初始化空地图
                 for (let y = 0; y < mapData.rows; y++) {
@@ -955,9 +1097,22 @@
                         const level = Math.floor(Math.random() * (mapData.maxLv - mapData.minLv + 1)) + mapData.minLv;
                         this.currentMap.cells[y][x] = {
                             type: 'monster', x, y, emoji: template.emoji,
-                            monster: this.createMonster(template, level)
+                            monster: this.createMonster(template, level, MONSTERS.indexOf(template))
                         };
                         monsters++;
+                    }
+                }
+
+                // 添加随机礼包（每层3-5个）
+                const giftCount = 3 + Math.floor(Math.random() * 3);
+                let gifts = 0;
+                while (gifts < giftCount) {
+                    const x = Math.floor(Math.random() * mapData.cols);
+                    const y = Math.floor(Math.random() * mapData.rows);
+                    if (this.isReservedCell(x, y, mapData.rows, mapData.cols)) continue;
+                    if (this.currentMap.cells[y][x].type === 'empty') {
+                        this.currentMap.cells[y][x] = { type: 'gift', x, y, emoji: '🎁', mapId: mapId };
+                        gifts++;
                     }
                 }
 
@@ -998,16 +1153,24 @@
                     
                     const cell = this.currentMap.cells[y][x];
                     if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && cell.type === 'empty') {
+                        const layerHp = Math.floor(bossData.level * 55 * bossData.hpMult);
                         const boss = {
                             ...bossData,
                             isBoss: true,
                             bossIndex: mapId,
-                            hp: Math.floor(bossData.level * 55 * bossData.hpMult),
-                            maxHp: Math.floor(bossData.level * 55 * bossData.hpMult),
+                            hp: layerHp,
+                            maxHp: layerHp * 3,
+                            layerHp: layerHp,
+                            hpLayers: 3,
+                            currentLayer: 3,
                             atk: Math.floor(bossData.level * 1.4 * bossData.atkMult),
                             def: Math.floor(bossData.level * 0.8 * bossData.defMult),
-                            exp: bossData.level * 50,
-                            parts: [{ x, y, isMain: true }]
+                            exp: bossData.level * 10,
+                            parts: [{ x, y, isMain: true }],
+                            // BOSS阶段系统
+                            phaseBonus: { def: 0.60, atk: 0.60 },
+                            defBoosted: false,
+                            atkBoosted: false
                         };
 
                         this.currentMap.cells[y][x] = {
@@ -1024,6 +1187,91 @@
                 }
             },
 
+            // BOSS随机移动
+            moveBoss() {
+                if (!this.currentMap || !this.currentMap.boss) return;
+                // 战斗中不移动
+                if (document.getElementById('battleScreen').classList.contains('active')) return;
+
+                const boss = this.currentMap.boss;
+                if (!boss.parts || boss.parts.length === 0) return;
+
+                const mainPart = boss.parts.find(p => p.isMain);
+                if (!mainPart) return;
+
+                // 随机方向：上下左右
+                const dirs = [
+                    { dx: 0, dy: -1 }, { dx: 0, dy: 1 },
+                    { dx: -1, dy: 0 }, { dx: 1, dy: 0 }
+                ];
+                const dir = dirs[Math.floor(Math.random() * dirs.length)];
+                const newX = mainPart.x + dir.dx;
+                const newY = mainPart.y + dir.dy;
+
+                // 边界检查
+                if (newX < 0 || newX >= this.currentMap.cols || newY < 0 || newY >= this.currentMap.rows) return;
+
+                const targetCell = this.currentMap.cells[newY][newX];
+                // 不能移动到障碍物、村庄、传送门、其他怪物上
+                if (targetCell.type !== 'empty') {
+                    // 检查是否撞到玩家 → 发起战斗（怪物先攻击）
+                    if (newX === this.player.x && newY === this.player.y) {
+                        this.startBossAmbush(boss, mainPart);
+                    }
+                    return;
+                }
+
+                // 移动BOSS到新位置
+                const oldX = mainPart.x;
+                const oldY = mainPart.y;
+
+                // 清除旧位置
+                this.currentMap.cells[oldY][oldX] = { type: 'empty', x: oldX, y: oldY, emoji: MAPS[this.currentMap.id].emptyEmoji };
+
+                // 更新BOSS位置
+                mainPart.x = newX;
+                mainPart.y = newY;
+
+                // 设置新位置
+                this.currentMap.cells[newY][newX] = {
+                    type: 'monster', x: newX, y: newY,
+                    emoji: boss.emoji,
+                    monster: boss, isMainPart: true
+                };
+
+                // 检查是否移动到玩家位置 → 发起战斗（怪物先攻击）
+                if (newX === this.player.x && newY === this.player.y) {
+                    this.startBossAmbush(boss, mainPart);
+                    return;
+                }
+
+                this.renderMap();
+            },
+
+            // BOSS主动碰撞玩家，怪物先攻击
+            startBossAmbush(boss, bossPart) {
+                this.log(`⚠️ ${boss.name} 主动发起了攻击！`);
+                // 清除BOSS在地图上的位置
+                this.currentMap.cells[bossPart.y][bossPart.x] = { type: 'empty', x: bossPart.x, y: bossPart.y, emoji: MAPS[this.currentMap.id].emptyEmoji };
+                // 开始战斗，怪物先攻击
+                battle.start(boss, true);
+            },
+
+            showMapEnterCG(mapData) {
+                const cg = document.getElementById('mapEnterCg');
+                document.getElementById('mapEnterEmoji').textContent = mapData.emoji;
+                document.getElementById('mapEnterName').textContent = mapData.name;
+                document.getElementById('mapEnterLevel').textContent = `Lv.${mapData.minLv}-${mapData.maxLv}`;
+                document.getElementById('mapEnterDesc').textContent = mapData.desc;
+                
+                cg.classList.add('active');
+                
+                // 3秒后自动关闭
+                setTimeout(() => {
+                    cg.classList.remove('active');
+                }, 3000);
+            },
+
             updatePortals() {
                 const mapData = MAPS[this.currentMap.id];
                 
@@ -1036,29 +1284,50 @@
                 }
             },
 
-            createMonster(template, level) {
+            createMonster(template, level, monsterIndex = -1) {
                 // 怪物品质：普通70% / 精英25% / 稀有5%
                 const rand = Math.random();
                 let quality, qualityName, hpMult, atkMult, defMult, expMult, color;
                 if (rand < 0.70) {
-                    quality = 'normal'; qualityName = ''; hpMult = 1.0; atkMult = 1.0; defMult = 1.0; expMult = 1.0; color = '#e74c3c';
+                    quality = 'normal'; qualityName = ''; hpMult = 1.0; atkMult = 1.0; defMult = 1.0; expMult = 1.0; color = '#ffffff';
                 } else if (rand < 0.95) {
-                    quality = 'elite'; qualityName = '👑'; hpMult = 1.5; atkMult = 1.3; defMult = 1.2; expMult = 1.5; color = '#9b59b6';
+                    quality = 'elite'; qualityName = '👑'; hpMult = 1.5; atkMult = 1.3; defMult = 1.2; expMult = 2.0; color = '#9b59b6';
                 } else {
-                    quality = 'rare'; qualityName = '💎'; hpMult = 2.0; atkMult = 1.6; defMult = 1.5; expMult = 2.0; color = '#f39c12';
+                    quality = 'rare'; qualityName = '💎'; hpMult = 2.0; atkMult = 1.6; defMult = 1.5; expMult = 5.0; color = '#f39c12';
                 }
                 
-                // 怪物基础攻击提升30%
-                const ATK_BUFF = 1.3;
+                // 怪物基础攻击提升100%，防御提升130%
+                const ATK_BUFF = 2;
+                const DEF_BUFF = 2.3;
                 
                 const hp = Math.floor(level * template.hpBase * (0.8 + Math.random() * 0.4) * hpMult);
                 const atk = Math.max(1, Math.floor(level * template.atkBase * (0.8 + Math.random() * 0.4) * atkMult * ATK_BUFF));
-                const def = Math.max(1, Math.floor(level * template.defBase * (0.8 + Math.random() * 0.4) * defMult));
+                const def = Math.max(1, Math.floor(level * template.defBase * (0.8 + Math.random() * 0.4) * defMult * DEF_BUFF));
+                
+                // 阶段加成系数（根据品质）
+                const phaseBonus = {
+                    normal: { def: 0.20, atk: 0.20 },
+                    elite: { def: 0.40, atk: 0.40 },
+                    rare: { def: 0.60, atk: 0.60 }
+                };
+                
+                // 多层血条：普通1层，精英2层，稀有(BOSS)3层
+                const hpLayers = quality === 'normal' ? 1 : quality === 'elite' ? 2 : 3;
+                
                 return { 
                     name: template.name, emoji: template.emoji, level, 
                     hp, maxHp: hp, atk, def, 
                     exp: Math.floor(level * 10 * expMult),
-                    quality, qualityName, color
+                    quality, qualityName, color,
+                    monsterIndex,
+                    // 阶段系统
+                    phaseBonus: phaseBonus[quality],
+                    defBoosted: false,
+                    atkBoosted: false,
+                    // 多层血条
+                    hpLayers,
+                    currentLayer: hpLayers,
+                    layerHp: hp
                 };
             },
 
@@ -1082,6 +1351,7 @@
                             const cellData = this.currentMap.cells[y][x];
                             switch (cellData.type) {
                                 case 'village': cell.classList.add('village'); cell.textContent = cellData.emoji; break;
+                                case 'gift': cell.classList.add('gift-cell'); cell.textContent = '🎁'; cell.title = '礼包 - 走过去打开'; break;
                                 case 'portal':
                                     if (cellData.locked) { cell.classList.add('portal-locked'); } else { cell.classList.add('portal'); }
                                     cell.textContent = cellData.emoji;
@@ -1109,7 +1379,13 @@
                                         const qualityClass = monster.quality === 'elite' ? 'monster-elite' : 
                                                            monster.quality === 'rare' ? 'monster-rare' : 'monster';
                                         cell.classList.add(qualityClass);
-                                        cell.textContent = monster.qualityName + monster.emoji;
+                                        // 普通怪物使用贴图
+                                        const monsterArt = monster.monsterIndex >= 0 && MONSTER_ART[monster.monsterIndex] ? MONSTER_ART[monster.monsterIndex] : null;
+                                        if (monsterArt) {
+                                            cell.innerHTML = `<img src="${monsterArt}" style="width:44px;height:44px;object-fit:contain;border-radius:4px;" onerror="this.parentElement.textContent='${monster.qualityName}${monster.emoji}'">`;
+                                        } else {
+                                            cell.textContent = monster.qualityName + monster.emoji;
+                                        }
                                         const label = document.createElement('span');
                                         label.className = 'monster-label';
                                         label.style.color = monster.color;
@@ -1267,6 +1543,7 @@
                     await this.moveTo(x, y, true);
                     const finalCell = this.currentMap.cells[this.player.y][this.player.x];
                     if (finalCell.type === 'village') this.enterVillage();
+                    else if (finalCell.type === 'gift') this.openGift(finalCell);
                 }
             },
 
@@ -1298,6 +1575,17 @@
                     
                     this.player.x = step.x;
                     this.player.y = step.y;
+                    
+                    // 离开村庄时停止恢复
+                    if (this.healInterval) {
+                        const cell = this.currentMap.cells[step.y][step.x];
+                        if (cell.type !== 'village') {
+                            clearInterval(this.healInterval);
+                            this.healInterval = null;
+                            this.log('离开村庄，恢复中断！');
+                        }
+                    }
+                    
                     this.renderMap();
                     await this.sleep(60);
                 }
@@ -1308,9 +1596,67 @@
             sleep(ms) { return new Promise(r => setTimeout(r, ms)); },
 
             enterVillage() {
-                this.player.hp = this.player.maxHp;
+                // 先清除旧的恢复定时器，防止重复
+                if (this.healInterval) {
+                    clearInterval(this.healInterval);
+                    this.healInterval = null;
+                }
+                
+                // 血量逐渐恢复动画
+                const targetHp = this.player.maxHp;
+                const currentHp = this.player.hp;
+                const healStep = Math.ceil((targetHp - currentHp) / 10); // 10步恢复
+                
+                if (currentHp < targetHp) {
+                    this.healInterval = setInterval(() => {
+                        this.player.hp = Math.min(this.player.hp + healStep, targetHp);
+                        this.updateUI();
+                        
+                        if (this.player.hp >= targetHp) {
+                            clearInterval(this.healInterval);
+                            this.healInterval = null;
+                            this.log('🏠 回到村庄，生命值已恢复！');
+                        }
+                    }, 1000); // 每1秒恢复一次
+                }
+                
+                this.autoSave();
+            },
+
+            // 打开礼包
+            openGift(cell) {
+                const mapData = this.currentMap;
+                const midLv = Math.floor((mapData.minLv + mapData.maxLv) / 2);
+
+                // 随机经验值：地图等级 * 5~15
+                const expGain = Math.floor(midLv * (5 + Math.random() * 10));
+
+                // 随机装备（50%概率）
+                let drop = null;
+                if (Math.random() < 0.5) {
+                    drop = this.generateDrop(midLv, false, 0, 1); // 最低精良品质
+                }
+
+                // 清除礼包
+                this.currentMap.cells[cell.y][cell.x] = { type: 'empty', x: cell.x, y: cell.y };
+
+                // 发放奖励
+                if (expGain > 0) this.gainExp(expGain);
+
+                if (drop) {
+                    if (this.player.inventory.length < this.player.maxInventory) {
+                        this.player.inventory.push(drop);
+                        const quality = QUALITIES[drop.quality];
+                        this.log(`🎁 获得装备: ${drop.setName ? '[' + drop.setName + '] ' : ''}${drop.name}+${drop.level} (${quality.name})`);
+                    } else {
+                        this.log(`🎁 获得装备但背包已满！`);
+                    }
+                } else {
+                    this.log(`🎁 打开礼包，获得了 ${expGain} 经验值！`);
+                }
+
                 this.updateUI();
-                this.log('🏠 回到村庄，生命值已恢复！');
+                this.renderMap();
                 this.autoSave();
             },
 
@@ -1337,7 +1683,7 @@
                         const level = Math.floor(Math.random() * (mapData.maxLv - mapData.minLv + 1)) + mapData.minLv;
                         cells[y][x] = {
                             type: 'monster', x, y, emoji: template.emoji,
-                            monster: this.createMonster(template, level)
+                            monster: this.createMonster(template, level, MONSTERS.indexOf(template))
                         };
                         monsters++;
                     }
@@ -1367,9 +1713,18 @@
             },
 
             updateUI() {
+                document.getElementById('charName').textContent = this.player.charName || '勇者';
                 document.getElementById('charLevel').textContent = `Lv.${this.player.level}`;
-                document.getElementById('hpFill').style.width = `${(this.player.hp / this.player.maxHp) * 100}%`;
+                const hpPercent = (this.player.hp / this.player.maxHp) * 100;
+                document.getElementById('hpFill').style.width = `${hpPercent}%`;
                 document.getElementById('hpText').textContent = `${this.player.hp}/${this.player.maxHp}`;
+                // 角色面板血量颜色：>=50%蓝色，30-50%黄色，<30%红色
+                const hpFill = document.getElementById('hpFill');
+                hpFill.style.background = hpPercent < 30 
+                    ? 'linear-gradient(90deg, #c0392b, #e74c3c)' 
+                    : hpPercent < 50 
+                        ? 'linear-gradient(90deg, #f39c12, #f1c40f)' 
+                        : 'linear-gradient(90deg, #2980b9, #3498db)';
                 document.getElementById('charAtk').textContent = this.getTotalAtk();
                 document.getElementById('charDef').textContent = this.getTotalDef();
                 document.getElementById('expFill').style.width = `${(this.player.exp / this.player.expNeeded) * 100}%`;
@@ -1382,10 +1737,57 @@
                 this.updatePassportList();
             },
 
+            // 获取套装加成
+            // 获取套装加成（按套装类型统计）
+            getSetBonus() {
+                const equipped = [
+                    this.player.weapon,
+                    this.player.armor,
+                    this.player.accessory,
+                    this.player.boots
+                ].filter(e => e && e.setType);
+                
+                if (equipped.length < 2) return null;
+                
+                // 统计各套装数量
+                const setCounts = {};
+                equipped.forEach(e => {
+                    setCounts[e.setType] = (setCounts[e.setType] || 0) + 1;
+                });
+                
+                // 找出数量最多的套装
+                let maxSet = null, maxCount = 0;
+                for (const [setType, count] of Object.entries(setCounts)) {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        maxSet = setType;
+                    }
+                }
+                
+                // 返回对应套装加成
+                if (maxCount >= 4 && SET_TYPES[maxSet]) {
+                    return { ...SET_TYPES[maxSet].bonus4, setType: maxSet, count: 4, setData: SET_TYPES[maxSet] };
+                } else if (maxCount >= 2 && SET_TYPES[maxSet]) {
+                    return { ...SET_TYPES[maxSet].bonus2, setType: maxSet, count: maxCount, setData: SET_TYPES[maxSet] };
+                }
+                return null;
+            },
+
+            // 获取经验加成（来自套装）
+            getExpBonus() {
+                const setBonus = this.getSetBonus();
+                return setBonus && setBonus.expMult ? setBonus.expMult : 1;
+            },
+
             getTotalAtk() {
                 let atk = this.player.atk;
                 if (this.player.weapon) atk += this.player.weapon.atk;
                 if (this.player.armor) atk += this.player.armor.atk;
+                if (this.player.accessory) atk += this.player.accessory.atk;
+                if (this.player.boots) atk += this.player.boots.atk;
+                // 套装加成
+                const setBonus = this.getSetBonus();
+                if (setBonus && setBonus.atkMult) atk = Math.floor(atk * setBonus.atkMult);
                 return atk;
             },
 
@@ -1393,6 +1795,11 @@
                 let def = this.player.def;
                 if (this.player.weapon) def += this.player.weapon.def;
                 if (this.player.armor) def += this.player.armor.def;
+                if (this.player.accessory) def += this.player.accessory.def;
+                if (this.player.boots) def += this.player.boots.def;
+                // 套装加成
+                const setBonus = this.getSetBonus();
+                if (setBonus && setBonus.defMult) def = Math.floor(def * setBonus.defMult);
                 return def;
             },
 
@@ -1403,8 +1810,9 @@
                 if (this.player.weapon) {
                     const w = this.player.weapon;
                     const quality = QUALITIES[w.quality];
+                    const art = EQUIP_ART[w.equipId];
                     weaponSlot.classList.remove('empty');
-                    weaponSlot.innerHTML = `<span class="equip-icon">${w.emoji}</span><div class="equip-info"><div class="equip-name">${w.name}+${w.level}</div><div class="equip-quality ${quality.class}">${quality.name}</div><div class="equip-stats">❤️+${w.hp} ⚔️+${w.atk} 🛡️+${w.def}</div></div><button class="btn-small btn-unequip" onclick="game.unequip('weapon')">卸下</button>`;
+                    weaponSlot.innerHTML = `<span class="equip-icon">${art ? `<img src="${art}" style="width:36px;height:36px;object-fit:contain;" onerror="this.parentElement.textContent='${w.emoji}'">` : w.emoji}</span><div class="equip-info"><div class="equip-name" style="color:${w.setColor || ''}">${w.setName ? `[${w.setName}] ` : ''}${w.name}+${w.level}</div><div class="equip-quality ${quality.class}">${quality.name}</div><div class="equip-stats">❤️+${w.hp} ⚔️+${w.atk} 🛡️+${w.def}</div></div><button class="btn-small btn-unequip" onclick="game.unequip('weapon')">卸下</button>`;
                 } else {
                     weaponSlot.classList.add('empty');
                     weaponSlot.innerHTML = `<span class="equip-icon">🗡️</span><div class="equip-info"><div class="equip-name">武器栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div>`;
@@ -1413,11 +1821,49 @@
                 if (this.player.armor) {
                     const a = this.player.armor;
                     const quality = QUALITIES[a.quality];
+                    const art = EQUIP_ART[a.equipId];
                     armorSlot.classList.remove('empty');
-                    armorSlot.innerHTML = `<span class="equip-icon">${a.emoji}</span><div class="equip-info"><div class="equip-name">${a.name}+${a.level}</div><div class="equip-quality ${quality.class}">${quality.name}</div><div class="equip-stats">❤️+${a.hp} ⚔️+${a.atk} 🛡️+${a.def}</div></div><button class="btn-small btn-unequip" onclick="game.unequip('armor')">卸下</button>`;
+                    armorSlot.innerHTML = `<span class="equip-icon">${art ? `<img src="${art}" style="width:36px;height:36px;object-fit:contain;" onerror="this.parentElement.textContent='${a.emoji}'">` : a.emoji}</span><div class="equip-info"><div class="equip-name" style="color:${a.setColor || ''}">${a.setName ? `[${a.setName}] ` : ''}${a.name}+${a.level}</div><div class="equip-quality ${quality.class}">${quality.name}</div><div class="equip-stats">❤️+${a.hp} ⚔️+${a.atk} 🛡️+${a.def}</div></div><button class="btn-small btn-unequip" onclick="game.unequip('armor')">卸下</button>`;
                 } else {
                     armorSlot.classList.add('empty');
                     armorSlot.innerHTML = `<span class="equip-icon">👕</span><div class="equip-info"><div class="equip-name">防具栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div>`;
+                }
+
+                // 饰品栏
+                const accessorySlot = document.getElementById('accessorySlot');
+                if (this.player.accessory) {
+                    const ac = this.player.accessory;
+                    const quality = QUALITIES[ac.quality];
+                    const art = EQUIP_ART[ac.equipId];
+                    accessorySlot.classList.remove('empty');
+                    accessorySlot.innerHTML = `<span class="equip-icon">${art ? `<img src="${art}" style="width:36px;height:36px;object-fit:contain;" onerror="this.parentElement.textContent='${ac.emoji}'">` : ac.emoji}</span><div class="equip-info"><div class="equip-name" style="color:${ac.setColor || ''}">${ac.setName ? `[${ac.setName}] ` : ''}${ac.name}+${ac.level}</div><div class="equip-quality ${quality.class}">${quality.name}</div><div class="equip-stats">❤️+${ac.hp} ⚔️+${ac.atk} 🛡️+${ac.def}</div></div><button class="btn-small btn-unequip" onclick="game.unequip('accessory')">卸下</button>`;
+                } else {
+                    accessorySlot.classList.add('empty');
+                    accessorySlot.innerHTML = `<span class="equip-icon">💍</span><div class="equip-info"><div class="equip-name">饰品栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div>`;
+                }
+
+                // 鞋子栏
+                const bootsSlot = document.getElementById('bootsSlot');
+                if (this.player.boots) {
+                    const bt = this.player.boots;
+                    const quality = QUALITIES[bt.quality];
+                    const art = EQUIP_ART[bt.equipId];
+                    bootsSlot.classList.remove('empty');
+                    bootsSlot.innerHTML = `<span class="equip-icon">${art ? `<img src="${art}" style="width:36px;height:36px;object-fit:contain;" onerror="this.parentElement.textContent='${bt.emoji}'">` : bt.emoji}</span><div class="equip-info"><div class="equip-name" style="color:${bt.setColor || ''}">${bt.setName ? `[${bt.setName}] ` : ''}${bt.name}+${bt.level}</div><div class="equip-quality ${quality.class}">${quality.name}</div><div class="equip-stats">❤️+${bt.hp} ⚔️+${bt.atk} 🛡️+${bt.def}</div></div><button class="btn-small btn-unequip" onclick="game.unequip('boots')">卸下</button>`;
+                } else {
+                    bootsSlot.classList.add('empty');
+                    bootsSlot.innerHTML = `<span class="equip-icon">👢</span><div class="equip-info"><div class="equip-name">鞋子栏</div><div class="equip-quality"></div><div class="equip-stats">空</div></div>`;
+                }
+
+                // 显示当前套装加成
+                const setBonus = this.getSetBonus();
+                const setBonusDiv = document.getElementById('setBonusInfo');
+                if (setBonusDiv) {
+                    if (setBonus) {
+                        setBonusDiv.innerHTML = `<div style="color:#fff;font-weight:bold;">${setBonus.setData.name}套装 (${setBonus.count}件): ${setBonus.desc}</div>`;
+                    } else {
+                        setBonusDiv.innerHTML = '<div style="color:#888;">装备2件同套装可激活套装加成</div>';
+                    }
                 }
             },
 
@@ -1448,12 +1894,24 @@
                 this.player.def = 5 + (this.player.level - 1) * 1;
                 if (this.player.weapon) this.player.maxHp += this.player.weapon.hp;
                 if (this.player.armor) this.player.maxHp += this.player.armor.hp;
+                if (this.player.accessory) this.player.maxHp += this.player.accessory.hp;
+                if (this.player.boots) this.player.maxHp += this.player.boots.hp;
+                // 套装加成
+                const setBonus = this.getSetBonus();
+                if (setBonus && setBonus.hpMult) this.player.maxHp = Math.floor(this.player.maxHp * setBonus.hpMult);
                 this.player.hp = Math.min(this.player.hp, this.player.maxHp);
             },
 
             gainExp(amount) {
-                this.player.exp += amount;
-                this.log(`获得 ${amount} 经验值！`);
+                // 应用套装经验加成
+                const expBonus = this.getExpBonus();
+                const finalAmount = Math.floor(amount * expBonus);
+                this.player.exp += finalAmount;
+                if (expBonus > 1) {
+                    this.log(`获得 ${finalAmount} 经验值！(套装+${Math.floor((expBonus - 1) * 100)}%)`);
+                } else {
+                    this.log(`获得 ${finalAmount} 经验值！`);
+                }
                 let upCount = 0;
                 while (this.player.exp >= this.player.expNeeded && this.player.level < 80) {
                     this.player.exp -= this.player.expNeeded;
@@ -1462,8 +1920,8 @@
                     this.player.atk += 1;
                     this.player.def += 1;
                     this.player.hp = this.player.maxHp;
-                    // 升级经验：每级相差20，+10点
-                    this.player.expNeeded = 20 + (this.player.level - 1) * 20;
+                    // 升级经验：基础100，每级+20
+                    this.player.expNeeded = 50 + (this.player.level - 1) * 50;
                     upCount++;
                 }
                 if (upCount > 0) {
@@ -1508,28 +1966,44 @@
 
             getRandomQuality() {
                 const rand = Math.random();
-                if (rand < 0.35) return 0; // 普通 35%
-                if (rand < 0.65) return 1; // 精良 30%
-                if (rand < 0.85) return 2; // 优秀 20%
-                if (rand < 0.95) return 3; // 史诗 10%
+                // 装备爆率+10%：普通25%，精良35%，优秀20%，史诗15%，传说5%
+                if (rand < 0.25) return 0; // 普通 25%
+                if (rand < 0.60) return 1; // 精良 35%
+                if (rand < 0.80) return 2; // 优秀 20%
+                if (rand < 0.95) return 3; // 史诗 15%
                 return 4; // 传说 5%
             },
 
             generateDrop(monsterLevel, isBoss = false, traitBonus = 0, minQuality = 0) {
-                const isWeapon = Math.random() < 0.5;
-                const templates = isWeapon ? WEAPONS : ARMORS;
+                // 随机选择装备类型：武器30%，防具30%，饰品20%，鞋子20%
+                const rand = Math.random();
+                let templates, equipType;
+                if (rand < 0.3) {
+                    templates = WEAPONS;
+                    equipType = 'weapon';
+                } else if (rand < 0.6) {
+                    templates = ARMORS;
+                    equipType = 'armor';
+                } else if (rand < 0.8) {
+                    templates = ACCESSORIES;
+                    equipType = 'accessory';
+                } else {
+                    templates = BOOTS;
+                    equipType = 'boots';
+                }
                 const template = templates[Math.floor(Math.random() * templates.length)];
                 
                 let level = Math.max(1, Math.min(80, monsterLevel + Math.floor(Math.random() * 7) - 3));
-                // BOSS掉落最低品质为优秀(2)，普通怪随机
-                let quality = isBoss ? Math.max(2, this.getRandomQuality()) : this.getRandomQuality();
-                quality = Math.max(minQuality, Math.min(4, quality + traitBonus));
+                // 怪物掉落最低品质：普通怪≥普通(0)，精英怪≥精良(1)，稀有怪≥优秀(2)，BOSS≥史诗(3)
+                let quality = this.getRandomQuality();
+                quality = Math.max(minQuality, quality);
+                quality = Math.max(0, Math.min(4, quality + traitBonus));
                 const qualityData = QUALITIES[quality];
                 
                 // 基础属性计算
-                const baseHp = Math.floor(level * (isWeapon ? 15 : 7.5) * template.hpMod);
-                const baseAtk = Math.max(1, Math.floor(level * (isWeapon ? 1.0 : 0.5) * template.atkMod));
-                const baseDef = Math.max(1, Math.floor(level * (isWeapon ? 0.5 : 1.0) * template.defMod));
+                const baseHp = Math.floor(level * (equipType === 'weapon' ? 15 : equipType === 'armor' ? 7.5 : equipType === 'boots' ? 5 : 5) * template.hpMod);
+                const baseAtk = Math.max(1, Math.floor(level * (equipType === 'weapon' ? 1.0 : equipType === 'armor' ? 0.5 : equipType === 'boots' ? 0.3 : 0.3) * template.atkMod));
+                const baseDef = Math.max(1, Math.floor(level * (equipType === 'weapon' ? 0.5 : equipType === 'armor' ? 1.0 : equipType === 'boots' ? 0.6 : 0.4) * template.defMod));
                 
                 // 应用品质倍率后，再应用浮动范围（±25%）
                 const hpWithQuality = Math.floor(baseHp * qualityData.multiplier);
@@ -1539,13 +2013,23 @@
                 // 浮动范围：75%-125%
                 const floatMult = 0.75 + Math.random() * 0.5;
                 
+                // 随机分配套装类型
+                const setTypes = Object.keys(SET_TYPES);
+                const setType = setTypes[Math.floor(Math.random() * setTypes.length)];
+                const setData = SET_TYPES[setType];
+                
                 return {
-                    type: isWeapon ? 'weapon' : 'armor',
+                    type: equipType,
+                    equipId: template.id,
                     name: template.name, emoji: template.emoji, avatar: template.avatar,
                     level, quality,
                     hp: Math.floor(hpWithQuality * floatMult),
                     atk: Math.floor(atkWithQuality * floatMult),
-                    def: Math.floor(defWithQuality * floatMult)
+                    def: Math.floor(defWithQuality * floatMult),
+                    // 套装属性
+                    setType: setType,
+                    setName: setData.name,
+                    setColor: setData.color
                 };
             },
 
@@ -1559,11 +2043,12 @@
                 } else {
                     this.player.inventory.forEach((item, index) => {
                         const quality = QUALITIES[item.quality];
+                        const art = EQUIP_ART[item.equipId];
                         const div = document.createElement('div');
                         div.className = 'inventory-item';
                         div.style.borderColor = quality.color;
                         div.innerHTML = `
-                            <div style="font-size: 2em; text-align: center; margin-bottom: 10px;">${item.emoji}</div>
+                            <div style="font-size: 2em; text-align: center; margin-bottom: 10px;">${art ? `<img src="${art}" style="width:48px;height:48px;object-fit:contain;" onerror="this.parentElement.textContent='${item.emoji}'">` : item.emoji}</div>
                             <div style="font-weight: bold; text-align: center; color: ${quality.color}">${item.name}+${item.level}</div>
                             <div style="text-align: center; font-size: 0.8em; color: ${quality.color}; margin: 3px 0;">${quality.name}</div>
                             <div style="font-size: 0.85em; color: #aaa; text-align: center; margin: 5px 0;">❤️+${item.hp} ⚔️+${item.atk} 🛡️+${item.def}</div>
@@ -1624,13 +2109,15 @@
                 const item = this.player.inventory[index];
                 if (item.type === 'weapon' && this.player.weapon) this.player.inventory.push(this.player.weapon);
                 else if (item.type === 'armor' && this.player.armor) this.player.inventory.push(this.player.armor);
+                else if (item.type === 'accessory' && this.player.accessory) this.player.inventory.push(this.player.accessory);
+                else if (item.type === 'boots' && this.player.boots) this.player.inventory.push(this.player.boots);
                 
                 this.player[item.type] = item;
                 this.player.inventory.splice(index, 1);
                 this.recalculateStats();
                 this.updateUI();
                 this.renderMap();
-                this.log(`装备了 ${item.name}+${item.level}`);
+                this.log(`装备了 ${item.setName ? `[${item.setName}] ` : ''}${item.name}+${item.level}`);
                 this.closeEquipPreview();
                 this.closeInventory();
                 this.autoSave();
@@ -1638,10 +2125,9 @@
 
             convertItem(index) {
                 const item = this.player.inventory[index];
-                const expGain = item.level * 8 * (item.quality + 1);
                 this.player.inventory.splice(index, 1);
-                this.gainExp(expGain);
-                this.log(`将 ${item.name} 转化为 ${expGain} 经验值`);
+                // 装备回收不再给经验值
+                this.log(`将 ${item.name} 回收`);
                 this.openInventory();
                 this.autoSave();
             },
@@ -1652,13 +2138,62 @@
                     return;
                 }
                 const count = this.player.inventory.length;
-                let totalExp = 0;
-                this.player.inventory.forEach(item => {
-                    totalExp += item.level * 8 * (item.quality + 1);
-                });
                 this.player.inventory = [];
-                this.gainExp(totalExp);
-                this.log(`🗑️ 一键回收 ${count} 件装备，获得 ${totalExp} 经验值`);
+                // 装备回收不再给经验值
+                this.log(`🗑️ 一键回收 ${count} 件装备`);
+                this.openInventory();
+                this.autoSave();
+            },
+
+            // 自动装备：遍历背包，找出比当前装备更强的装备并自动穿上
+            autoEquip() {
+                if (this.player.inventory.length === 0) {
+                    this.log('背包是空的，没有可装备的物品');
+                    return;
+                }
+
+                // 计算装备总战力（用于比较强弱）
+                const calcPower = (item) => item.hp + item.atk * 2 + item.def * 1.5;
+                // 计算当前某槽位装备的战力
+                const getCurrentPower = (slot) => this.player[slot] ? calcPower(this.player[slot]) : 0;
+
+                let equipped = 0;
+                const slots = ['weapon', 'armor', 'accessory', 'boots'];
+
+                // 多轮扫描，直到没有更好的装备为止
+                let improved = true;
+                while (improved) {
+                    improved = false;
+                    for (let i = this.player.inventory.length - 1; i >= 0; i--) {
+                        const item = this.player.inventory[i];
+                        const slot = item.type;
+                        if (!slots.includes(slot)) continue;
+
+                        const currentPower = getCurrentPower(slot);
+                        const newPower = calcPower(item);
+
+                        // 新装备战力更高才替换
+                        if (newPower > currentPower) {
+                            // 保存旧装备到背包
+                            if (this.player[slot]) {
+                                this.player.inventory.push(this.player[slot]);
+                            }
+                            this.player[slot] = item;
+                            this.player.inventory.splice(i, 1);
+                            equipped++;
+                            improved = true;
+                        }
+                    }
+                }
+
+                if (equipped > 0) {
+                    this.recalculateStats();
+                    this.updateUI();
+                    this.renderMap();
+                    this.log(`🤖 自动装备了 ${equipped} 件更强的装备！`);
+                } else {
+                    this.log('🤖 背包中没有比当前更强的装备');
+                }
                 this.openInventory();
                 this.autoSave();
             },
@@ -1668,11 +2203,13 @@
                 const content = document.getElementById('skillContent');
                 content.innerHTML = '';
                 SKILLS.forEach(skill => {
-                    const unlocked = this.player.level >= skill.level;
-                    const onCooldown = this.player.skillCooldowns[skill.level] > 0;
+                    // 技能通过击败对应BOSS解锁
+                    const unlocked = this.player.unlockedSkills.includes(skill.bossIndex);
+                    const onCooldown = this.player.skillCooldowns[skill.bossIndex] > 0;
+                    const bossName = BOSSES[skill.bossIndex] ? BOSSES[skill.bossIndex].name : '未知';
                     const div = document.createElement('div');
                     div.className = `skill-item ${!unlocked ? 'locked' : ''}`;
-                    div.innerHTML = `<div class="skill-name">${skill.emoji} ${skill.name} ${unlocked ? '' : '(锁定)'}</div><div class="skill-desc">${skill.desc} | 冷却:${skill.cooldown} | Lv.${skill.level}</div>${onCooldown ? `<div style="color:#e74c3c;font-size:0.8em;">冷却中:${this.player.skillCooldowns[skill.level]}回合</div>` : ''}`;
+                    div.innerHTML = `<div class="skill-name">${skill.emoji} ${skill.name} ${unlocked ? '' : '(锁定)'}</div><div class="skill-desc">${skill.desc} | 冷却:${skill.cooldown}${unlocked ? '' : ` | 击败${bossName}解锁`}</div>${onCooldown ? `<div style="color:#e74c3c;font-size:0.8em;">冷却中:${this.player.skillCooldowns[skill.bossIndex]}回合</div>` : ''}`;
                     content.appendChild(div);
                 });
                 list.classList.add('active');
@@ -1690,7 +2227,8 @@
                     div.style.cursor = 'pointer';
                     div.style.textAlign = 'center';
                     div.style.padding = '15px';
-                    div.innerHTML = `<div style="font-size: 3em; margin-bottom: 5px;">${char.emoji}</div><div style="font-size: 0.9em;">${char.name}</div>`;
+                    // 使用贴图替代emoji，职业名称金色
+                    div.innerHTML = `<div style="margin-bottom: 5px;"><img src="${char.art}" style="width:60px;height:60px;object-fit:contain;border-radius:8px;" onerror="this.parentElement.textContent='${char.emoji}'"></div><div style="font-size: 0.9em; color: #ffd700;">${char.name}</div>`;
                     div.onclick = () => this.selectChar(index);
                     content.appendChild(div);
                 });
@@ -1919,7 +2457,7 @@
         const battle = {
             enemy: null, enemyX: 0, enemyY: 0, autoMode: false, autoInterval: null, speed: 1, isBoss: false,
 
-            start(enemy, x, y) {
+            start(enemy, x, y, enemyFirst = false) {
                 this.enemy = { ...enemy };
                 this.enemyX = x;
                 this.enemyY = y;
@@ -1966,7 +2504,7 @@
                 enemyFighter.className = `battle-fighter enemy ${this.isBoss ? 'boss' : ''}`;
                 
                 const hpFill = document.getElementById('battleEnemyHpFill');
-                hpFill.className = `battle-hp-fill ${this.isBoss ? 'boss' : 'enemy'}`;
+                hpFill.className = `battle-hp-fill enemy`;
 
                 document.getElementById('battlePlayerAvatar').innerHTML = `<img src="${BASE_ART}" style="width:180px;height:180px;object-fit:contain;border-radius:8px;" onerror="this.parentElement.textContent='${game.getPlayerAvatar()}'">`;
                 document.getElementById('battlePlayerLevel').textContent = `Lv.${game.player.level}`;
@@ -1975,10 +2513,12 @@
                 document.getElementById('battlePlayerAtk').textContent = game.getTotalAtk();
                 document.getElementById('battlePlayerDef').textContent = game.getTotalDef();
 
-                // BOSS使用贴图，普通怪物使用emoji
+                // BOSS使用贴图，普通怪物使用贴图
                 const avatarEl = document.getElementById('battleEnemyAvatar');
                 if (this.isBoss && this.enemy.bossIndex !== undefined && BOSS_ART[this.enemy.bossIndex]) {
                     avatarEl.innerHTML = `<img src="${BOSS_ART[this.enemy.bossIndex]}" style="width:180px;height:180px;object-fit:contain;border-radius:8px;" onerror="this.parentElement.textContent='${this.enemy.emoji}'">`;
+                } else if (this.enemy.monsterIndex >= 0 && MONSTER_ART[this.enemy.monsterIndex]) {
+                    avatarEl.innerHTML = `<img src="${MONSTER_ART[this.enemy.monsterIndex]}" style="width:180px;height:180px;object-fit:contain;border-radius:8px;" onerror="this.parentElement.textContent='${this.enemy.emoji}'">`;
                 } else {
                     avatarEl.textContent = this.enemy.emoji;
                 }
@@ -2010,6 +2550,12 @@
 
                 document.getElementById('battleLog').innerHTML = '<div class="battle-log-entry log-system">战斗开始！</div>';
 
+                // 怪物先攻击（BOSS主动碰撞时）
+                if (enemyFirst) {
+                    this.addLog(`${this.enemy.name} 主动发起攻击！怪物先手！`, 'system');
+                    setTimeout(() => this.enemyAttack(), 500 / this.speed);
+                }
+
                 if (game.autoBattle) this.toggleAuto();
             },
 
@@ -2029,6 +2575,8 @@
 
             attack(useSkill) {
                 if (!this.enemy || this.enemy.hp <= 0) return;
+                // 玩家已死亡则不再攻击
+                if (game.player.hp <= 0) return;
 
                 // 玩家攻击动画
                 const playerAvatar = document.getElementById('battlePlayerAvatar');
@@ -2046,17 +2594,34 @@
 
                 if (useSkill) {
                     if (useSkill.multiplier) damage = Math.floor(damage * useSkill.multiplier);
-                    game.player.skillCooldowns[useSkill.level] = useSkill.cooldown;
+                    game.player.skillCooldowns[useSkill.bossIndex] = useSkill.cooldown;
                     this.addLog(`使用技能 ${useSkill.name}！`, 'system');
                 }
 
-                this.enemy.hp -= damage;
+                // 多层血条伤害计算
+                let remainingDamage = damage;
+                while (remainingDamage > 0 && this.enemy.currentLayer > 0) {
+                    if (this.enemy.hp > remainingDamage) {
+                        this.enemy.hp -= remainingDamage;
+                        remainingDamage = 0;
+                    } else {
+                        remainingDamage -= this.enemy.hp;
+                        this.enemy.currentLayer--;
+                        if (this.enemy.currentLayer > 0) {
+                            this.enemy.hp = this.enemy.layerHp;
+                            this.addLog(`${this.enemy.name} 的血层被击破！剩余 ${this.enemy.currentLayer} 层！`, 'system');
+                        } else {
+                            this.enemy.hp = 0;
+                        }
+                    }
+                }
+                
                 this.addLog(`勇者攻击！造成 ${damage} 伤害！`, 'player');
                 this.updateEnemyHp();
                 // 显示伤害数字
                 this.showDamage('enemy', damage);
 
-                if (this.enemy.hp <= 0) {
+                if (this.enemy.hp <= 0 && this.enemy.currentLayer <= 0) {
                     if (this.isBoss) game.winBoss();
                     else game.win();
                     return;
@@ -2067,9 +2632,9 @@
 
             // 每回合结束后递减技能冷却
             tickCooldowns() {
-                for (let level in game.player.skillCooldowns) {
-                    if (game.player.skillCooldowns[level] > 0) {
-                        game.player.skillCooldowns[level]--;
+                for (let bossIndex in game.player.skillCooldowns) {
+                    if (game.player.skillCooldowns[bossIndex] > 0) {
+                        game.player.skillCooldowns[bossIndex]--;
                     }
                 }
             },
@@ -2084,6 +2649,8 @@
 
             enemyAttack() {
                 if (!this.enemy || this.enemy.hp <= 0) return;
+                // 玩家已死亡则不再攻击
+                if (game.player.hp <= 0) return;
 
                 // 敌人攻击动画
                 const enemyAvatar = document.getElementById('battleEnemyAvatar');
@@ -2136,14 +2703,50 @@
 
             updatePlayerHp() {
                 const hpPercent = Math.max(0, (game.player.hp / game.player.maxHp) * 100);
-                document.getElementById('battlePlayerHpFill').style.width = `${hpPercent}%`;
+                const hpFill = document.getElementById('battlePlayerHpFill');
+                hpFill.style.width = `${hpPercent}%`;
                 document.getElementById('battlePlayerHpText').textContent = `${Math.max(0, game.player.hp)}/${game.player.maxHp}`;
+                // 血量颜色变化：>=50%蓝色，30-50%黄色，<30%红色
+                hpFill.classList.remove('hp-yellow', 'hp-red');
+                if (hpPercent < 30) hpFill.classList.add('hp-red');
+                else if (hpPercent < 50) hpFill.classList.add('hp-yellow');
             },
 
             updateEnemyHp() {
-                const hpPercent = Math.max(0, (this.enemy.hp / this.enemy.maxHp) * 100);
-                document.getElementById('battleEnemyHpFill').style.width = `${hpPercent}%`;
-                document.getElementById('battleEnemyHpText').textContent = `${Math.max(0, this.enemy.hp)}/${this.enemy.maxHp}`;
+                // 多层血条计算
+                const maxHp = this.enemy.hpLayers * this.enemy.layerHp;
+                const currentTotalHp = (this.enemy.currentLayer - 1) * this.enemy.layerHp + this.enemy.hp;
+                const hpPercent = Math.max(0, (currentTotalHp / maxHp) * 100);
+                
+                const hpFill = document.getElementById('battleEnemyHpFill');
+                hpFill.style.width = `${(this.enemy.hp / this.enemy.layerHp) * 100}%`;
+                
+                // 多层血条显示
+                const layerText = this.enemy.hpLayers > 1 ? ` [${this.enemy.currentLayer}/${this.enemy.hpLayers}]` : '';
+                document.getElementById('battleEnemyHpText').textContent = `${Math.max(0, this.enemy.hp)}/${this.enemy.layerHp}${layerText}`;
+                
+                // 血量颜色变化：>=50%蓝色，30-50%黄色，<30%红色
+                hpFill.classList.remove('hp-yellow', 'hp-red');
+                if (hpPercent < 30) hpFill.classList.add('hp-red');
+                else if (hpPercent < 50) hpFill.classList.add('hp-yellow');
+                
+                // 怪物阶段系统触发（普通怪和BOSS都触发）
+                if (this.enemy.phaseBonus) {
+                    // 血量<50%时防御提升
+                    if (hpPercent < 50 && !this.enemy.defBoosted) {
+                        this.enemy.def = Math.floor(this.enemy.def * (1 + this.enemy.phaseBonus.def));
+                        this.enemy.defBoosted = true;
+                        const phaseName = this.isBoss ? '【BOSS】' : '';
+                        this.addLog(`${phaseName}${this.enemy.name} 进入防御姿态！防御力提升${Math.floor(this.enemy.phaseBonus.def * 100)}%！`, 'system');
+                    }
+                    // 血量<30%时攻击提升
+                    if (hpPercent < 30 && !this.enemy.atkBoosted) {
+                        this.enemy.atk = Math.floor(this.enemy.atk * (1 + this.enemy.phaseBonus.atk));
+                        this.enemy.atkBoosted = true;
+                        const phaseName = this.isBoss ? '【BOSS】' : '';
+                        this.addLog(`${phaseName}${this.enemy.name} 进入狂暴状态！攻击力提升${Math.floor(this.enemy.phaseBonus.atk * 100)}%！`, 'system');
+                    }
+                }
             },
 
             flee() {
@@ -2164,18 +2767,18 @@
             },
 
             showSkills() {
-                // 获取已解锁的技能
-                const unlockedSkills = SKILLS.filter(s => game.player.level >= s.level);
+                // 获取已解锁的技能（通过击败BOSS解锁）
+                const unlockedSkills = SKILLS.filter(s => game.player.unlockedSkills.includes(s.bossIndex));
                 if (unlockedSkills.length === 0) {
-                    this.addLog('等级不足，尚未解锁任何技能！', 'system');
+                    this.addLog('尚未击败任何BOSS解锁技能！', 'system');
                     return;
                 }
                 // 获取可用（未冷却）的技能
-                const availableSkills = unlockedSkills.filter(s => !game.player.skillCooldowns[s.level] || game.player.skillCooldowns[s.level] <= 0);
+                const availableSkills = unlockedSkills.filter(s => !game.player.skillCooldowns[s.bossIndex] || game.player.skillCooldowns[s.bossIndex] <= 0);
                 if (availableSkills.length === 0) {
                     // 显示冷却中的技能
-                    const coolingSkills = unlockedSkills.filter(s => game.player.skillCooldowns[s.level] > 0);
-                    const cooldownInfo = coolingSkills.map(s => `${s.name}(${game.player.skillCooldowns[s.level]}回合)`).join(', ');
+                    const coolingSkills = unlockedSkills.filter(s => game.player.skillCooldowns[s.bossIndex] > 0);
+                    const cooldownInfo = coolingSkills.map(s => `${s.name}(${game.player.skillCooldowns[s.bossIndex]}回合)`).join(', ');
                     this.addLog(`技能冷却中: ${cooldownInfo}`, 'system');
                     return;
                 }
@@ -2194,7 +2797,7 @@
                     this.addLog('开始自动战斗...', 'system');
                     this.autoInterval = setInterval(() => {
                         if (this.enemy && this.enemy.hp > 0 && game.player.hp > 0) {
-                            const availableSkills = SKILLS.filter(s => game.player.level >= s.level && (!game.player.skillCooldowns[s.level] || game.player.skillCooldowns[s.level] <= 0));
+                            const availableSkills = SKILLS.filter(s => game.player.unlockedSkills.includes(s.bossIndex) && (!game.player.skillCooldowns[s.bossIndex] || game.player.skillCooldowns[s.bossIndex] <= 0));
                             if (availableSkills.length > 0 && Math.random() < 0.3) {
                                 this.attack(availableSkills[availableSkills.length - 1]);
                             } else {
@@ -2233,7 +2836,9 @@
             battle.addLog(`获得 ${expGain} 经验！`, 'system');
 
             if (Math.random() < 0.5) {
-                const drop = this.generateDrop(battle.enemy.level);
+                // 根据怪物品质设置最低掉落品质：普通≥0，精英≥1，稀有≥2
+                const enemyMinQuality = battle.enemy.quality === 'elite' ? 1 : battle.enemy.quality === 'rare' ? 2 : 0;
+                const drop = this.generateDrop(battle.enemy.level, false, 0, enemyMinQuality);
                 this.player.inventory.push(drop);
                 const quality = QUALITIES[drop.quality];
                 battle.addLog(`获得: [${quality.name}] ${drop.name}+${drop.level}！`, 'system');
@@ -2266,6 +2871,9 @@
 
             setTimeout(() => {
                 document.getElementById('battleScreen').classList.remove('active');
+                // 恢复"再次来袭"按钮显示
+                const refreshBtn = document.getElementById('refreshBtnWrap');
+                if (refreshBtn) refreshBtn.style.display = 'block';
                 // 恢复地图BGM
                 musicPlayer.playMapBGM(this.currentMap.id);
                 this.renderMap();
@@ -2281,7 +2889,7 @@
             const mapData = MAPS[this.currentMap.id];
             const monsterTemplates = MONSTERS.filter(m => mapData.monsters.includes(m.id));
             const template = monsterTemplates[Math.floor(Math.random() * monsterTemplates.length)];
-            const monster = this.createMonster(template, last.level);
+            const monster = this.createMonster(template, last.level, MONSTERS.indexOf(template));
 
             this.currentMap.cells[last.y][last.x] = {
                 type: 'monster', x: last.x, y: last.y,
@@ -2307,9 +2915,9 @@
             this.gainExp(expGain);
             battle.addLog(`获得 ${expGain} 经验！`, 'system');
 
-            // BOSS必掉装备，8-9层BOSS掉落最低史诗品质
+            // BOSS必掉装备，最低史诗品质
             const mapId = this.currentMap.id;
-            const minQuality = mapId >= 7 ? 3 : 2; // 第8层(id=7)开始最低史诗(3)
+            const minQuality = 3; // 所有BOSS掉落最低史诗(3)
             const drop = this.generateDrop(boss.level, true, 0, minQuality);
             this.player.inventory.push(drop);
             const quality = QUALITIES[drop.quality];
@@ -2319,6 +2927,15 @@
             if (!this.player.passports.includes(this.currentMap.id)) {
                 this.player.passports.push(this.currentMap.id);
                 battle.addLog(`🎫 获得${BOSSES[this.currentMap.id].name}通关凭证！`, 'system');
+            }
+
+            // 解锁对应技能
+            if (!this.player.unlockedSkills.includes(this.currentMap.id)) {
+                this.player.unlockedSkills.push(this.currentMap.id);
+                const skill = SKILLS.find(s => s.bossIndex === this.currentMap.id);
+                if (skill) {
+                    battle.addLog(`✨ 解锁新技能：${skill.emoji} ${skill.name}！`, 'system');
+                }
             }
 
             this.player.bossKills++;
@@ -2347,19 +2964,70 @@
         };
 
         game.lose = function() {
-            battle.addLog('你被击败了！返回村庄...', 'system');
-            game.player.hp = 0;
+            battle.addLog('你被击败了！', 'system');
             battle.stopAuto();
-            setTimeout(() => {
-                document.getElementById('battleScreen').classList.remove('active');
-                // 恢复地图BGM
-                musicPlayer.playMapBGM(this.currentMap.id);
-                this.returnToVillage();
-                this.updateUI();
-            }, 1500);
+            game.player.hp = 0;
+
+            // 战败惩罚：损失10%金币（经验不扣）
+            const expLoss = Math.floor(game.player.exp * 0.1);
+            game.player.exp = Math.max(0, game.player.exp - expLoss);
+
+            // 关闭战斗界面
+            document.getElementById('battleScreen').classList.remove('active');
+
+            // 显示战败CG
+            const enemyName = battle.enemy ? battle.enemy.name : '未知怪物';
+            const enemyEmoji = battle.enemy ? battle.enemy.emoji : '👹';
+            const isBoss = battle.isBoss;
+
+            // 获取怪物贴图
+            let enemyArtHtml = enemyEmoji;
+            if (isBoss && battle.enemy.bossIndex !== undefined && BOSS_ART[battle.enemy.bossIndex]) {
+                enemyArtHtml = `<img src="${BOSS_ART[battle.enemy.bossIndex]}" style="width:120px;height:120px;object-fit:contain;border-radius:8px;" onerror="this.outerHTML='${enemyEmoji}'">`;
+            } else if (battle.enemy.monsterIndex >= 0 && MONSTER_ART[battle.enemy.monsterIndex]) {
+                enemyArtHtml = `<img src="${MONSTER_ART[battle.enemy.monsterIndex]}" style="width:120px;height:120px;object-fit:contain;border-radius:8px;" onerror="this.outerHTML='${enemyEmoji}'">`;
+            }
+
+            document.getElementById('defeatEnemy').textContent = `被 ${enemyName} 击败了...`;
+            document.getElementById('defeatDetail').innerHTML = `
+                <div style="font-size:1.1em;">${enemyName} ${isBoss ? '(BOSS)' : ''}</div>
+                <div style="margin-top:8px;">勇者等级: Lv.${game.player.level}</div>
+                <div>当前层数: 第${game.currentMap.id + 1}层</div>
+            `;
+            // 替换CG中央大图标为怪物贴图
+            const defeatIconEl = document.getElementById('defeatIcon');
+            if (isBoss && battle.enemy.bossIndex !== undefined && BOSS_ART[battle.enemy.bossIndex]) {
+                defeatIconEl.innerHTML = `<img src="${BOSS_ART[battle.enemy.bossIndex]}" style="width:150px;height:150px;object-fit:contain;border-radius:12px;" onerror="this.parentElement.textContent='💀'">`;
+            } else if (battle.enemy.monsterIndex >= 0 && MONSTER_ART[battle.enemy.monsterIndex]) {
+                defeatIconEl.innerHTML = `<img src="${MONSTER_ART[battle.enemy.monsterIndex]}" style="width:150px;height:150px;object-fit:contain;border-radius:12px;" onerror="this.parentElement.textContent='💀'">`;
+            } else {
+                defeatIconEl.textContent = enemyEmoji;
+            }
+            document.getElementById('defeatPenalty').textContent = `损失 ${expLoss} 经验值`;
+            document.getElementById('defeatCg').classList.add('active');
+
+            // 播放失败音效（如果有）
+            musicPlayer.stopBGM();
+        };
+
+        game.closeDefeatCg = function() {
+            document.getElementById('defeatCg').classList.remove('active');
+            // 恢复"再次来袭"按钮显示
+            const refreshBtn = document.getElementById('refreshBtnWrap');
+            if (refreshBtn) refreshBtn.style.display = 'block';
+            // 恢复地图BGM
+            musicPlayer.playMapBGM(this.currentMap.id);
+            // 返回村庄并恢复
+            this.returnToVillage();
+            this.updateUI();
+            this.autoSave();
         };
 
         window.onload = () => game.init();
     </script>
+    <!-- 开发者信息 -->
+    <div style="position: fixed; bottom: 10px; right: 15px; font-size: 0.75em; color: rgba(61, 43, 31, 0.5); z-index: 100; pointer-events: none;">
+        张晨 by TRAE AI
+    </div>
 </body>
 </html>

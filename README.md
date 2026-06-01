@@ -1,3 +1,12 @@
+---
+title: 勇者传说 RPG
+emoji: ⚔️
+colorFrom: red
+colorTo: yellow
+sdk: static
+pinned: false
+---
+
 # ⚔️ 勇者传说 RPG
 
 > 一款纯前端实现的日式西幻风格回合制RPG游戏
@@ -12,7 +21,7 @@
 
 ## 🌐 在线试玩
 
-**👉 [立即开始游戏](https://4rqbhfdvw-herorpg-y0qkg01ht.maozi.io/)**
+**👉 [立即开始游戏](https://zhangzui-hero-legend-rpg.hf.space)**
 
 欢迎体验，祝您游戏愉快！
 
@@ -111,10 +120,10 @@ hero-legend-rpg/
 
 ---
 
-**开发者**：SOLO AI Assistant  
+**开发者**：张晨 by TRAE AI  
 **版本**：v1.0.0  
 **最后更新**：2025年  
-**部署平台**：[帽子云](https://maozi.io)
+**部署平台**：[Hugging Face Spaces](https://huggingface.co/spaces)
 
 ---
 
