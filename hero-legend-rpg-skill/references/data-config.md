@@ -107,15 +107,26 @@ const MAPS = [
 
 ```javascript
 const SKILLS = [
-    // 格式: { level, name, emoji, desc, cooldown, [multiplier|hits|healPercent|...] }
-    { level: 10, name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 },
-    { level: 20, name: '防御', emoji: '🛡️', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 },
-    { level: 30, name: '连击', emoji: '⚡', desc: '攻击2次', cooldown: 4, hits: 2 },
-    { level: 40, name: '狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 },
-    { level: 50, name: '圣光', emoji: '✨', desc: '恢复30%', cooldown: 8, healPercent: 0.3 },
-    { level: 60, name: '终极', emoji: '💥', desc: '3倍伤害', cooldown: 10, multiplier: 3 }
+    // 格式: { bossIndex, name, emoji, desc, cooldown, [multiplier|hits|healPercent|...] }
+    // bossIndex 对应 BOSSES 数组索引，击败对应BOSS后解锁技能
+    { bossIndex: 0, name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 4, multiplier: 1.5 },
+    { bossIndex: 1, name: '防御', emoji: '🛡️', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 },
+    { bossIndex: 2, name: '连击', emoji: '⚡', desc: '攻击2次', cooldown: 5, hits: 2 },
+    { bossIndex: 3, name: '狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 },
+    { bossIndex: 4, name: '圣光', emoji: '✨', desc: '恢复30%', cooldown: 8, healPercent: 0.3 },
+    { bossIndex: 5, name: '终极', emoji: '💥', desc: '3.5倍伤害', cooldown: 8, multiplier: 3.5 },
+    { bossIndex: 6, name: '神罚', emoji: '⚡', desc: '5倍伤害', cooldown: 10, multiplier: 5 },
+    { bossIndex: 7, name: '创世', emoji: '🌟', desc: '7倍伤害', cooldown: 12, multiplier: 7 },
+    { bossIndex: 8, name: '创世之光', emoji: '🌟', desc: '10倍伤害+恢复20%', cooldown: 14, multiplier: 10, healPercent: 0.2 }
 ];
 ```
+
+**技能平衡建议**：
+- 以20回合为基准周期计算伤害效率
+- 低倍率技能：1.5x~2x，冷却4-5回合
+- 中倍率技能：3.5x~5x，冷却8-10回合
+- 高倍率技能：7x~10x，冷却12-14回合
+- 确保高倍率技能在相同周期内总伤害更高
 
 ---
 
