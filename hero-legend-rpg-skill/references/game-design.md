@@ -3,7 +3,7 @@
 > 本文档可作为 Skill 供其他开发者参考和复用
 
 **开发者**：张晨 by TRAE AI  
-**版本**：v1.1.0
+**版本**：v1.2.0
 
 ---
 
@@ -226,6 +226,7 @@ generateDrop(monsterLevel, isBoss = false, traitBonus = 0) {
     // 3. 随机品质（BOSS最低史诗）
     // 4. 计算基础属性 × 品质倍率(1.0-5.0)
     // 5. 应用浮动范围（±25%）
+    // 6. 100%附加套装属性
 }
 ```
 
@@ -237,6 +238,23 @@ generateDrop(monsterLevel, isBoss = false, traitBonus = 0) {
 | 优秀 | 20% |
 | 史诗 | 10% |
 | 传说 | 5% |
+
+**套装系统**：
+```javascript
+// 所有装备100%拥有套装属性
+const setTypes = Object.keys(SET_TYPES);
+const setType = setTypes[Math.floor(Math.random() * setTypes.length)];
+
+// 套装效果（2件/4件）
+const SET_TYPES = {
+    dragon: {
+        name: '龙族', color: '#ff6b6b',
+        bonus2: { atkMult: 1.15, desc: '攻击+15%' },
+        bonus4: { atkMult: 1.30, desc: '攻击+30%' }
+    },
+    // ... 其他套装
+};
+```
 
 ### 3. 怪物品质系统
 
@@ -284,6 +302,64 @@ expNeeded = 50 + (level - 1) * 50;  // 每级相差50
 - 进入村庄触发逐渐恢复（10步回满）
 - 离开村庄立即停止恢复
 - 防止重复创建定时器
+
+### 7. 神秘商人系统
+
+**生成机制**：
+```javascript
+placeMerchant(mapId) {
+    // 1. 预先生成6件装备（地图生成时）
+    const merchantItems = [];
+    for (let i = 0; i < 6; i++) {
+        const item = generateMerchantItem(level, slot);
+        merchantItems.push(item);
+    }
+    
+    // 2. 将商品数据存入地图格子
+    cells[y][x] = {
+        type: 'merchant',
+        merchant: { mapId, items: merchantItems }
+    };
+}
+```
+
+**购买逻辑**：
+```javascript
+buyFromMerchant(index) {
+    // 扣除金币，加入背包
+    // 从merchant.items中移除（设为null）
+    // 已售出的商品显示"已售出"状态
+}
+```
+
+**设计要点**：
+- 商品在地图生成时确定，不随商店开关变化
+- 购买后商品状态持久化到地图数据中
+- 离开地图后重新进入，商人和商品重新生成
+
+### 8. DOM安全访问模式
+
+**问题**：直接访问 `document.getElementById()` 可能返回 null，导致报错
+
+**解决方案**：
+```javascript
+// 安全访问模式
+const element = document.getElementById('id');
+if (element) {
+    element.classList.add('active');
+    element.textContent = 'text';
+}
+
+// 或使用可选链（如果环境支持）
+document.getElementById('id')?.classList.add('active');
+```
+
+**关键位置**：
+- 战斗界面开关
+- 商店界面更新
+- 地图渲染
+- 日志输出
+- 存档/读档
 
 ---
 
@@ -430,6 +506,7 @@ defeat_boss.mp3    - BOSS战斗死亡
 |------|------|----------|
 | v1.0.0 | 2025-05 | 初始版本发布 |
 | v1.1.0 | 2025-06 | BOSS专属技能AI、技能动画、装备品质倍率调整、地图进场CG、移动路径指引、3套随机BGM+神战BGM、地图等级优化、死亡BGM |
+| v1.2.0 | 2026-06 | 套装系统（100%掉落）、神秘商人系统、地图礼包、角色头像保存、冒险日志优化、刷新怪物逻辑优化、DOM null检查修复 |
 
 ---
 

@@ -2,6 +2,8 @@
 
 本文档提供可直接复用的数据配置模板。
 
+**版本**：v1.2.0
+
 ---
 
 ## 品质系统模板
@@ -117,6 +119,55 @@ const SKILLS = [
 
 ---
 
+## 套装系统模板
+
+```javascript
+const SET_TYPES = {
+    dragon: {
+        name: '龙族', color: '#ff6b6b',
+        bonus2: { atkMult: 1.15, desc: '攻击+15%' },
+        bonus4: { atkMult: 1.30, desc: '攻击+30%' }
+    },
+    knight: {
+        name: '骑士', color: '#3498db',
+        bonus2: { defMult: 1.15, desc: '防御+15%' },
+        bonus4: { defMult: 1.30, desc: '防御+30%' }
+    },
+    sage: {
+        name: '贤者', color: '#9b59b6',
+        bonus2: { hpMult: 1.15, desc: '生命+15%' },
+        bonus4: { hpMult: 1.30, desc: '生命+30%' }
+    },
+    shadow: {
+        name: '暗影', color: '#2c3e50',
+        bonus2: { expMult: 1.10, desc: '经验+10%' },
+        bonus4: { expMult: 1.20, desc: '经验+20%' }
+    },
+    gold: {
+        name: '黄金', color: '#f39c12',
+        bonus2: { goldMult: 1.15, desc: '金币+15%' },
+        bonus4: { goldMult: 1.30, desc: '金币+30%' }
+    }
+};
+```
+
+**装备附加套装属性**：
+```javascript
+// 所有装备100%拥有套装属性
+const setTypes = Object.keys(SET_TYPES);
+const setType = setTypes[Math.floor(Math.random() * setTypes.length)];
+const setData = SET_TYPES[setType];
+
+return {
+    // ... 其他属性
+    setType: setType,
+    setName: setData.name,
+    setColor: setData.color
+};
+```
+
+---
+
 ## 角色形象模板
 
 ```javascript
@@ -130,13 +181,37 @@ const CHARACTERS = [
 
 ---
 
+## 商人配置模板
+
+```javascript
+const MERCHANT_CONFIG = {
+    emoji: '🧙',
+    art: 'art/merchant.png',  // 商人贴图
+    levelRanges: {
+        0: { min: 3, max: 6 },    // 第1层地图
+        1: { min: 10, max: 14 },  // 第2层地图
+        2: { min: 20, max: 24 },  // 第3层地图
+        // ... 每层对应等级范围
+    }
+};
+
+// 生成商人商品
+generateMerchantItem(level, slot) {
+    // slot: 'weapon' | 'armor' | 'accessory' | 'boots'
+    // 返回带套装属性的装备对象
+}
+```
+
+---
+
 ## 使用说明
 
 1. 复制所需模板到你的项目中
 2. 根据需要修改参数值
 3. 确保emoji不重复
 4. 调整数值平衡以适应你的游戏难度
+5. 所有装备建议100%附加套装属性，提升收集乐趣
 
 ---
 
-> 📝 模板基于《勇者传说RPG》实际配置
+> 📝 模板基于《勇者传说RPG》v1.2.0 实际配置
