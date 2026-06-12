@@ -1015,11 +1015,20 @@
             currentSource: 0,  // 当前使用的源索引
 
             // 三套BGM，通关BGM共用
-            bgmSets: [
-                { map: 'map_bgm.mp3', battle: 'battle_normal.mp3', boss: 'battle_boss.mp3' },
-                { map: 'map_bgm2.mp3', battle: 'battle_normal2.mp3', boss: 'battle_boss2.mp3' },
-                { map: 'map_bgm3.mp3', battle: 'battle_normal3.mp3', boss: 'battle_boss3.mp3' }
-            ],
+            bgmSets: (() => {
+                const mapList = ['map_bgm.mp3', 'map_bgm2.mp3', 'map_bgm3.mp3'];
+                const battleList = ['battle_normal.mp3', 'battle_normal2.mp3', 'battle_normal3.mp3'];
+                const bossList = ['battle_boss.mp3', 'battle_boss2.mp3', 'battle_boss3.mp3'];
+                const sets = [];
+                for (const map of mapList) {
+                    for (const battle of battleList) {
+                        for (const boss of bossList) {
+                            sets.push({ map, battle, boss });
+                        }
+                    }
+                }
+                return sets;
+            })(),
             victory: 'victory.mp3',
             defeatNormal: 'defeat_normal.mp3',
             defeatBoss: 'defeat_boss.mp3',
