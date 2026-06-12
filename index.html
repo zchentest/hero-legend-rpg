@@ -1143,12 +1143,18 @@
             },
 
             // 通用播放方法 - 支持多源自动切换
+            // 通用播放方法 - 支持多源自动切换
             play(type, loop = true) {
-                // 如果正在播放同类型音乐，不重复播放
-                if (this.currentAudio && this.currentType === type && !this.currentAudio.ended) {
-                    return;
+                // 地图BGM切换时，强制停止当前，确保新地图音乐能播放
+                if (type === 'map') {
+                    this.stop();
+                } else {
+                    // 非地图BGM，同类型未结束时避免重复播放
+                    if (this.currentAudio && this.currentType === type && !this.currentAudio.ended) {
+                        return;
+                    }
+                    this.stop();
                 }
-                this.stop();
                 const url = MUSIC_CONFIG.getUrl(type);
                 this.currentAudio = new Audio(url);
                 this.currentAudio.volume = this.volume;
@@ -1156,7 +1162,6 @@
                 this.currentType = type;
                 this.currentPlayType = type;
                 this.currentPlayLoop = loop;
-                // 播放，失败时自动切换源
                 this.currentAudio.play().catch(e => {
                     console.log('音乐播放失败 [' + MUSIC_CONFIG.sources[MUSIC_CONFIG.currentSource].name + ']:', url);
                     if (MUSIC_CONFIG.nextSource()) {
@@ -1269,6 +1274,18 @@
 
             loadSkills() {
                 // 技能通过击败BOSS解锁，不再基于等级
+            },
+
+            // 检查某个格子周围是否存在至少一个可通行的格子（非障碍物、非地图边界）
+            hasAdjacentWalkableCell(x, y) {
+                const dirs = [[0,1],[0,-1],[1,0],[-1,0]];
+                for (let [dx, dy] of dirs) {
+                    const nx = x + dx, ny = y + dy;
+                    if (nx < 0 || nx >= this.currentMap.cols || ny < 0 || ny >= this.currentMap.rows) continue;
+                    const neighbor = this.currentMap.cells[ny][nx];
+                    if (neighbor && neighbor.type !== 'obstacle') return true;
+                }
+                return false;
             },
 
             generateMap(mapId) {
@@ -1396,6 +1413,11 @@
                     
                     const cell = this.currentMap.cells[y][x];
                     if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && cell.type === 'empty') {
+                        // 新增：检查邻居是否可通行
+                        if (!this.hasAdjacentWalkableCell(x, y)) {
+                            attempts++;
+                            continue;
+                        }
                         const layerHp = Math.floor(bossData.level * 55 * bossData.hpMult);
                         const boss = {
                             ...bossData,
@@ -1496,6 +1518,11 @@
                     
                     if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && 
                         this.currentMap.cells[y][x].type === 'empty') {
+                         // 新增：检查邻居是否可通行
+                        if (!this.hasAdjacentWalkableCell(x, y)) {
+                            attempts++;
+                            continue;
+                        }
                         this.currentMap.cells[y][x] = {
                             type: 'merchant', x, y, 
                             emoji: MERCHANT_CONFIG.emoji,
@@ -1537,7 +1564,8 @@
                 for (let y = 2; y < mapData.rows - 2; y++) {
                     for (let x = 2; x < mapData.cols - 2; x++) {
                         if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && 
-                            this.currentMap.cells[y][x].type === 'empty') {
+                            this.currentMap.cells[y][x].type === 'empty' &&
+                            this.hasAdjacentWalkableCell(x, y) ) {
                             this.currentMap.cells[y][x] = {
                                 type: 'finalMerchant', x, y, 
                                 emoji: MERCHANT_CONFIG.emoji,
