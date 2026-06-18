@@ -555,6 +555,86 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+
+
+        /* 特效基础样式 */
+        .battle-effect {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 刀砍特效 */
+        .effect-slash {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.9) 50%, rgba(100,200,255,0.8) 55%, transparent 65%);
+            box-shadow: 0 0 10px rgba(100,200,255,0.8);
+            transform: translate(-50%, -50%) rotate(45deg) scale(0);
+            animation: slashAnim 0.5s ease-out forwards;
+        }
+        @keyframes slashAnim {
+            0% { transform: translate(-50%, -50%) rotate(45deg) scale(0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) rotate(45deg) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) rotate(45deg) scale(1.8); opacity: 0; }
+        }
+
+        /* 投射物特效 (火球、毒物、射线等) */
+        .effect-projectile {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            animation: projectileAnim 0.6s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+        }
+        @keyframes projectileAnim {
+            0% { transform: translate(-50%, -50%) translate(0, 0) rotate(var(--angle)); opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--angle)); opacity: 0; }
+        }
+
+        /* 火球 */
+        .effect-fireball {
+            background: radial-gradient(circle, #ffeb3b 20%, #ff9800 60%, #b71c1c 100%);
+            box-shadow: 0 0 15px #ff5722, 0 0 30px #ff5722;
+        }
+
+        /* 毒物 */
+        .effect-poison {
+            background: radial-gradient(circle, #cddc39 20%, #4caf50 60%, #1b5e20 100%);
+            box-shadow: 0 0 15px #4caf50, 0 0 30px #4caf50;
+            width: 25px; height: 25px;
+        }
+
+        /* 闪电 (拉长) */
+        .effect-lightning {
+            background: linear-gradient(to right, #fff, #ffeb3b, transparent);
+            box-shadow: 0 0 20px #ffeb3b, 0 0 40px #00e5ff;
+            width: 80px; height: 5px;
+            border-radius: 2px;
+        }
+
+        /* 神圣射线 */
+        .effect-holy {
+            background: linear-gradient(to right, #fff, #ffd700, transparent);
+            box-shadow: 0 0 25px #ffd700, 0 0 50px #fff;
+            width: 100px; height: 8px;
+        }
+
+        /* 目标命中爆开效果 */
+        .effect-impact {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            animation: impactAnim 0.4s ease-out forwards;
+        }
+        @keyframes impactAnim {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
     </style>
 </head>
 <body>
@@ -869,43 +949,93 @@
             3: { hpMult: 1.1, atkMult: 1.1, defMult: 1.1, desc: '3件套: 全属性+10%' },
             4: { hpMult: 1.15, atkMult: 1.15, defMult: 1.15, desc: '4件套: 全属性+15%' }
         };
-
         const MONSTERS = [
-            { id: 'slime', name: '史莱姆', emoji: '💧', minLv: 1, maxLv: 3, hpBase: 15, atkBase: 0.6, defBase: 0.4, size: 1 },
-            { id: 'mushroom', name: '蘑菇怪', emoji: '🍄', minLv: 2, maxLv: 4, hpBase: 18, atkBase: 0.7, defBase: 0.5, size: 1 },
-            { id: 'bat', name: '小蝙蝠', emoji: '🦇', minLv: 2, maxLv: 5, hpBase: 12, atkBase: 0.9, defBase: 0.3, size: 1 },
-            { id: 'goblin', name: '哥布林', emoji: '👹', minLv: 4, maxLv: 7, hpBase: 20, atkBase: 0.8, defBase: 0.5, size: 1 },
-            { id: 'treant', name: '树精', emoji: '🌿', minLv: 5, maxLv: 8, hpBase: 25, atkBase: 0.6, defBase: 0.8, size: 1 },
-            { id: 'wolf', name: '狼', emoji: '🐕', minLv: 6, maxLv: 9, hpBase: 22, atkBase: 0.9, defBase: 0.4, size: 1 },
-            { id: 'boar', name: '野猪', emoji: '🐗', minLv: 7, maxLv: 10, hpBase: 28, atkBase: 1.0, defBase: 0.5, size: 1 },
-            { id: 'skeleton', name: '骷髅兵', emoji: '💀', minLv: 8, maxLv: 12, hpBase: 24, atkBase: 0.8, defBase: 0.6, size: 1 },
-            { id: 'batking', name: '蝙蝠王', emoji: '🦹', minLv: 10, maxLv: 13, hpBase: 20, atkBase: 1.2, defBase: 0.4, size: 1 },
-            { id: 'rock', name: '岩石怪', emoji: '🗿', minLv: 11, maxLv: 15, hpBase: 35, atkBase: 0.7, defBase: 1.0, size: 1 },
-            { id: 'zombie', name: '矿工僵尸', emoji: '🧟', minLv: 12, maxLv: 16, hpBase: 32, atkBase: 0.8, defBase: 0.5, size: 1 },
-            { id: 'orc', name: '兽人', emoji: '👺', minLv: 14, maxLv: 19, hpBase: 30, atkBase: 1.1, defBase: 0.6, size: 1 },
-            { id: 'fire', name: '火元素', emoji: '🔥', minLv: 15, maxLv: 20, hpBase: 26, atkBase: 1.2, defBase: 0.5, size: 1 },
-            { id: 'lavaslime', name: '熔岩怪', emoji: '🌋', minLv: 16, maxLv: 22, hpBase: 38, atkBase: 1.0, defBase: 0.7, size: 1 },
-            { id: 'demon_dog', name: '恶魔犬', emoji: '🐺', minLv: 18, maxLv: 24, hpBase: 28, atkBase: 1.3, defBase: 0.4, size: 1 },
-            { id: 'dark_knight', name: '黑骑士', emoji: '🏇', minLv: 20, maxLv: 26, hpBase: 35, atkBase: 1.1, defBase: 0.8, size: 1 },
-            { id: 'demon', name: '恶魔', emoji: '👿', minLv: 22, maxLv: 28, hpBase: 32, atkBase: 1.3, defBase: 0.5, size: 1 },
-            { id: 'shadow_dragon', name: '暗影龙', emoji: '🐲', minLv: 25, maxLv: 30, hpBase: 45, atkBase: 1.2, defBase: 0.7, size: 1 },
-            { id: 'bone_dragon', name: '骨龙', emoji: '🦴', minLv: 30, maxLv: 38, hpBase: 50, atkBase: 1.3, defBase: 0.6, size: 1 },
-            { id: 'ancient_dragon', name: '远古巨龙', emoji: '🐉', minLv: 28, maxLv: 35, hpBase: 55, atkBase: 1.4, defBase: 0.8, size: 1 },
+            // 第1层 新手村
+            { id: 'slime', name: '史莱姆', emoji: '💧', minLv: 1, maxLv: 3, hpBase: 15, atkBase: 2.0, defBase: 1.0, size: 1 },
+            { id: 'mushroom', name: '蘑菇怪', emoji: '🍄', minLv: 2, maxLv: 4, hpBase: 18, atkBase: 2.0, defBase: 1.5, size: 1 },
+            { id: 'bat', name: '小蝙蝠', emoji: '🦇', minLv: 2, maxLv: 5, hpBase: 12, atkBase: 2.0, defBase: 0.8, size: 1 },
+            
+            // 第2层 迷雾森林
+            { id: 'goblin', name: '哥布林', emoji: '👹', minLv: 4, maxLv: 7, hpBase: 20, atkBase: 3.0, defBase: 2.0, size: 1 },
+            { id: 'treant', name: '树精', emoji: '🌿', minLv: 5, maxLv: 8, hpBase: 25, atkBase: 3.0, defBase: 4.0, size: 1 },
+            { id: 'wolf', name: '狼', emoji: '🐕', minLv: 6, maxLv: 9, hpBase: 22, atkBase: 3.0, defBase: 1.5, size: 1 },
+            { id: 'boar', name: '野猪', emoji: '🐗', minLv: 7, maxLv: 10, hpBase: 28, atkBase: 3.0, defBase: 2.5, size: 1 },
+            
+            // 第3层 废弃矿坑
+            { id: 'skeleton', name: '骷髅兵', emoji: '💀', minLv: 8, maxLv: 12, hpBase: 24, atkBase: 4.0, defBase: 3.0, size: 1 },
+            { id: 'batking', name: '蝙蝠王', emoji: '🦹', minLv: 10, maxLv: 13, hpBase: 20, atkBase: 4.0, defBase: 2.0, size: 1 },
+            { id: 'rock', name: '岩石怪', emoji: '🗿', minLv: 11, maxLv: 15, hpBase: 35, atkBase: 4.0, defBase: 6.0, size: 1 },
+            { id: 'zombie', name: '矿工僵尸', emoji: '🧟', minLv: 12, maxLv: 16, hpBase: 32, atkBase: 4.0, defBase: 3.0, size: 1 },
+            
+            // 第4层 熔岩地带
+            { id: 'orc', name: '兽人', emoji: '👺', minLv: 14, maxLv: 19, hpBase: 30, atkBase: 9.5, defBase: 4.0, size: 1 },
+            { id: 'fire', name: '火元素', emoji: '🔥', minLv: 15, maxLv: 20, hpBase: 26, atkBase: 11.0, defBase: 3.0, size: 1 },
+            { id: 'lavaslime', name: '熔岩怪', emoji: '🌋', minLv: 16, maxLv: 22, hpBase: 38, atkBase: 8.0, defBase: 6.5, size: 1 },
+            { id: 'demon_dog', name: '恶魔犬', emoji: '🐺', minLv: 18, maxLv: 24, hpBase: 28, atkBase: 12.0, defBase: 3.5, size: 1 },
+            
+            // 第5层 冰封雪原
+            { id: 'dark_knight', name: '黑骑士', emoji: '🏇', minLv: 20, maxLv: 26, hpBase: 35, atkBase: 5.0, defBase: 7.0, size: 1 },
+            { id: 'demon', name: '恶魔', emoji: '👿', minLv: 22, maxLv: 28, hpBase: 32, atkBase: 5.0, defBase: 4.5, size: 1 },
+            { id: 'shadow_dragon', name: '暗影龙', emoji: '🐲', minLv: 25, maxLv: 30, hpBase: 45, atkBase: 5.0, defBase: 6.5, size: 1 },
+            
+            // 第6层 龙之巢穴
+            { id: 'bone_dragon', name: '骨龙', emoji: '🦴', minLv: 30, maxLv: 38, hpBase: 50, atkBase: 6.0, defBase: 7.0, size: 1 },
+            { id: 'ancient_dragon', name: '远古巨龙', emoji: '🐉', minLv: 28, maxLv: 35, hpBase: 55, atkBase: 6.0, defBase: 9.0, size: 1 },
+            
             // 第7层 天空之城
-            { id: 'cloud_beast', name: '云兽', emoji: '☁️', minLv: 35, maxLv: 45, hpBase: 48, atkBase: 1.2, defBase: 0.9, size: 1 },
-            { id: 'angel', name: '天使', emoji: '👼', minLv: 38, maxLv: 48, hpBase: 45, atkBase: 1.4, defBase: 0.8, size: 1 },
-            { id: 'thunder_bird', name: '雷鸟', emoji: '🦅', minLv: 40, maxLv: 50, hpBase: 42, atkBase: 1.5, defBase: 0.7, size: 1 },
-            { id: 'storm_element', name: '风暴元素', emoji: '🌪️', minLv: 42, maxLv: 52, hpBase: 40, atkBase: 1.6, defBase: 0.6, size: 1 },
+            { id: 'cloud_beast', name: '云兽', emoji: '☁️', minLv: 35, maxLv: 45, hpBase: 48, atkBase: 7.0, defBase: 11.0, size: 1 },
+            { id: 'angel', name: '天使', emoji: '👼', minLv: 38, maxLv: 48, hpBase: 45, atkBase: 7.0, defBase: 9.0, size: 1 },
+            { id: 'thunder_bird', name: '雷鸟', emoji: '🦅', minLv: 40, maxLv: 50, hpBase: 42, atkBase: 7.0, defBase: 7.5, size: 1 },
+            { id: 'storm_element', name: '风暴元素', emoji: '🌪️', minLv: 42, maxLv: 52, hpBase: 40, atkBase: 7.0, defBase: 6.5, size: 1 },
+            
             // 第8层 深渊
-            { id: 'void_walker', name: '虚空行者', emoji: '🌑', minLv: 48, maxLv: 58, hpBase: 55, atkBase: 1.5, defBase: 0.9, size: 1 },
-            { id: 'evil_eye', name: '魔眼', emoji: '👁️', minLv: 50, maxLv: 60, hpBase: 48, atkBase: 1.7, defBase: 0.7, size: 1 },
-            { id: 'chaos_tentacle', name: '混沌触手', emoji: '🦑', minLv: 52, maxLv: 62, hpBase: 60, atkBase: 1.4, defBase: 1.0, size: 1 },
-            { id: 'mist_ghost', name: '迷雾幽灵', emoji: '🌫️', minLv: 54, maxLv: 65, hpBase: 45, atkBase: 1.6, defBase: 0.8, size: 1 },
+            { id: 'void_walker', name: '虚空行者', emoji: '🌑', minLv: 48, maxLv: 58, hpBase: 55, atkBase: 8.0, defBase: 12.0, size: 1 },
+            { id: 'evil_eye', name: '魔眼', emoji: '👁️', minLv: 50, maxLv: 60, hpBase: 48, atkBase: 8.0, defBase: 9.0, size: 1 },
+            { id: 'chaos_tentacle', name: '混沌触手', emoji: '🦑', minLv: 52, maxLv: 62, hpBase: 60, atkBase: 8.0, defBase: 15.0, size: 1 },
+            { id: 'mist_ghost', name: '迷雾幽灵', emoji: '🌫️', minLv: 54, maxLv: 65, hpBase: 45, atkBase: 8.0, defBase: 10.0, size: 1 },
+            
             // 第9层 神域
-            { id: 'divine_messenger', name: '神使', emoji: '⭐', minLv: 60, maxLv: 70, hpBase: 58, atkBase: 1.6, defBase: 1.0, size: 1 },
-            { id: 'holy_beast', name: '圣兽', emoji: '🦁', minLv: 62, maxLv: 72, hpBase: 65, atkBase: 1.5, defBase: 1.1, size: 1 },
-            { id: 'temple_guard', name: '神殿守卫', emoji: '🔱', minLv: 65, maxLv: 75, hpBase: 70, atkBase: 1.4, defBase: 1.2, size: 1 }
+            { id: 'divine_messenger', name: '神使', emoji: '⭐', minLv: 60, maxLv: 70, hpBase: 58, atkBase: 8.0, defBase: 16.0, size: 1 },
+            { id: 'holy_beast', name: '圣兽', emoji: '🦁', minLv: 62, maxLv: 72, hpBase: 65, atkBase: 8.0, defBase: 18.0, size: 1 },
+            { id: 'temple_guard', name: '神殿守卫', emoji: '🔱', minLv: 65, maxLv: 75, hpBase: 70, atkBase: 8.0, defBase: 22.0, size: 1 }
         ];
+
+        // const MONSTERS = [
+        //     { id: 'slime', name: '史莱姆', emoji: '💧', minLv: 1, maxLv: 3, hpBase: 15, atkBase: 0.6, defBase: 0.4, size: 1 },
+        //     { id: 'mushroom', name: '蘑菇怪', emoji: '🍄', minLv: 2, maxLv: 4, hpBase: 18, atkBase: 0.7, defBase: 0.5, size: 1 },
+        //     { id: 'bat', name: '小蝙蝠', emoji: '🦇', minLv: 2, maxLv: 5, hpBase: 12, atkBase: 0.9, defBase: 0.3, size: 1 },
+        //     { id: 'goblin', name: '哥布林', emoji: '👹', minLv: 4, maxLv: 7, hpBase: 20, atkBase: 0.8, defBase: 0.5, size: 1 },
+        //     { id: 'treant', name: '树精', emoji: '🌿', minLv: 5, maxLv: 8, hpBase: 25, atkBase: 0.6, defBase: 0.8, size: 1 },
+        //     { id: 'wolf', name: '狼', emoji: '🐕', minLv: 6, maxLv: 9, hpBase: 22, atkBase: 0.9, defBase: 0.4, size: 1 },
+        //     { id: 'boar', name: '野猪', emoji: '🐗', minLv: 7, maxLv: 10, hpBase: 28, atkBase: 1.0, defBase: 0.5, size: 1 },
+        //     { id: 'skeleton', name: '骷髅兵', emoji: '💀', minLv: 8, maxLv: 12, hpBase: 24, atkBase: 0.8, defBase: 0.6, size: 1 },
+        //     { id: 'batking', name: '蝙蝠王', emoji: '🦹', minLv: 10, maxLv: 13, hpBase: 20, atkBase: 1.2, defBase: 0.4, size: 1 },
+        //     { id: 'rock', name: '岩石怪', emoji: '🗿', minLv: 11, maxLv: 15, hpBase: 35, atkBase: 0.7, defBase: 1.0, size: 1 },
+        //     { id: 'zombie', name: '矿工僵尸', emoji: '🧟', minLv: 12, maxLv: 16, hpBase: 32, atkBase: 0.8, defBase: 0.5, size: 1 },
+        //     { id: 'orc', name: '兽人', emoji: '👺', minLv: 14, maxLv: 19, hpBase: 30, atkBase: 1.1, defBase: 0.6, size: 1 },
+        //     { id: 'fire', name: '火元素', emoji: '🔥', minLv: 15, maxLv: 20, hpBase: 26, atkBase: 1.2, defBase: 0.5, size: 1 },
+        //     { id: 'lavaslime', name: '熔岩怪', emoji: '🌋', minLv: 16, maxLv: 22, hpBase: 38, atkBase: 1.0, defBase: 0.7, size: 1 },
+        //     { id: 'demon_dog', name: '恶魔犬', emoji: '🐺', minLv: 18, maxLv: 24, hpBase: 28, atkBase: 1.3, defBase: 0.4, size: 1 },
+        //     { id: 'dark_knight', name: '黑骑士', emoji: '🏇', minLv: 20, maxLv: 26, hpBase: 35, atkBase: 1.1, defBase: 0.8, size: 1 },
+        //     { id: 'demon', name: '恶魔', emoji: '👿', minLv: 22, maxLv: 28, hpBase: 32, atkBase: 1.3, defBase: 0.5, size: 1 },
+        //     { id: 'shadow_dragon', name: '暗影龙', emoji: '🐲', minLv: 25, maxLv: 30, hpBase: 45, atkBase: 1.2, defBase: 0.7, size: 1 },
+        //     { id: 'bone_dragon', name: '骨龙', emoji: '🦴', minLv: 30, maxLv: 38, hpBase: 50, atkBase: 1.3, defBase: 0.6, size: 1 },
+        //     { id: 'ancient_dragon', name: '远古巨龙', emoji: '🐉', minLv: 28, maxLv: 35, hpBase: 55, atkBase: 1.4, defBase: 0.8, size: 1 },
+        //     // 第7层 天空之城
+        //     { id: 'cloud_beast', name: '云兽', emoji: '☁️', minLv: 35, maxLv: 45, hpBase: 48, atkBase: 1.2, defBase: 0.9, size: 1 },
+        //     { id: 'angel', name: '天使', emoji: '👼', minLv: 38, maxLv: 48, hpBase: 45, atkBase: 1.4, defBase: 0.8, size: 1 },
+        //     { id: 'thunder_bird', name: '雷鸟', emoji: '🦅', minLv: 40, maxLv: 50, hpBase: 42, atkBase: 1.5, defBase: 0.7, size: 1 },
+        //     { id: 'storm_element', name: '风暴元素', emoji: '🌪️', minLv: 42, maxLv: 52, hpBase: 40, atkBase: 1.6, defBase: 0.6, size: 1 },
+        //     // 第8层 深渊
+        //     { id: 'void_walker', name: '虚空行者', emoji: '🌑', minLv: 48, maxLv: 58, hpBase: 55, atkBase: 1.5, defBase: 0.9, size: 1 },
+        //     { id: 'evil_eye', name: '魔眼', emoji: '👁️', minLv: 50, maxLv: 60, hpBase: 48, atkBase: 1.7, defBase: 0.7, size: 1 },
+        //     { id: 'chaos_tentacle', name: '混沌触手', emoji: '🦑', minLv: 52, maxLv: 62, hpBase: 60, atkBase: 1.4, defBase: 1.0, size: 1 },
+        //     { id: 'mist_ghost', name: '迷雾幽灵', emoji: '🌫️', minLv: 54, maxLv: 65, hpBase: 45, atkBase: 1.6, defBase: 0.8, size: 1 },
+        //     // 第9层 神域
+        //     { id: 'divine_messenger', name: '神使', emoji: '⭐', minLv: 60, maxLv: 70, hpBase: 58, atkBase: 1.6, defBase: 1.0, size: 1 },
+        //     { id: 'holy_beast', name: '圣兽', emoji: '🦁', minLv: 62, maxLv: 72, hpBase: 65, atkBase: 1.5, defBase: 1.1, size: 1 },
+        //     { id: 'temple_guard', name: '神殿守卫', emoji: '🔱', minLv: 65, maxLv: 75, hpBase: 70, atkBase: 1.4, defBase: 1.2, size: 1 }
+        // ];
 
         // 旅行商人配置
         const MERCHANT_CONFIG = {
@@ -966,17 +1096,30 @@
             dragon_boots: 'equip_art_v2/dragon_boots.jpg'
         };
 
+        // const BOSSES = [
+        //     { name: '哥布林王', emoji: '👺', level: 8, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 } },
+        //     { name: '森林之王', emoji: '🌳', level: 18, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '藤蔓缠绕', emoji: '🌿', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 } },
+        //     { name: '骷髅领主', emoji: '💀', level: 28, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '骨刃连斩', emoji: '⚡', desc: '攻击2次', cooldown: 4, hits: 2 } },
+        //     { name: '炎魔', emoji: '🔥', level: 38, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '烈焰狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 } },
+        //     { name: '冰霜巨龙', emoji: '🐲', level: 52, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '冰霜吐息', emoji: '✨', desc: '恢复30%血量', cooldown: 8, healPercent: 0.3 } },
+        //     { name: '龙神', emoji: '🐉', level: 60, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '龙息终焉', emoji: '💥', desc: '3倍伤害', cooldown: 10, multiplier: 3 } },
+        //     { name: '雷神', emoji: '🌩️', level: 68, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '天罚雷霆', emoji: '⚡', desc: '4倍伤害', cooldown: 12, multiplier: 4 } },
+        //     { name: '虚空之主', emoji: '👾', level: 75, hpMult: 3.8, atkMult: 1.8, defMult: 1.8, skill: { name: '虚空吞噬', emoji: '🌀', desc: '5倍伤害', cooldown: 15, multiplier: 5 } },
+        //     { name: '创世神', emoji: '👑', level: 80, hpMult: 4.5, atkMult: 2.0, defMult: 2.0, skill: { name: '创世之光', emoji: '🌟', desc: '6倍伤害+恢复20%', cooldown: 15, multiplier: 6, healPercent: 0.2 } }
+        // ];
+
         const BOSSES = [
-            { name: '哥布林王', emoji: '👺', level: 8, hpMult: 2.8, atkMult: 1.8, defMult: 1.8, skill: { name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 } },
-            { name: '森林之王', emoji: '🌳', level: 18, hpMult: 2.8, atkMult: 3, defMult: 1.8, skill: { name: '藤蔓缠绕', emoji: '🌿', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 } },
-            { name: '骷髅领主', emoji: '💀', level: 28, hpMult: 2.8, atkMult: 3, defMult: 1.8, skill: { name: '骨刃连斩', emoji: '⚡', desc: '攻击2次', cooldown: 4, hits: 2 } },
-            { name: '炎魔', emoji: '🔥', level: 38, hpMult: 2.8, atkMult: 3, defMult: 1.8, skill: { name: '烈焰狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 } },
-            { name: '冰霜巨龙', emoji: '🐲', level: 52, hpMult: 2.8, atkMult: 3, defMult: 1.8, skill: { name: '冰霜吐息', emoji: '✨', desc: '恢复30%血量', cooldown: 8, healPercent: 0.3 } },
-            { name: '龙神', emoji: '🐉', level: 60, hpMult: 3.8, atkMult: 7, defMult: 1.8, skill: { name: '龙息终焉', emoji: '💥', desc: '3倍伤害', cooldown: 5, multiplier: 3 } },
-            { name: '雷神', emoji: '🌩️', level: 68, hpMult: 4.8, atkMult: 7, defMult: 1.8, skill: { name: '天罚雷霆', emoji: '⚡', desc: '4倍伤害', cooldown: 5, multiplier: 4 } },
-            { name: '虚空之主', emoji: '👾', level: 75, hpMult: 4.8, atkMult: 8, defMult: 1.8, skill: { name: '虚空吞噬', emoji: '🌀', desc: '5倍伤害', cooldown: 5, multiplier: 5 } },
-            { name: '创世神', emoji: '👑', level: 80, hpMult: 5.5, atkMult: 10.0, defMult: 2.0, skill: { name: '创世之光', emoji: '🌟', desc: '6倍伤害+恢复20%', cooldown: 5, multiplier: 6, healPercent: 0.2 } }
+            { name: '哥布林王', emoji: '👺', level: 8, hpMult: 3.5, atkMult: 3.5, defMult: 2.5, skill: { name: '重击', emoji: '⚔️', desc: '1.5倍伤害', cooldown: 3, multiplier: 1.5 } },
+            { name: '森林之王', emoji: '🌳', level: 18, hpMult: 4.0, atkMult: 4.5, defMult: 3.0, skill: { name: '藤蔓缠绕', emoji: '🌿', desc: '防御翻倍', cooldown: 5, defenseBoost: 2 } },
+            { name: '骷髅领主', emoji: '💀', level: 28, hpMult: 4.5, atkMult: 5.0, defMult: 4.0, skill: { name: '骨刃连斩', emoji: '⚡', desc: '攻击2次', cooldown: 4, hits: 2 } },
+            { name: '炎魔', emoji: '🔥', level: 38, hpMult: 5.0, atkMult: 5.5, defMult: 5.0, skill: { name: '烈焰狂暴', emoji: '🔥', desc: '攻击+30%', cooldown: 6, duration: 3, atkBoost: 0.3 } },
+            { name: '冰霜巨龙', emoji: '🐲', level: 52, hpMult: 6.0, atkMult: 6.0, defMult: 6.5, skill: { name: '冰霜吐息', emoji: '✨', desc: '恢复30%血量', cooldown: 8, healPercent: 0.3 } },
+            { name: '龙神', emoji: '🐉', level: 60, hpMult: 7.0, atkMult: 6.5, defMult: 8.0, skill: { name: '龙息终焉', emoji: '💥', desc: '3倍伤害', cooldown: 10, multiplier: 3 } },
+            { name: '雷神', emoji: '🌩️', level: 68, hpMult: 8.0, atkMult: 7.0, defMult: 10.0, skill: { name: '天罚雷霆', emoji: '⚡', desc: '4倍伤害', cooldown: 12, multiplier: 4 } },
+            { name: '虚空之主', emoji: '👾', level: 75, hpMult: 10.0, atkMult: 7.5, defMult: 12.0, skill: { name: '虚空吞噬', emoji: '🌀', desc: '5倍伤害', cooldown: 15, multiplier: 5 } },
+            { name: '创世神', emoji: '👑', level: 80, hpMult: 12.0, atkMult: 8.0, defMult: 15.0, skill: { name: '创世之光', emoji: '🌟', desc: '6倍伤害+恢复20%', cooldown: 15, multiplier: 6, healPercent: 0.2 } }
         ];
+
 
         const MAPS = [
             { id: 0, name: '新手村外围', emoji: '🌿', minLv: 1, maxLv: 5, rows: 12, cols: 22, obstacleRate: 0.12, monsterCount: 18, monsters: ['slime', 'mushroom', 'bat'], bgClass: 'map-bg-village', obstacles: { types: ['🌳', '🌲', '🌿'] }, emptyEmoji: '🟫', desc: '宁静的村庄外围，适合新手冒险者练级' },
@@ -1015,20 +1158,11 @@
             currentSource: 0,  // 当前使用的源索引
 
             // 三套BGM，通关BGM共用
-            bgmSets: (() => {
-                const mapList = ['map_bgm.mp3', 'map_bgm2.mp3', 'map_bgm3.mp3'];
-                const battleList = ['battle_normal.mp3', 'battle_normal2.mp3', 'battle_normal3.mp3'];
-                const bossList = ['battle_boss.mp3', 'battle_boss2.mp3', 'battle_boss3.mp3'];
-                const sets = [];
-                for (const map of mapList) {
-                    for (const battle of battleList) {
-                        for (const boss of bossList) {
-                            sets.push({ map, battle, boss });
-                        }
-                    }
-                }
-                return sets;
-            })(),
+            bgmSets: [
+                { map: 'map_bgm.mp3', battle: 'battle_normal.mp3', boss: 'battle_boss.mp3' },
+                { map: 'map_bgm2.mp3', battle: 'battle_normal2.mp3', boss: 'battle_boss2.mp3' },
+                { map: 'map_bgm3.mp3', battle: 'battle_normal3.mp3', boss: 'battle_boss3.mp3' }
+            ],
             victory: 'victory.mp3',
             defeatNormal: 'defeat_normal.mp3',
             defeatBoss: 'defeat_boss.mp3',
@@ -1152,18 +1286,12 @@
             },
 
             // 通用播放方法 - 支持多源自动切换
-            // 通用播放方法 - 支持多源自动切换
             play(type, loop = true) {
-                // 地图BGM切换时，强制停止当前，确保新地图音乐能播放
-                if (type === 'map') {
-                    this.stop();
-                } else {
-                    // 非地图BGM，同类型未结束时避免重复播放
-                    if (this.currentAudio && this.currentType === type && !this.currentAudio.ended) {
-                        return;
-                    }
-                    this.stop();
+                // 如果正在播放同类型音乐，不重复播放
+                if (this.currentAudio && this.currentType === type && !this.currentAudio.ended) {
+                    return;
                 }
+                this.stop();
                 const url = MUSIC_CONFIG.getUrl(type);
                 this.currentAudio = new Audio(url);
                 this.currentAudio.volume = this.volume;
@@ -1171,6 +1299,7 @@
                 this.currentType = type;
                 this.currentPlayType = type;
                 this.currentPlayLoop = loop;
+                // 播放，失败时自动切换源
                 this.currentAudio.play().catch(e => {
                     console.log('音乐播放失败 [' + MUSIC_CONFIG.sources[MUSIC_CONFIG.currentSource].name + ']:', url);
                     if (MUSIC_CONFIG.nextSource()) {
@@ -1283,18 +1412,6 @@
 
             loadSkills() {
                 // 技能通过击败BOSS解锁，不再基于等级
-            },
-
-            // 检查某个格子周围是否存在至少一个可通行的格子（非障碍物、非地图边界）
-            hasAdjacentWalkableCell(x, y) {
-                const dirs = [[0,1],[0,-1],[1,0],[-1,0]];
-                for (let [dx, dy] of dirs) {
-                    const nx = x + dx, ny = y + dy;
-                    if (nx < 0 || nx >= this.currentMap.cols || ny < 0 || ny >= this.currentMap.rows) continue;
-                    const neighbor = this.currentMap.cells[ny][nx];
-                    if (neighbor && neighbor.type !== 'obstacle') return true;
-                }
-                return false;
             },
 
             generateMap(mapId) {
@@ -1422,11 +1539,6 @@
                     
                     const cell = this.currentMap.cells[y][x];
                     if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && cell.type === 'empty') {
-                        // 新增：检查邻居是否可通行
-                        if (!this.hasAdjacentWalkableCell(x, y)) {
-                            attempts++;
-                            continue;
-                        }
                         const layerHp = Math.floor(bossData.level * 55 * bossData.hpMult);
                         const boss = {
                             ...bossData,
@@ -1527,11 +1639,6 @@
                     
                     if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && 
                         this.currentMap.cells[y][x].type === 'empty') {
-                         // 新增：检查邻居是否可通行
-                        if (!this.hasAdjacentWalkableCell(x, y)) {
-                            attempts++;
-                            continue;
-                        }
                         this.currentMap.cells[y][x] = {
                             type: 'merchant', x, y, 
                             emoji: MERCHANT_CONFIG.emoji,
@@ -1573,8 +1680,7 @@
                 for (let y = 2; y < mapData.rows - 2; y++) {
                     for (let x = 2; x < mapData.cols - 2; x++) {
                         if (!this.isReservedCell(x, y, mapData.rows, mapData.cols) && 
-                            this.currentMap.cells[y][x].type === 'empty' &&
-                            this.hasAdjacentWalkableCell(x, y) ) {
+                            this.currentMap.cells[y][x].type === 'empty') {
                             this.currentMap.cells[y][x] = {
                                 type: 'finalMerchant', x, y, 
                                 emoji: MERCHANT_CONFIG.emoji,
@@ -3580,6 +3686,85 @@
                 if (game.autoBattle) this.toggleAuto();
             },
 
+            // 在你的类中添加这个特效生成方法
+            playBattleEffect(fromId, toId, effectType) {
+                const fromEl = document.getElementById(fromId);
+                const toEl = document.getElementById(toId);
+                // 假设战斗区域的父容器有 class: battle-arena
+                const container = document.querySelector('.battle-arena') || document.body; 
+
+                if (!fromEl || !toEl || !container) return;
+
+                const fromRect = fromEl.getBoundingClientRect();
+                const toRect = toEl.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+
+                // 计算相对于战斗容器的坐标
+                const startX = fromRect.left + fromRect.width / 2 - containerRect.left;
+                const startY = fromRect.top + fromRect.height / 2 - containerRect.top;
+                const endX = toRect.left + toRect.width / 2 - containerRect.left;
+                const endY = toRect.top + toRect.height / 2 - containerRect.top;
+
+                if (effectType === 'slash') {
+                    // 刀砍特效：直接在目标身上生成
+                    const effect = document.createElement('div');
+                    effect.className = 'battle-effect effect-slash';
+                    effect.style.left = `${endX}px`;
+                    effect.style.top = `${endY}px`;
+                    container.appendChild(effect);
+                    setTimeout(() => effect.remove(), 500);
+                } else {
+                    // 投射物特效（火球、毒物、闪电、射线）
+                    const effect = document.createElement('div');
+                    effect.className = `battle-effect effect-projectile ${effectType}`;
+                    effect.style.left = `${startX}px`;
+                    effect.style.top = `${startY}px`;
+                    
+                    // 计算位移和旋转角度
+                    const dx = endX - startX;
+                    const dy = endY - startY;
+                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                    
+                    effect.style.setProperty('--dx', `${dx}px`);
+                    effect.style.setProperty('--dy', `${dy}px`);
+                    effect.style.setProperty('--angle', `${angle}deg`);
+                    
+                    container.appendChild(effect);
+                    
+                    // 投射物到达目标时产生爆开效果
+                    setTimeout(() => {
+                        const impact = document.createElement('div');
+                        impact.className = 'battle-effect effect-impact';
+                        impact.style.left = `${endX}px`;
+                        impact.style.top = `${endY}px`;
+                        // 根据属性改变爆开颜色
+                        if (effectType === 'effect-fireball') impact.style.background = 'radial-gradient(circle, rgba(255,87,34,0.9), transparent 70%)';
+                        if (effectType === 'effect-poison') impact.style.background = 'radial-gradient(circle, rgba(76,175,80,0.9), transparent 70%)';
+                        container.appendChild(impact);
+                        setTimeout(() => impact.remove(), 400);
+                    }, 500); // 与 projectileAnim 的 0.6s 对应，稍微提前一点
+
+                    setTimeout(() => effect.remove(), 600);
+                }
+            },
+
+            // 获取特效类型的辅助函数 (根据怪物名称或武器判断)
+            getEnemyEffectType(enemyName, isSkill) {
+                // 如果是技能攻击，可以返回特定的大招特效
+                if (isSkill) return 'effect-lightning'; 
+
+                // 2. 普通攻击根据怪物中文名匹配
+                const fireMobs = ['火元素', '熔岩怪', '恶魔', '恶魔犬', '雷鸟'];
+                const poisonMobs = ['史莱姆', '蘑菇怪', '矿工僵尸', '混沌触手', '小蝙蝠', '蝙蝠王', '迷雾幽灵'];
+                const slashMobs = ['哥布林', '骷髅兵', '兽人', '黑骑士', '骨龙', '狼', '野猪', '神殿守卫'];
+                
+                if (fireMobs.includes(enemyName)) return 'effect-fireball';
+                if (poisonMobs.includes(enemyName)) return 'effect-poison';
+                if (slashMobs.includes(enemyName)) return 'effect-slash';
+                
+                return 'effect-poison'; // 默认魔法弹
+            },
+
             setSpeed(speed) {
                 const wasAuto = this.autoMode;
                 this.speed = speed;
@@ -3600,6 +3785,28 @@
                 if (!this.enemy || this.enemy.hp <= 0) return;
                 // 玩家已死亡则不再攻击
                 if (game.player.hp <= 0) return;
+
+                
+
+                // ============== 新增：触发玩家攻击特效 ==============
+                // 决定特效类型
+                if (useSkill) {
+                    let effectType = this.getPlayerEffectType(useSkill, useSkill);
+                    
+                    // 延迟触发特效，配合玩家头像跳出动画
+                    setTimeout(() => {
+                        this.playBattleEffect('battlePlayerAvatar', 'battleEnemyAvatar', effectType);
+                    }, 200);
+                }
+                else {
+                    let effectType = this.getPlayerEffectType();
+                    
+                    // 延迟触发特效，配合玩家头像跳出动画
+                    setTimeout(() => {
+                        this.playBattleEffect('battlePlayerAvatar', 'battleEnemyAvatar', effectType);
+                    }, 200);
+                }
+                // ==============================================
 
                 // 根据技能类型选择动画
                 const playerAvatar = document.getElementById('battlePlayerAvatar');
@@ -3691,6 +3898,35 @@
                 setTimeout(() => this.enemyAttack(), 500 / this.speed);
             },
 
+            // 获取玩家攻击特效类型
+            getPlayerEffectType(isSkill = false, skill = null) {
+                // 如果使用了技能，优先根据技能名称匹配华丽特效
+                if (isSkill && skill) {
+                    if (skill.name.includes('雷霆') || skill.name.includes('神罚')) return 'effect-lightning';
+                    if (skill.name.includes('狂暴') || skill.name.includes('火')) return 'effect-fireball';
+                    if (skill.name.includes('圣光') || skill.name.includes('创世')) return 'effect-holy';
+                    if (skill.name.includes('斩') || skill.name.includes('重击')) return 'slash';
+                    if (skill.name.includes('连击')) return 'effect-poison'; // 比如淬毒连击
+                }
+
+                // 没有用技能，或者技能没匹配上，根据普通武器决定特效
+                const weaponId = game.player.weapon ? game.player.weapon.equipId : 'sword';
+                switch (weaponId) {
+                    case 'staff': // 法杖 -> 闪电或火球
+                        return Math.random() > 0.5 ? 'effect-lightning' : 'effect-fireball';
+                    case 'dagger': // 匕首 -> 毒物
+                        return 'effect-poison';
+                    case 'sword': // 铁剑
+                        return 'slash';
+                    case 'axe':   // 战斧
+                        return 'slash'; // 默认刀砍
+                    case 'greatsword': // 巨剑
+                        return 'slash';
+                    default:
+                        return 'slash'; // 默认刀砍
+                }
+            },
+
             // 每回合结束后递减技能冷却
             tickCooldowns() {
                 for (let bossIndex in game.player.skillCooldowns) {
@@ -3731,6 +3967,23 @@
                         }
                     }
                 }
+
+
+                // ============== 新增：触发攻击特效 ==============
+                // 决定特效类型
+                let effectType = this.getEnemyEffectType(this.enemy.name, useBossSkill);
+                // 如果是Boss技能，可以用更强的特效
+                if (useBossSkill && bossSkill) {
+                    if (bossSkill.name.includes('雷霆') || bossSkill.name.includes('雷')) effectType = 'effect-lightning';
+                    if (bossSkill.name.includes('火') || bossSkill.name.includes('炎')) effectType = 'effect-fireball';
+                    if (bossSkill.name.includes('斩') || bossSkill.name.includes('击')) effectType = 'slash';
+                    if (bossSkill.name.includes('创世') || bossSkill.name.includes('光')) effectType = 'effect-holy';
+                }
+                
+                // 延迟触发特效，配合头像跳出动画
+                setTimeout(() => {
+                    this.playBattleEffect('battleEnemyAvatar', 'battlePlayerAvatar', effectType);
+                }, 200);
 
                 // 根据是否使用技能选择动画
                 let animClass = 'enemy-attack';
