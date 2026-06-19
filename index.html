@@ -1260,7 +1260,9 @@
                 if (!this.enabled) return;
                 const mapId = game.currentMap.id;
                 if (MUSIC_CONFIG.bossBGMs[mapId]) {
-                    this._bossBgmIndex = mapId;
+                    // 将 this._bossBgmIndex = mapId;
+                    // 改为
+                    MUSIC_CONFIG._bossBgmIndex = mapId;
                     this.play('boss_bgm', true);
                 } else {
                     this.play('boss', true);
